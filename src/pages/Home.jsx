@@ -4,7 +4,7 @@ import Timeline from "../components/Timeline";
 // import Speakers from "../components/SpeakerSection/Speakers";
 import Footer from "../components/Footer";
 import AboutNITJ from "../components/AboutNITJ";
-import AboutNews from "../components/AboutNews";
+// import AboutNews from "../components/AboutNews";
 import CountdownBox from "../components/timer.jsx";
 
 // import SponsorShip from "../components/Sponsorship";
@@ -64,7 +64,7 @@ function Home(props) {
       
       {/* <Speakers /> */}
       {/* <OurEvents confid={props.confId}  /> */}
-      <AboutNews confid={props.confId} />
+      {/* <AboutNews confid={props.confId} /> */}
        <Timeline confid={props.confId}  />
         <div className="w-full flex justify-center mt-8">
             <CountdownBox />

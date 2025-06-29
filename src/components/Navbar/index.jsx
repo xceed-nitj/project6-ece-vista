@@ -14,7 +14,7 @@ const COLOR_NAV_BG = "#1a1307"; // yellow-950
 const COLOR_NAV_OPTION_BG = "#fff";
 const COLOR_NAV_TEXT = "#a16207"; // amber-900
 const COLOR_NAV_TEXT_HOVER = "#854d0e"; // amber-600
-const COLOR_NAV_CENTER = "#1c1917"; // amber-950
+const COLOR_NAV_CENTER = "#5C4033"; // amber-950
 const COLOR_NAV_BORDER = "#bfa77a";
 
    const navigationLeft = [
@@ -73,26 +73,52 @@ const navigationRight = [
         style={{ background: COLOR_NAV_BG, height: "30px" }}
       >
 
-            <div className="flex-1 flex flex-col items-center text-center gap-0 pt-0">
-              <p className="lg:text-2xl md:text-xl text-xl font-semibold tracking-wide text-center justify-center text-white">
-                
-                {/* International Conference on Advanced Materials for Sustainable Development and Technology */}
-              </p>
-              {/* <p className="lg:text-xl md:text-xl -mt-1 text-xl font-extrabold">
-                (AMSDT)-2025| November 7-8, 2025| Hybrid Mode
-              </p> */}
-              {/* <div>
-                <h3 className="text-blue-600 font-medium -mt-1 tracking-wide text-lg">
-                  Jointly organized by
-                </h3>
-                <div className="text-blue-600 list-disc list-inside -mt-1 text-sm sm:text-base">
-                  <ul>
-                    <li>Dr B R Ambedkar National Institute of Technology Jalandhar, Punjab, India</li>
-                    <li>Institute of Nano Science and Technology, Mohali, Punjab, India</li>
-                  </ul>
-                </div>
-              </div> */}
-            </div>
+           <div className="flex w-full justify-between items-center text-white px-4 py-0 gap-4 flex-wrap">
+  {/* Email */}
+  <div className="flex items-center gap-2">
+    {/* Email Icon */}
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="1"
+      stroke="currentColor"
+      className="w-6 h-6"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M21.75 7.5v9a2.25 2.25 0 01-2.25 2.25h-15A2.25 2.25 0 012.25 16.5v-9m19.5 0l-9.75 6.75L2.25 7.5m19.5 0L12 14.25 2.25 7.5"
+      />
+    </svg>
+    <p className="text-base lg:text-sm font-semibold tracking-wide">
+      cipher@nitj.ac.in
+    </p>
+  </div>
+
+  {/* Phone */}
+  <div className="flex items-center gap-2">
+    {/* Phone Icon */}
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="1"
+      stroke="currentColor"
+      className="w-6 h-6"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M2.25 6.75c0-.621.504-1.125 1.125-1.125h3.375c.444 0 .84.255 1.03.654l1.174 2.348a1.125 1.125 0 01-.21 1.248l-1.239 1.238a11.25 11.25 0 005.303 5.303l1.238-1.239a1.125 1.125 0 011.248-.21l2.348 1.174c.399.19.654.586.654 1.03v3.375c0 .621-.504 1.125-1.125 1.125h-.75C10.67 20.25 3.75 13.33 3.75 5.25v-.75z"
+      />
+    </svg>
+    <p className="text-base lg:text-sm font-semibold tracking-wide">
+      +91-12345-67890
+    </p>
+  </div>
+</div>
+
 
           </div>
         <Disclosure as="header" className="bg-white shadow">
@@ -194,7 +220,7 @@ const navigationRight = [
                         className="text-3xl font-bold whitespace-nowrap"
                         style={{ color: COLOR_NAV_CENTER }}
                       >
-                        C I P H E R
+                        C I P H E R 2 0 2 6
                       </span>
                     </div>
 
