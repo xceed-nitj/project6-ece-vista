@@ -1,4 +1,4 @@
-  import { Disclosure } from "@headlessui/react";
+import { Disclosure } from "@headlessui/react";
   import {
     Bars3Icon,
     // EnvelopeIcon,
@@ -7,75 +7,81 @@
   // import TopNavInfo from "./TopNavInfo";
   import { Link, useLocation } from "react-router-dom";
   import { useState, useEffect } from "react";
-  import { IoMdHome } from "react-icons/io";
+  // import { IoMdHome } from "react-icons/io";
 
-  const navigation = [
-    { name: <IoMdHome className="h-5 w-5" />, href: "/", current: true },
-    { name: "Tracks", href: "/tracks", current: false },
-    { name: "Guidelines", href: "/Guidelines", current: false },
-    { name: "Abstract Submission", href: "/submission", current: false },
-     {
-      name: "Registration",
-      href: "",
-      current: false,
-      subItems: [
-        { name: "Registration Fee", href: "/registrationfee" },
-        { name: "Registration Link", href: "/registrationlink" },
-      ],
-    },
-    { name: "Publications", href: "/publications", current: false },
-    { name: "List of Speakers", href: "/speakers", current: false },
-    { name: "Awards", href: "/awards", current: false },
-    { name: "Sponsors", href: "/sponsors", current: false },
-    {
-      name: "Committees",
-      href: "",
-      current: false,
-      subItems: [
-        { name: "Organizing Heads", href: "/organizingheads" },
-        { name: "Advisory Committee", href: "/advisorycommittee" },
-      ],
-    },
-   
-    { name: "Location", href: "/location", current: false },
-    { name: "Accommodation", href: "/accommodation", current: false },
-  ];
+// Theme color variables
+const COLOR_NAV_BG = "#1a1307"; // yellow-950
+const COLOR_NAV_OPTION_BG = "#fff";
+const COLOR_NAV_TEXT = "#a16207"; // amber-900
+const COLOR_NAV_TEXT_HOVER = "#854d0e"; // amber-600
+const COLOR_NAV_CENTER = "#1c1917"; // amber-950
+const COLOR_NAV_BORDER = "#bfa77a";
+
+   const navigationLeft = [
+  { name: "Home", href: "/", current: true },
+  { name: "Tracks", href: "/tracks", current: false },
+  { name: "Abstract Submission", href: "/submission", current: false },
+];
+const navigationRight = [
+  {
+    name: "Registration",
+    href: "",
+    current: false,
+    subItems: [
+      { name: "Registration Fee", href: "/registrationfee" },
+      { name: "Registration Link", href: "/registrationlink" },
+    ],
+  },
+  { name: "Awards", href: "/awards", current: false },
+  
+  { name: "Accommodation", href: "/accommodation", current: false },
+];
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
 
   export default function Example() {
-    const [currentNavigation, setCurrentNavigation] = useState(navigation);
-    const location = useLocation();
+  const location = useLocation();
 
-    useEffect(() => {
-      const updatedNavigation = navigation.map((item) => ({
-        ...item,
-        current: location.pathname.endsWith(item.href),
-      }));
-      setCurrentNavigation(updatedNavigation);
-    }, [location.pathname]);
+  const [navLeft, setNavLeft] = useState(navigationLeft);
+  const [navRight, setNavRight] = useState(navigationRight);
+
+  useEffect(() => {
+  const updateCurrent = (navArray) =>
+    navArray.map((item) => ({
+      ...item,
+      current: location.pathname.endsWith(item.href),
+      subItems: item.subItems
+        ? item.subItems.map((sub) => ({
+            ...sub,
+            current: location.pathname.endsWith(sub.href),
+          }))
+        : undefined,
+    }));
+
+  setNavLeft(updateCurrent(navigationLeft));
+  setNavRight(updateCurrent(navigationRight));
+}, [location.pathname]);
+
 
     return (
       <div>
 
-      <div className="w-full flex items-center justify-between flex-wrap p-1"
-              style={{
-                background: 'linear-gradient(to right, #FF9933, #FFFFFF, #138808)',
-              }}
-          >
-            <img src="nitjlogo.png" alt="AMS" className=" hidden sm:block w-36 h-36 item-center object-contain p-4" />
+      <div
+        className="w-full flex items-center justify-between flex-wrap p-1"
+        style={{ background: COLOR_NAV_BG, height: "30px" }}
+      >
 
             <div className="flex-1 flex flex-col items-center text-center gap-0 pt-0">
-              <p className="lg:text-2xl md:text-xl text-xl font-semibold tracking-wide text-center justify-center">
-                International Conference on Advanced Materials for Sustainable Development and Technology
+              <p className="lg:text-2xl md:text-xl text-xl font-semibold tracking-wide text-center justify-center text-white">
+                
+                {/* International Conference on Advanced Materials for Sustainable Development and Technology */}
               </p>
-              
-              <p className="text-center text-xl font-extrabold md:text-xl lg:text-xl">
-  (AMSDT)-2025 | November 7–8, 2025 | Hybrid Mode
-</p>
-              <div>
+              {/* <p className="lg:text-xl md:text-xl -mt-1 text-xl font-extrabold">
+                (AMSDT)-2025| November 7-8, 2025| Hybrid Mode
+              </p> */}
+              {/* <div>
                 <h3 className="text-blue-600 font-medium -mt-1 tracking-wide text-lg">
                   Jointly organized by
                 </h3>
@@ -85,18 +91,20 @@
                     <li>Institute of Nano Science and Technology, Mohali, Punjab, India</li>
                   </ul>
                 </div>
-              </div>
+              </div> */}
             </div>
 
-            <img src="inst.png" alt="AMS" className="hidden sm:block w-38 h-38 object-contain p-6 sm:p-8 lg:p-8" />
           </div>
-        <Disclosure as="header" className="bg-blue-900 shadow">
+        <Disclosure as="header" className="bg-white shadow">
           {({ open }) => (
             <>
               <div className="mx-auto">
-                <div className="relative px-2 sm:px-4 lg:px-8 flex h-14 justify-between items-center bg-blue-900 border-b border-gray-200">
-                  <div className="relative z-10 flex items-center lg:hidden">
-                    <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-blue-200 hover:bg-gray-200 hover:text-blue-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-200">
+                <div
+                  className="relative px-2 sm:px-4 lg:px-8 flex h-12 justify-between items-center"
+                  style={{ background: COLOR_NAV_OPTION_BG, borderColor: COLOR_NAV_BORDER }}
+                >
+                  <div className="relative z-10 flex items-center lg:hidden ">
+                    <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-amber-900 hover:bg-gray-200 hover:text-amber-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-amber-200">
                       <span className="absolute -inset-0.5" />
                       <span className="sr-only">Open menu</span>
                       {open ? (
@@ -112,119 +120,213 @@
                       icon={<EnvelopeIcon className="h-5 w-5 text-blue-200" />}
                       value="amsdt2025@nitj.ac.in"
                     />
-                  </div> */}
-                  <nav className="hidden lg:flex space-x-1 mx-auto" aria-label="Global">
-                    {currentNavigation.map((item) => (
-                      <div key={item.name} className="relative group navbar">
-                        {item.subItems ? (
-                          <>
+                  </div> */}  
+                  <nav
+                    className="hidden lg:flex items-center justify-center w-full px-4"
+                    aria-label="Global"
+                    style={{
+                      fontFamily: "'Montserrat', sans-serif",
+                      fontWeight: 500,
+                      background: COLOR_NAV_OPTION_BG
+                    }}
+                  >
+                    {/* Left nav */}
+                    <div className="flex items-center justify-center gap-10 max-w-5xl ">
+                      <div className="flex space-x-6">
+                      {navLeft.map((item) => (
+                <div key={item.name} className="relative group">
+                  {item.subItems ? (
+                    <>
+                      <Link
+                        to={item.href}
+                        className="inline-flex items-center py-2 px-3 text-sm uppercase font-medium transition-colors duration-200"
+                        style={{
+                          color: COLOR_NAV_TEXT
+                        }}
+                        aria-current={item.current ? "page" : undefined}
+                        onMouseOver={e => (e.currentTarget.style.color = COLOR_NAV_TEXT_HOVER)}
+                        onMouseOut={e => (e.currentTarget.style.color = COLOR_NAV_TEXT)}
+                      >
+                        {item.name}
+                        <div className="absolute bottom-0 left-0 w-0 h-0.5"
+                          style={{ background: COLOR_NAV_TEXT }}
+                        ></div>
+                      </Link>
+                      <div className="absolute left-0 hidden mt-0.5 w-64 origin-top-left bg-gray-400 border border-[#713F12]/20 rounded-md shadow-lg group-hover:block z-50">
+                        <div className="py-1">
+                          {item.subItems.map((subItem) => (
                             <Link
-                              to={item.href}
-                              className="inline-flex items-center py-2 px-3 text-sm text-gray-800 uppercase hover:text-blue-200 font-medium transition-colors duration-200"
-                              aria-current={item.current ? "page" : undefined}
+                              key={subItem.name}
+                              to={subItem.href}
+                              className="block px-4 py-2 text-sm text-gray-700 hover:bg-amber-400 hover:text-amber-900"
                             >
-                              {item.name}
-                              <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-200 group-hover:w-full transition-all duration-300"></div>
+                              {subItem.name}
                             </Link>
-                            <div className="absolute left-0 hidden mt-0.5 w-64 origin-top-left bg-blue-900 border border-gray-200 rounded-md shadow-lg group-hover:block z-50">
-                              <div className="py-1 ">
-                                {item.subItems.map((subItem) => (
-                                  <Link
-                                    key={subItem.name}
-                                    to={subItem.href}
-                                    className="block px-4 py-2 text-sm text-white hover:bg-blue-700 hover:text-blue-200"
-                                  >
-                                    {subItem.name}
-                                  </Link>
-                                ))}
-                              </div>
-                            </div>
-                          </>
-                        ) : (
-                          <Link
-                            to={item.href}
-                            className="inline-flex items-center py-2 px-1 text-sm text-gray-800 uppercase hover:text-blue-200 font-medium transition-colors duration-200"
-                            aria-current={item.current ? "page" : undefined}
-                          >
-                            {item.name}
-                            <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-200 group-hover:w-full transition-all duration-300"></div>
-                          </Link>
-                        )}
+                          ))}
+                        </div>
                       </div>
-                    ))}
+                    </>
+                  ) : (
+                    <Link
+                      to={item.href}
+                      className="inline-flex items-center py-2 px-1 text-sm uppercase font-bold transition-colors duration-200"
+                      style={{
+                        color: COLOR_NAV_TEXT
+                      }}
+                      aria-current={item.current ? "page" : undefined}
+                      onMouseOver={e => (e.currentTarget.style.color = COLOR_NAV_TEXT_HOVER)}
+                      onMouseOut={e => (e.currentTarget.style.color = COLOR_NAV_TEXT)}
+                    >
+                      {item.name}
+                      <div className="absolute bottom-0 left-0 w-0 h-0.5"
+                        style={{ background: COLOR_NAV_TEXT }}
+                      ></div>
+                    </Link>
+                  )}
+                </div>
+              ))}
+              </div>
+                    </div>
+
+                    {/* Center CIPHER */}
+                    <div className="px-10 justify-center items-center">
+                      <span
+                        className="text-3xl font-bold whitespace-nowrap"
+                        style={{ color: COLOR_NAV_CENTER }}
+                      >
+                        C I P H E R
+                      </span>
+                    </div>
+
+                    {/* Right nav */}
+                    <div className="flex space-x-6">
+              {navRight.map((item) => (
+                <div key={item.name} className="relative group">
+                  {item.subItems ? (
+                    <>
+                      <Link
+                        to={item.href}
+                        className="inline-flex items-center py-2 px-3 text-sm uppercase font-bold transition-colors duration-200"
+                        style={{
+                          color: COLOR_NAV_TEXT
+                        }}
+                        aria-current={item.current ? "page" : undefined}
+                        onMouseOver={e => (e.currentTarget.style.color = COLOR_NAV_TEXT_HOVER)}
+                        onMouseOut={e => (e.currentTarget.style.color = COLOR_NAV_TEXT)}
+                      >
+                        {item.name}
+                        <div className="absolute bottom-0 left-0 w-0 h-0.5"
+                          style={{ background: COLOR_NAV_BORDER }}
+                        ></div>
+                      </Link>
+                      <div className="absolute left-0 hidden mt-0.5 w-64 origin-top-left bg-white border border-gray-200 rounded-md shadow-lg group-hover:block z-50">
+                        <div className="py-1">
+                          {item.subItems.map((subItem) => (
+                            <Link
+                              key={subItem.name}
+                              to={subItem.href}
+                              className="block px-4 py-2 text-sm text-amber-900 hover:bg-amber-50 hover:text-amber-600"
+                            >
+                              {subItem.name}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <Link
+                      to={item.href}
+                      className="inline-flex items-center py-2 px-1 text-sm uppercase font-bold transition-colors duration-200"
+                      style={{
+                        color: COLOR_NAV_TEXT
+                      }}
+                      aria-current={item.current ? "page" : undefined}
+                      onMouseOver={e => (e.currentTarget.style.color = COLOR_NAV_TEXT_HOVER)}
+                      onMouseOut={e => (e.currentTarget.style.color = COLOR_NAV_TEXT)}
+                    >
+                      {item.name}
+                      <div className="absolute bottom-0 left-0 w-0 h-0.5"
+                        style={{ background: COLOR_NAV_BORDER }}
+                      ></div>
+                    </Link>
+                  )}
+                </div>
+              ))}
+                    </div>
                   </nav>
                 </div>
               </div>
 
-              <Disclosure.Panel as="nav" className="lg:hidden bg-blue-900" aria-label="Global">
-                <div className="space-y-1 px-2 pb-3 pt-2">
-                  {currentNavigation.map((item) => (
-                    <div key={item.name}>
-                      {item.subItems ? (
-                        <Disclosure>
-                          {({ open }) => (
-                            <>
-                              <Disclosure.Button
-                                className={classNames(
-                                  item.current
-                                    ? "bg-blue-700 text-blue-200"
-                                    : "text-gray-700 hover:bg-blue-700 hover:text-blue-200",
-                                  "block w-full rounded-md py-2 px-3 text-base font-medium text-left flex justify-between items-center"
-                                )}
-                              >
-                                <span>{item.name}</span>
-                                <svg
-                                  className={classNames(
-                                    open ? "rotate-180" : "",
-                                    "w-5 h-5 text-blue-200"
-                                  )}
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                  stroke="currentColor"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M19 9l-7 7-7-7"
-                                  />
-                                </svg>
-                              </Disclosure.Button>
-                              <Disclosure.Panel className="space-y-1 bg-blue-900">
-                                {item.subItems.map((subItem) => (
-                                  <Link
-                                    key={subItem.name}
-                                    to={subItem.href}
-                                    className="block pl-8 pr-3 py-2 text-sm font-medium text-gray-700 hover:bg-blue-700 hover:text-blue-200"
-                                  >
-                                    {subItem.name}
-                                  </Link>
-                                ))}
-                              </Disclosure.Panel>
-                            </>
-                          )}
-                        </Disclosure>
-                      ) : (
-                        <Link
-                          to={item.href}
+                    {/* Mobile navigation */}
+      <Disclosure.Panel as="nav" className="lg:hidden bg-white" aria-label="Global">
+        <div className="space-y-1 px-2 pb-3 pt-2">
+          {[...navLeft, ...navRight].map((item) => (
+            <div key={item.href}>
+              {item.subItems ? (
+                <Disclosure>
+                  {({ open }) => (
+                    <>
+                      <Disclosure.Button
+                        className={classNames(
+                          item.current
+                            ? "bg-white text-amber-900"
+                            : "text-gray-700 hover:bg-amber-400 hover:text-amber-200",
+                          "block w-full rounded-md py-2 px-3 text-base font-medium text-left flex justify-between items-center"
+                        )}
+                      >
+                        <span>{item.name}</span>
+                        <svg
                           className={classNames(
-                            item.current
-                              ? "bg-blue-700 text-blue-200"
-                              : "text-gray-700 hover:bg-blue-700 hover:text-blue-200",
-                            "block w-full rounded-md py-2 px-3 text-base font-medium"
+                            open ? "rotate-180" : "",
+                            "w-5 h-5 text-amber-900"
                           )}
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
                         >
-                          {item.name}
-                        </Link>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </Disclosure.Panel>
-            </>
-          )}
-        </Disclosure>
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M19 9l-7 7-7-7"
+                          />
+                        </svg>
+                      </Disclosure.Button>
+                      <Disclosure.Panel className="space-y-1 bg-amber-50">
+                        {item.subItems.map((subItem) => (
+                          <Link
+                            key={subItem.name}
+                            to={subItem.href}
+                            className="block pl-8 pr-3 py-2 text-sm font-medium text-amber-900 hover:bg-amber-50 hover:text-amber-700"
+                          >
+                            {subItem.name}
+                          </Link>
+                        ))}
+                      </Disclosure.Panel>
+                    </>
+                  )}
+                </Disclosure>
+              ) : (
+                <Link
+                  to={item.href}
+                  className={classNames(
+                    item.current
+                      ? "bg-amber-200 text-amber-900"
+                      : "text-amber-900 hover:bg-amber-50 hover:text-amber-900",
+                    "block w-full rounded-md py-2 px-3 text-base font-medium"
+                  )}
+                >
+                  {item.name}
+                </Link>
+              )}
+            </div>
+          ))}
+        </div>
+      </Disclosure.Panel>
+    </>
+  )}
+</Disclosure>
       </div>
     );
   }

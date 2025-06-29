@@ -1,9 +1,25 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 // import Separator from "./common/Separator";
 // import Slider from "../components/Slider";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import getEnvironment from "../getenvironment";
+
+// Theme color variables
+const COLOR_BG_MAIN = "#fff";
+const COLOR_BG_NEWS = "#fff";
+const COLOR_BORDER_NEWS = "#bfa77a";
+const COLOR_BORDER_R = "#713F12";
+const COLOR_CARD_BG = "#fff"; // changed to white
+const COLOR_CARD_BORDER = "#bfa77a";
+const COLOR_CARD_TITLE = "#6b4f2c";
+const COLOR_CARD_ACCENT = "#bfa77a";
+const COLOR_CARD_NEW_BG = "#f6e7c1";
+const COLOR_CARD_NEW_TEXT = "#bfa77a";
+const COLOR_CARD_DESC = "#6b4f2c";
+const COLOR_CARD_LINK = "#bfa77a";
+const COLOR_CARD_LINK_HOVER = "#6b4f2c";
+const COLOR_LOGO_BG = "#1a1307"; // yellow-950
 
 function AboutNews(props) {
   const [apiUrl, setApiUrl] = useState(null);
@@ -11,24 +27,25 @@ function AboutNews(props) {
     // Fetch the environment URL
     getEnvironment().then(url => setApiUrl(url));
   }, []);
-  const [isMouseOver, setIsMouseOver] = useState(false);
   const confid = props.confid;
-  const [data, setData] = useState(null);
+  // const [data, setData] = useState(null);
 
-  useEffect(() => {
-    if (apiUrl) {
-      axios.get(`${apiUrl}/conferencemodule/home/conf/${confid}`, {
-        withCredentials: true
-      })
-        .then(res => {
-          setData(res.data);
-          console.log(res.data);
-        })
-        .catch(err => console.log(err));
-    }
-  }, [apiUrl]);
+  // useEffect(() => {
+  //   if (apiUrl) {
+  //     axios.get(`${apiUrl}/conferencemodule/home/conf/${confid}`, {
+  //       withCredentials: true
+  //     })
+  //       .then(res => {
+  //         setData(res.data);
+  //         console.log(res.data);
+  //       })
+  //       .catch(err => console.log(err));
+  //   }
+  // }, [apiUrl,confid]);
 
   const [newsData, setNewsData] = useState([]);
+  const scrollRef = useRef(null);
+
   useEffect(() => {
     if (apiUrl) {
       axios.get(`${apiUrl}/conferencemodule/announcements/conf/${confid}`, {
@@ -41,136 +58,159 @@ function AboutNews(props) {
         })
         .catch(err => console.log(err));
     }
-  }, [apiUrl]);
+  }, [apiUrl, confid]);
+
+  // Continuous horizontal scroll effect
+  useEffect(() => {
+    if (!newsData.length) return;
+    const container = scrollRef.current;
+    let reqId;
+    let scrollAmount = 0.5; // Adjust speed here
+
+    function animate() {
+      if (container) {
+        container.scrollLeft += scrollAmount;
+        // If reached end, reset to start for infinite loop
+        if (container.scrollLeft + container.offsetWidth >= container.scrollWidth) {
+          container.scrollLeft = 0;
+        }
+      }
+      reqId = requestAnimationFrame(animate);
+    }
+    reqId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(reqId);
+  }, [newsData]);
 
   return (
-    <div className="bg-white relative overflow-hidden">
+    <div className="bg-white relative overflow-hidden min-h-screen w-full" style={{ background: COLOR_BG_MAIN }}>
       {/* Background decorative elements */}
       <div className="absolute inset-0 pointer-events-none opacity-10">
-        <div className="absolute w-[800px] h-[200px] border border-[#2563eb]/10 rounded-full -right-1/4 top-1/4 transform -translate-y-1/2"></div>
-        <div className="absolute w-[500px] h-[200px] border border-[#2563eb]/15 rounded-full -left-1/4 bottom-1/4"></div>
-        <div className="absolute w-3 h-3 bg-[#2563eb] rounded-full left-[10%] top-[20%] animate-pulse"></div>
-        <div className="absolute w-2 h-2 bg-[#2563eb] rounded-full right-[15%] bottom-[30%] animate-pulse"></div>
+        <div className="absolute w-[800px] h-[100px] border border-[#2563eb]/10 -right-1/4 top-1/4 transform -translate-y-1/2"></div>
+        <div className="absolute w-[500px] h-[200px] border border-[#2563eb]/15 -left-1/4 bottom-1/4"></div>
+        <div className="absolute w-3 h-3 bg-[#2563eb] left-[10%] top-[20%] animate-pulse"></div>
+        <div className="absolute w-2 h-2 bg-[#2563eb] right-[15%] bottom-[30%] animate-pulse"></div>
       </div>
 
-      <div className="container max-w-7xl mx-auto px-5 sm:px-10 lg:px-8 pt-20 relative z-10 ">
-        {/* Main content section - First row */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 mb-16">
-          {/* About Section - Takes 3/5 of the grid on large screens */}
-          <div className=" lg:h-[500px] lg:col-span-3 space-y-8">
-            <div className=" lg:h-[500px] bg-white border border-gray-200 rounded-xl p-6 shadow-lg shadow-[#2563eb]/10 backdrop-blur-sm ">
-              <h2 className="text-4xl font-sans font-bold text-blue-600 mb-2">
-                AMSDT-2025
-              </h2>
-              <div className="w-20 h-1 bg-blue-600 mb-4"></div>
-              <div className="text-base text-gray-700 space-y-4 text-justify">
-                {data ? (
-                  <div className="min-h-[216px]" dangerouslySetInnerHTML={{ __html: data.about[0].description }} />
-                ) : (
-                  <div className="min-h-[216px] animate-pulse bg-gray-200/50 rounded"></div>
-                )}
-              </div>
-            </div>
-
-            {/* <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-lg shadow-[#2563eb]/10 backdrop-blur-sm">
-              <h2 className="text-4xl font-sans font-bold text-blue-600 mb-2">
-                About Jalandhar
-              </h2>
-              <div className="w-20 h-1 bg-blue-600 mb-4"></div>
-              <div className="text-base text-gray-700 space-y-4 text-justify">
-                {data ? (
-                  <div dangerouslySetInnerHTML={{ __html: data.about[1].description }} />
-                ) : (
-                  <div className="h-32 animate-pulse bg-gray-200/50 rounded"></div>
-                )}
-              </div>
-            </div> */}
-          </div>
-
-          {/* News Section - Takes 2/5 of the grid on large screens */}
-          <div className=" lg:h-[500px] flex-col gap-10 lg:col-span-2 ">
-            <div className="bg-white border h-[500px] border-gray-200 rounded-xl p-6 shadow-lg shadow-[#2563eb]/10 backdrop-blur-sm">
-              <h2 className="text-4xl font-sans font-bold text-blue-600 mb-2">News</h2>
-              <div className="w-20 h-1 bg-blue-600 mb-4"></div>
-              
+      <div className="w-full h-screen relative z-10">
+        {/* Complete section with news and actions */}
+        <div className="bg-white relative overflow-hidden min-h-screen w-full font-serif" style={{ background: COLOR_BG_MAIN }}>
+          <div className="grid grid-cols-1 lg:grid-cols-5 h-full">
+            
+            {/* News Section - Takes 3/5 of the grid [#6b4f2c]*/}
+            <div
+              className="lg:col-span-3 p-8 border-r"
+              style={{
+                background: COLOR_BG_NEWS,
+                borderRightColor: COLOR_BORDER_R,
+                borderRightWidth: "1px",
+                borderBottom: `1px solid ${COLOR_BORDER_NEWS}`,
+                height: "30vh",
+                overflow: "hidden"
+              }}
+            >
+              {/* Horizontal scrollable news cards */}
               <div
                 id="news"
-                className="overflow-auto pr-2 scrollbar-thin scrollbar-thumb-[#2563eb]/30 scrollbar-track-black/20"
+                ref={scrollRef}
+                className="overflow-x-auto overflow-y-hidden whitespace-nowrap flex flex-row gap-4 h-full pb-2 no-scrollbar"
+                style={{ height: "calc(30vh - 48px)" }}
               >
-                <div
-                  className={`space-y-6 ${isMouseOver ? "animate-none cursor-default" : "animate-wiggle"}`}
-                  onMouseOver={() => setIsMouseOver(true)}
-                  onMouseOut={() => setIsMouseOver(false)}
-                >
-                  {newsData.map((item) => (
-                    !item.hidden && (
-                      <Link 
-                        key={item._id} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        to={item.link !== "" ? item.link : `/news/${item._id}`}
-                        className="block"
-                      >
-                        <div className="relative p-2 my-4 rounded-xl hover:shadow-md hover:shadow-[#2563eb]/30 bg-white/40 backdrop-blur-sm space-y-2 border border-[#2563eb]/20 transition-all hover:border-[#2563eb]/50">
-                          {/* <div className="w-2 h-2  bg-[#2563eb] absolute -left-1 -top-1 rounded-full"></div> */}
-                          <div className="flex flex-row justify-between items-start">
-                            <p className="text-base font-medium text-blue-600">{item.title}</p>
-                            
-                            {item.new && (
-                              <span className="flex flex-row items-center animate-pulse ml-2">
-                                <svg 
-                                  xmlns="http://www.w3.org/2000/svg" 
-                                  fill="none" 
-                                  viewBox="0 0 24 24" 
-                                  strokeWidth="2" 
-                                  stroke="currentColor" 
-                                  className="w-5 stroke-[#2563eb]"
-                                >
-                                  <path 
-                                    strokeLinecap="round" 
-                                    strokeLinejoin="round" 
-                                    d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" 
-                                  />
-                                </svg>
-                                <p className="text-blue-600 text-sm ml-1 font-semibold">NEW</p>
-                              </span>
-                            )}
-                          </div>
-
-                          <p className="text-sm font-sans border-solid border-l-2 border-[#2563eb] pl-4 text-gray-700">
-                            {item.metaDescription}
-                          </p>
+                {/* Duplicate newsData for seamless infinite scroll */}
+                {[...newsData, ...newsData].map((item, idx) =>
+                  !item.hidden && (
+                    <div
+                      key={item._id + "_" + idx}
+                      className="inline-block align-top rounded-xl shadow-md hover:shadow-lg transition-all duration-200 w-48 h-56 flex flex-col justify-between mr-2"
+                      style={{
+                        background: COLOR_CARD_BG,
+                        border: `2px solid ${COLOR_CARD_BORDER}`,
+                        minWidth: "12rem",
+                        maxWidth: "12rem"
+                      }}
+                    >
+                      {/* News image if available */}
+                      {item.image && (
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="w-full h-24 object-cover rounded-t-xl"
+                        />
+                      )}
+                      <div className="p-3 flex-1 flex flex-col">
+                        <div className="text-xs font-semibold mb-1 uppercase"
+                          style={{ color: COLOR_CARD_ACCENT }}>
+                          {item.date || ""}
                         </div>
-                      </Link>
-                    )
-                  ))}
-                </div>
+                        <div className="flex flex-row justify-between items-start">
+                          <span
+                            className="text-base font-bold mb-1 line-clamp-2"
+                            style={{ color: COLOR_CARD_TITLE }}
+                          >
+                            {item.title}
+                          </span>
+                          {item.new && (
+                            <span
+                              className="ml-2 px-2 py-0.5 rounded text-xs font-semibold align-middle"
+                              style={{
+                                background: COLOR_CARD_NEW_BG,
+                                color: COLOR_CARD_NEW_TEXT
+                              }}
+                            >
+                              NEW
+                            </span>
+                          )}
+                        </div>
+                        <div
+                          className="text-xs mt-1 flex-1 line-clamp-3"
+                          style={{ color: COLOR_CARD_DESC }}
+                        >
+                          {item.metaDescription}
+                        </div>
+                      </div>
+                      <div className="p-3 pt-0 flex items-end">
+                        <Link
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          to={item.link !== "" ? item.link : `/news/${item._id}`}
+                          className="font-semibold text-xs flex items-center gap-1"
+                          style={{
+                            color: COLOR_CARD_LINK
+                          }}
+                          onMouseOver={e => (e.currentTarget.style.color = COLOR_CARD_LINK_HOVER)}
+                          onMouseOut={e => (e.currentTarget.style.color = COLOR_CARD_LINK)}
+                        >
+                          Read More <span aria-hidden="true">→</span>
+                        </Link>
+                      </div>
+                    </div>
+                  )
+                )}
               </div>
             </div>
-            
-            {/* <Slider confid={confid} /> */}
+
+            {/* logo Section - Takes 2/5 of the grid */}
+          <div className="lg:col-span-2 p-8 flex items-center justify-center"
+                 style={{ height: "30vh", background: COLOR_LOGO_BG }}>
+              {/* Logo Container */}
+              <div className="flex items-center">
+                {/* Replace this with your actual logo */}
+                {/* <div className="text-white text-center">
+                  <div className="w-32 h-32 bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg flex items-center justify-center mb-4 shadow-xl">
+                    <span className="text-4xl font-bold text-white">LOGO</span>
+                  </div>
+                </div> */}
+                
+                 {/* If you have an actual logo image, use this instead: */}
+                <img 
+                  src="/nitjlogo.png" 
+                  alt="Company Logo" 
+                  className="max-w-48 max-h-32 object-contain"
+                />
+              </div>
+            </div>
+
           </div>
         </div>
-        
-        {/* Second row - Gallery Section */}
-        {/* <div className="grid grid-cols-1 gap-10">
-          <div className="relative">
-            <div className="absolute -top-10 -left-10 w-20 h-20 border border-[#2563eb]/20 rounded-full"></div>
-            <div className="absolute -bottom-10 -right-10 w-16 h-16 border border-[#2563eb]/20 rounded-full"></div>
-            
-            <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-lg shadow-[#2563eb]/10 backdrop-blur-sm">
-              <div className="flex items-center justify-center mb-4">
-                <div className="w-2 h-2 bg-[#2563eb] rounded-full mr-3 animate-pulse"></div>
-                <h2 className="text-4xl font-sans font-bold text-blue-600">Image Gallery</h2>
-                <div className="w-2 h-2 bg-[#2563eb] rounded-full ml-3 animate-pulse"></div>
-              </div>
-              <div className="w-32 h-1 bg-gradient-to-r from-transparent via-[#2563eb] to-transparent mx-auto mb-8"></div>
-              
-              {/* Pass the confid prop correctly to the Slider component */}
-              {/* <Slider confid={confid} />
-            </div>
-          </div> */}
-        {/* </div> */}
       </div>
     </div>
   );
