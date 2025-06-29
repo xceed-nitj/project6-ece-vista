@@ -41,7 +41,7 @@ function Slider() {
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
-            opacity: 0.85,
+            opacity: 0.35,
             zIndex: 0,
           }}
         />
