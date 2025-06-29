@@ -21,7 +21,7 @@ const sliderData = [
   },
 ];
 
-const COLOR_BG_NEWS = "#fff";
+const COLOR_BG_NEWS = "#f9f6f2";
 const COLOR_BORDER_R = "#713F12";
 const COLOR_CARD_BG = "#f5eee6";
 const COLOR_CARD_BORDER = "#bfa77a";
