@@ -105,7 +105,7 @@ function Slider(props) {
             backgroundRepeat: "no-repeat",
             opacity: 0.95,
             zIndex: 0,
-            transition: "opacity 5s ease-in-out",
+            transition: "opacity 7s ease-in",
           }}
         />
         <div className="absolute inset-0 pointer-events-none z-10">
