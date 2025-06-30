@@ -217,7 +217,7 @@ const navigationRight = [
                     {/* Center CIPHER */}
                     <div className="px-10 justify-center items-center">
                       <span
-                        className="text-3xl font-bold whitespace-nowrap"
+                        className="text-2xl font-bold whitespace-nowrap"
                         style={{ color: COLOR_NAV_CENTER }}
                       >
                         C I P H E R 2 0 2 6
