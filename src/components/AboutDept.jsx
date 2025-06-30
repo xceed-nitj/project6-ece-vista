@@ -3,10 +3,10 @@ import getEnvironment from "../getenvironment";
 import { useState, useEffect } from "react";
 
 const sliderData = [
-  { image: "/img1.jpg", label: " " },
-  { image: "/slider4.jpg", label: " " },
-  { image: "/img3.jpg", label: " " },
-  { image: "/slider2.jpg", label: " " },
+  { image: "/ece1.jpeg", label: " " },
+  { image: "/ece2.png", label: " " },
+  { image: "/ece3.png", label: " " },
+  // { image: "/slider2.jpg", label: " " },
 ];
 
 function Slider() {

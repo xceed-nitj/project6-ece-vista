@@ -3,7 +3,7 @@ import getEnvironment from "../getenvironment";
 import { useState, useEffect } from "react";
 
 const sliderData = [
-  { image: "/img1.jpg", label: " " },
+  { image: "/slider1.jpg", label: " " },
   { image: "/slider4.jpg", label: " " },
   { image: "/img3.jpg", label: " " },
   { image: "/slider2.jpg", label: " " },
@@ -74,9 +74,7 @@ function AboutNITJ(props) {
 </div>
       <div className="grid grid-rows-1 md:grid-rows-1 gap-8">
         <div className="bg-[#854D0E] border border-yellow-950  shadow-md hover:shadow-lg hover:shadow-yellow-900/30 transition-all duration-300 grid grid-cols-1 lg:grid-cols-5 gap-0 m-6">
-          <div className="lg:col-span-2 flex items-center justify-center">
-            <Slider />
-          </div>
+         
           {isLoading ? (
             <div className="animate-pulse space-y-3 p-5">
               <div className="h-4 bg-yellow-900 rounded w-3/4"></div>
@@ -97,7 +95,9 @@ function AboutNITJ(props) {
             </div>
           )}
 
-          
+           <div className="lg:col-span-2 flex items-center justify-center">
+            <Slider />
+          </div>
         </div>
       </div>
     </div>
