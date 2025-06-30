@@ -96,18 +96,23 @@ function Slider(props) {
         className="relative w-full h-[70vh]"
         style={{ position: "relative" }}
       >
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `url('${sliderData[currentSlide].image}')`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            opacity: 0.95,
-            zIndex: 0,
-            transition: "opacity 7s ease-in",
-          }}
-        />
+        <div className="absolute inset-0 z-0">
+  {sliderData.map((slide, index) => (
+    <div
+      key={index}
+      className={`absolute inset-0 transition-opacity duration-2000 ease-in-out ${
+        index === currentSlide ? "opacity-100 z-10" : "opacity-0"
+      }`}
+      style={{
+        backgroundImage: `url('${slide.image}')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        transition: "opacity 1s ease-in-out",
+      }}
+    />
+  ))}
+</div>
         <div className="absolute inset-0 pointer-events-none z-10">
           <div className="absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-black/60 to-transparent"></div>
           <div className="absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-black/60 to-transparent"></div>

@@ -17,10 +17,10 @@ const COLOR_NAV_TEXT_HOVER = "#854d0e"; // amber-600
 const COLOR_NAV_CENTER = "#5C4033"; // amber-950
 const COLOR_NAV_BORDER = "#bfa77a";
 
-   const navigationLeft = [
+ const navigationLeft = [
   { name: "Home", href: "/", current: true },
-  { name: "Tracks", href: "/tracks", current: false },
-  { name: "Abstract Submission", href: "/submission", current: false },
+  { name: "Tracks", href: "/682c31514f0ddcc436b90ebd", current: false },
+  { name: "Abstract Submission", href: "/6835ec0c7709458abce41a5e", current: false },
 ];
 const navigationRight = [
   {
@@ -29,12 +29,12 @@ const navigationRight = [
     current: false,
     subItems: [
       { name: "Registration Fee", href: "/registrationfee" },
-      { name: "Registration Link", href: "/registrationlink" },
+      { name: "Registration Link", href: "/682c30d94f0ddcc436b90eb7" },
     ],
   },
   { name: "Awards", href: "/awards", current: false },
   
-  { name: "Accommodation", href: "/accommodation", current: false },
+  { name: "Accommodation", href: "/685039afd6d0062014ddf965", current: false },
 ];
 
   function classNames(...classes) {
