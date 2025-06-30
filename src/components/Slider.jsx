@@ -1,7 +1,9 @@
 import { useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import axios from "axios";
 import getEnvironment from "../getenvironment";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 
 const sliderData = [
   {
@@ -23,15 +25,15 @@ const sliderData = [
 
 const COLOR_BG_NEWS = "#f9f6f2";
 const COLOR_BORDER_R = "#713F12";
-const COLOR_CARD_BG = "#f5eee6";
-const COLOR_CARD_BORDER = "#bfa77a";
-const COLOR_CARD_TITLE = "#6b4f2c";
-const COLOR_CARD_ACCENT = "#bfa77a";
-const COLOR_CARD_NEW_BG = "#f6e7c1";
-const COLOR_CARD_NEW_TEXT = "#bfa77a";
-const COLOR_CARD_DESC = "#6b4f2c";
-const COLOR_CARD_LINK = "#bfa77a";
-const COLOR_CARD_LINK_HOVER = "#6b4f2c";
+// const COLOR_CARD_BG = "#f5eee6";
+// const COLOR_CARD_BORDER = "#bfa77a";
+// const COLOR_CARD_TITLE = "#6b4f2c";
+// const COLOR_CARD_ACCENT = "#bfa77a";
+// const COLOR_CARD_NEW_BG = "#f6e7c1";
+// const COLOR_CARD_NEW_TEXT = "#bfa77a";
+// const COLOR_CARD_DESC = "#6b4f2c";
+// const COLOR_CARD_LINK = "#bfa77a";
+// const COLOR_CARD_LINK_HOVER = "#6b4f2c";
 const COLOR_LOGO_BG = "#1a1307";
 
 function Slider(props) {
@@ -53,18 +55,28 @@ function Slider(props) {
   }, []);
 
   useEffect(() => {
-    if (apiUrl) {
-      axios
-        .get(`${apiUrl}/conferencemodule/announcements/conf/${confid}`, {
-          withCredentials: true,
-        })
-        .then((res) => {
-          const sortedData = res.data.sort((a, b) => a.sequence - b.sequence);
-          setNewsData(sortedData);
-        })
-        .catch((err) => console.log(err));
+    if (!confid || !apiUrl) {
+      console.warn("Missing confid or apiUrl", { confid, apiUrl });
+      return;
     }
+    console.log("Sending GET request to:", `${apiUrl}/conferencemodule/announcements/conf/${confid}`);
+    axios
+      .get(`${apiUrl}/conferencemodule/announcements/conf/${confid}`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        const sortedData = res.data.about.sort((a, b) => a.sequence - b.sequence);
+        setNewsData(res.data.about);
+        console.log("Fetched news data:");
+        console.log("Fetched news data:", sortedData);
+      })
+      .catch((err) => {
+        console.error("API error:", err);
+        setNewsData([]); // Optionally clear on error
+      });
   }, [apiUrl, confid]);
+  console.log("apiUrl:", apiUrl);
+  
 
   useEffect(() => {
     if (!newsData.length) return;
@@ -96,18 +108,23 @@ function Slider(props) {
         className="relative w-full h-[70vh]"
         style={{ position: "relative" }}
       >
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `url('${sliderData[currentSlide].image}')`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            opacity: 0.95,
-            zIndex: 0,
-            transition: "opacity 7s ease-in",
-          }}
-        />
+        <div className="absolute inset-0 z-0">
+  {sliderData.map((slide, index) => (
+    <div
+      key={index}
+      className={`absolute inset-0 transition-opacity duration-2000 ease-in-out ${
+        index === currentSlide ? "opacity-100 z-10" : "opacity-0"
+      }`}
+      style={{
+        backgroundImage: `url('${slide.image}')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        transition: "opacity 1s ease-in-out",
+      }}
+    />
+  ))}
+</div>
         <div className="absolute inset-0 pointer-events-none z-10">
           <div className="absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-black/60 to-transparent"></div>
           <div className="absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-black/60 to-transparent"></div>
@@ -126,7 +143,7 @@ function Slider(props) {
           <div className="pl-8 sm:pl-16 md:pl-24 lg:pl-32 max-w-4xl pointer-events-auto text-left">
             <div className="mb-2">
               <span
-                className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl px-4 py-2 rounded shadow-lg block"
+                className="text-white text-3xl sm:text-4xl md:text-4xl lg:text-5xl px-4 py-2 rounded shadow-lg block"
                 style={{
                   fontFamily: "Playfair",
                   fontWeight: 300,
@@ -168,97 +185,124 @@ function Slider(props) {
       </div>
 
       {/* News & Logo Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-5 w-full h-[10vh]">
+      <div className="grid grid-cols-1 lg:grid-cols-5 w-full h-[20vh]">
         {/* News */}
         <div
-          className="lg:col-span-3 p-4 border-r overflow-hidden"
+          className="lg:col-span-3 p-6 border-r"
           style={{
             background: COLOR_BG_NEWS,
             borderRightColor: COLOR_BORDER_R,
             borderRightWidth: "1px",
           }}
         >
+          {/* News card buttons, small and in a single row */}
           <div
-            ref={scrollRef}
-            className="overflow-x-auto whitespace-nowrap flex flex-row gap-4 h-full no-scrollbar"
+            className="flex flex-row gap-3 flex-wrap items-center"
+            style={{
+              height: "calc(20vh - 48px)",
+              alignItems: "center",
+              maxHeight: "20vh",
+            }}
           >
-            {[...newsData, ...newsData].map(
-              (item, idx) =>
-                !item.hidden && (
-                  <div
-                    key={item._id + "_" + idx}
-                    className="inline-block align-top rounded-xl shadow-md hover:shadow-lg transition-all duration-200 w-48 h-56 flex flex-col justify-between"
-                    style={{
-                      background: COLOR_CARD_BG,
-                      border: `2px solid ${COLOR_CARD_BORDER}`,
-                      minWidth: "12rem",
-                      maxWidth: "12rem",
-                    }}
-                  >
-                    {item.image && (
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="w-full h-24 object-cover rounded-t-xl"
-                      />
-                    )}
-                    <div className="p-3 flex-1 flex flex-col">
-                      <div
-                        className="text-xs font-semibold mb-1 uppercase"
-                        style={{ color: COLOR_CARD_ACCENT }}
+            {(newsData.length ? newsData : [1, 2, 3]).map((item, idx) =>
+              newsData.length
+                ? (!item.hidden && (
+                    <a
+                      key={item._id}
+                      href={item.link !== "" ? item.link : `/news/${item._id}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ textDecoration: "none", position: "relative" }}
+                    >
+                      <button
+                        type="button"
+                        className="relative px-4 py-2 rounded-full font-semibold text-sm transition-all duration-300 shadow-md bg-[#401b02] whitespace-nowrap hover:shadow-xl hover:-translate-y-1"
+                        style={{
+                          color: "#fff",
+                          fontFamily: "inherit",
+                          cursor: "pointer",
+                          minWidth: "120px",
+                          minHeight: "36px",
+                          maxWidth: "220px",
+                          border: "2px solid #bfa77a",
+                          background: "#401b02"
+                        }}
                       >
-                        {item.date || ""}
-                      </div>
-                      <div className="flex flex-row justify-between items-start">
-                        <span
-                          className="text-base font-bold mb-1 line-clamp-2"
-                          style={{ color: COLOR_CARD_TITLE }}
-                        >
+                        <span className="text-left leading-relaxed">
                           {item.title}
                         </span>
+                        {/* Top-right external link icon */}
+                        {/* <span
+                          style={{
+                            position: "absolute",
+                            top: 6,
+                            right: 8,
+                            fontSize: 16,
+                            opacity: 0.85,
+                            color: "#fff"
+                          }}
+                        >
+                          <FontAwesomeIcon icon={faUpRightFromSquare} />
+                        </span> */}
+
+                            <img
+                          src="\external-link.png"
+                          alt="External link"  /// This is the external link icon here the link of the file comes from
+                          style={{
+                            position: "absolute",
+                            top: 6,
+                            right: 8,
+                            width: "12px",
+                            height: "12px",
+                            opacity: 0.85,
+                            filter: "brightness(0) invert(1)" // Makes the icon white
+                          }}
+                        />
+
                         {item.new && (
                           <span
-                            className="ml-2 px-2 py-0.5 rounded text-xs font-semibold"
+                            className="ml-2 px-2 py-1 rounded-full text-xs font-bold"
                             style={{
-                              background: COLOR_CARD_NEW_BG,
-                              color: COLOR_CARD_NEW_TEXT,
+                              background: "#ff6b35",
+                              color: "#fff",
+                              boxShadow: "0 2px 8px rgba(255, 107, 53, 0.3)"
                             }}
                           >
                             NEW
                           </span>
                         )}
-                      </div>
-                      <div
-                        className="text-xs mt-1 flex-1 line-clamp-3"
-                        style={{ color: COLOR_CARD_DESC }}
-                      >
-                        {item.metaDescription}
-                      </div>
-                    </div>
-                    <div className="p-3 pt-0 flex items-end">
-                      <Link
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        to={
-                          item.link !== ""
-                            ? item.link
-                            : `/news/${item._id}`
-                        }
-                        className="font-semibold text-xs flex items-center gap-1"
-                        style={{
-                          color: COLOR_CARD_LINK,
-                        }}
-                        onMouseOver={(e) =>
-                          (e.currentTarget.style.color = COLOR_CARD_LINK_HOVER)
-                        }
-                        onMouseOut={(e) =>
-                          (e.currentTarget.style.color = COLOR_CARD_LINK)
-                        }
-                      >
-                        Read More <span aria-hidden="true">→</span>
-                      </Link>
-                    </div>
-                  </div>
+                      </button>
+                    </a>
+                  ))
+                : (
+                  <button
+                    key={idx}
+                    type="button"
+                    className="relative px-4 py-2 rounded-full font-semibold text-sm transition-all duration-300 shadow-md bg-[#3d2b1f] min-w-[240px] min-h-[56px] max-w-[270px] whitespace-nowrap hover:shadow-xl hover:-translate-y-1"
+                    style={{
+                      color: "#fff",
+                      fontFamily: "inherit",
+                      opacity: 0.7,
+                      cursor: "default",
+                      border: "2px solid #bfa77a"
+                    }}
+                    disabled
+                  >
+                    <img
+                          src="\external-link.png"
+                          alt="External link"
+                          style={{
+                            position: "absolute",
+                            top: 17,
+                            right: 20,
+                            width: "17px",
+                            height: "17px",
+                            opacity: 0.85,
+                            filter: "brightness(0) invert(1)" // Makes the icon white
+                          }}
+                        />
+                    News will appear here
+                  </button>
                 )
             )}
           </div>
@@ -292,7 +336,7 @@ function Slider(props) {
           letterSpacing: "0.01em",
         }}
       >
-        Organised by the Department of Electronics and Communication Engineering
+        Organised by the Department of Electronics and Communication Engineering, NIT Jalandhar
       </p>
     </div>
   </div>

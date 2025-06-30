@@ -3,10 +3,10 @@ import getEnvironment from "../getenvironment";
 import { useState, useEffect } from "react";
 
 const sliderData = [
-  { image: "/img1.jpg", label: " " },
-  { image: "/img2.jpg", label: " " },
+  { image: "/slider1.jpg", label: " " },
+  { image: "/slider4.jpg", label: " " },
   { image: "/img3.jpg", label: " " },
-  { image: "/nitj.png", label: " " },
+  { image: "/slider2.jpg", label: " " },
 ];
 
 function Slider() {
@@ -52,6 +52,7 @@ function AboutNITJ(props) {
           withCredentials: true,
         })
         .then((res) => {
+          console.log(res.data);
           setData(res.data);
           setIsLoading(false);
         })
@@ -65,17 +66,12 @@ function AboutNITJ(props) {
   return (
     <div className="bg-white text-white container max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex justify-center my-4 md:my-6">
-        <button className="bg-[#1A1307] text-white text-lg md:text-xl font-semibold rounded-3xl px-6 py-3 md:px-8 md:py-4">
+        <h2 className="bg-[#1A1307] text-white text-xl md:text-xl font-semibold rounded-3xl text-center px-6 py-3 md:px-8 md:py-4">
           About Dr B R Ambedkar National Institute of Technology Jalandhar
-        </button>
+        </h2>
       </div>
       
       <div className="bg-[#854D0E] border border-yellow-950 rounded-xl shadow-md hover:shadow-lg hover:shadow-yellow-900/30 transition-all duration-300 flex flex-col lg:flex-row mx-4 sm:mx-6 md:mx-8 lg:mx-12 mb-8 md:mb-12">
-        {/* Slider - Comes first on mobile, right on desktop */}
-        <div className="lg:w-2/5 order-first lg:order-last">
-          <Slider />
-        </div>
-        
         {/* Content Section */}
         <div className="lg:w-3/5 p-4 md:p-6">
           {isLoading ? (
@@ -91,12 +87,16 @@ function AboutNITJ(props) {
                 <div
                   className="about-content"
                   dangerouslySetInnerHTML={{
-                    __html: data.about[2]?.description || "",
+                    __html: data.about[1]?.description || "",
                   }}
                 />
               )}
             </div>
           )}
+
+           <div className="lg:col-span-2 flex items-center justify-center">
+            <Slider />
+          </div>
         </div>
       </div>
     </div>

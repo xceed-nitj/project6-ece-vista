@@ -26,9 +26,10 @@ import Publications from "./pages/Publications";
 import Awards from "./pages/awards";
 import Sponsors from "./pages/Sponsors";
 import Guidelines from "./pages/Guidelines";
+import CommonTemplate from "./pages/CommonTemplate";
 
 function App() {
-   const confid="682c2dbe4f0ddcc436b90e88";
+   const confid="686270aa85f2e21ce21bfb19";
   return (
     <>
 
@@ -62,6 +63,7 @@ function App() {
         <Route path="advisorycommittee" element={<AdvisoryCommittee confid={confid} />} />    
         {/* <Route path="localcommittee" element={<LocalCommittee confid={confid} />} /> */}
         <Route path="publications" element={<Publications confid={confid} />} />
+        <Route path="/:templateid" element={<CommonTemplate confid={confid} />} />
 
 
       </Routes >
