@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import AboutNITJ from "../components/AboutNITJ";
 // import AboutNews from "../components/AboutNews";
 import CountdownBox from "../components/timer.jsx";
-
+import AboutDept  from "../components/AboutDept.jsx"
 // import SponsorShip from "../components/Sponsorship";
 import { useEffect} from "react";
 // import Hero2 from "../components/Hero2";
@@ -19,6 +19,7 @@ import Navbar from "../components/Navbar";
 // import VideoGallery from "../components/VideoGallery";
 // import DriveLinks from "../components/Drivelink";
 import OrganizingHeads from "../components/OrganizingHeads";
+import AboutConf from "../components/Aboutconf.jsx";
 // import AboutNews from "./components/Dummy";
 function Home(props) {
   useEffect(() => {
@@ -60,17 +61,17 @@ function Home(props) {
       {/* <Speaker confid={props.confId}  ref={ourspeakersRef}   />
       <InvitedSpeaker confid={props.confId}  ref={invitedspeakersRef}   /> */}
       <Slider />
-      
+      <AboutConf/>
       
       {/* <Speakers /> */}
       {/* <OurEvents confid={props.confId}  /> */}
       {/* <AboutNews confid={props.confId} /> */}
-       <Timeline confid={props.confId}  />
-        <div className="w-full flex justify-center mt-8">
-            <CountdownBox />
-          </div>
+      <Timeline confid={props.confId}  />
       <AboutNITJ confid={props.confId} />
-
+      <div className="w-full flex justify-center mt-8">
+        <CountdownBox />
+      </div>
+      <AboutDept confid={props.confId} />
       <OrganizingHeads />
 
       {/* <SponsorShip confid={props.confId} /> */}
