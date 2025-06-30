@@ -100,7 +100,7 @@ const OrganizingHeads = () => {
       image: "bodile.jpg",
     },
   ];
-// 
+//  Temp change to reopen PR
   const renderSection = (title, members) => (
     <div className="text-center mb-12">
       <button className="bg-[#1A1307] text-white text-xl font-semibold rounded-3xl p-4 justify-center">

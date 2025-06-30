@@ -61,7 +61,7 @@ function AboutNITJ(props) {
         });
     }
   }, [apiUrl, confid]);
-// 
+//  Temp change to reopen PR
   return (
     <div className="bg-white text-white container max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex justify-center my-4 md:my-6">

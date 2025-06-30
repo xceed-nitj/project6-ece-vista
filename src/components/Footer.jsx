@@ -123,7 +123,7 @@ const Footer = () => {
           />
         </svg>
       </div>
-{/*  */}
+{/*  Temp change to reopen PR */}
       <div className="bg-[#1A1307]  container mx-auto relative z-10 px-4 py-16">
         <div className="flex flex-col lg:flex-row items-start justify-between gap-12">
           {/* Contact Information */}
