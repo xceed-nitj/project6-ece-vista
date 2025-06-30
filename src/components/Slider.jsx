@@ -297,7 +297,7 @@ function Slider(props) {
           letterSpacing: "0.01em",
         }}
       >
-        Organised by the Department of Electronics and Communication Engineering
+        Organised by the Department of Electronics and Communication Engineering, NIT Jalandhar
       </p>
     </div>
   </div>

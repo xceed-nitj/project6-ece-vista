@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 
 const sliderData = [
   { image: "/img1.jpg", label: " " },
-  { image: "/img2.jpg", label: " " },
+  { image: "/slider4.jpg", label: " " },
   { image: "/img3.jpg", label: " " },
-  { image: "/nitj.png", label: " " },
+  { image: "/slider2.jpg", label: " " },
 ];
 
 function Slider() {
@@ -52,6 +52,7 @@ function AboutNITJ(props) {
           withCredentials: true,
         })
         .then((res) => {
+          console.log(res.data);
           setData(res.data);
           setIsLoading(false);
         })
@@ -63,10 +64,12 @@ function AboutNITJ(props) {
   }, [apiUrl, confid]);
 
   return (
-    <div className="bg-white text-white container max-w-8xl mx-auto px-4 sm:px-20 lg:px-8 ">
-      <div className="flex justify-center" > <button className="bg-[#BFA77A] text-[#854D0E] text-xl font-semibold rounded-3xl p-4 justify-center">About the NITJ</button></div>
+    // <div className="bg-white text-white container max-w-8xl mx-auto px-4 sm:px-20 lg:px-8 ">
+      <div className="w-full bg-white text-white mt-6">
+
+      <div className="flex justify-center" > <button className="bg-[#1a1307] text-white text-xl font-bold rounded-3xl p-4 justify-center">About Dr B R Ambedkar National Institute of Technology Jalandhar</button></div>
       <div className="grid grid-rows-1 md:grid-rows-1 gap-8">
-        <div className="bg-[#854D0E] border border-yellow-950 rounded-xl shadow-md hover:shadow-lg hover:shadow-yellow-900/30 transition-all duration-300 grid grid-cols-1 lg:grid-cols-5 gap-0 m-12">
+        <div className="bg-[#854D0E] border border-yellow-950  shadow-md hover:shadow-lg hover:shadow-yellow-900/30 transition-all duration-300 grid grid-cols-1 lg:grid-cols-5 gap-0 m-6">
           <div className="lg:col-span-2 flex items-center justify-center">
             <Slider />
           </div>
@@ -83,7 +86,7 @@ function AboutNITJ(props) {
                 <div
                   className="about-content"
                   dangerouslySetInnerHTML={{
-                    __html: data.about[2]?.description || "",
+                    __html: data.about[1]?.description || "",
                   }}
                 />
               ) : null}

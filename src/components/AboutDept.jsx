@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 
 const sliderData = [
   { image: "/img1.jpg", label: " " },
-  { image: "/img2.jpg", label: " " },
+  { image: "/slider4.jpg", label: " " },
   { image: "/img3.jpg", label: " " },
-  { image: "/nitj.png", label: " " },
+  { image: "/slider2.jpg", label: " " },
 ];
 
 function Slider() {
@@ -34,7 +34,7 @@ function Slider() {
   );
 }
 
-function AboutNITJ(props) {
+function AboutDept(props) {
   const confid = props.confid;
   const [apiUrl, setApiUrl] = useState(null);
   const [data, setData] = useState(null);
@@ -52,6 +52,7 @@ function AboutNITJ(props) {
           withCredentials: true,
         })
         .then((res) => {
+          console.log(res.data);
           setData(res.data);
           setIsLoading(false);
         })
@@ -63,11 +64,15 @@ function AboutNITJ(props) {
   }, [apiUrl, confid]);
 
   return (
-    <div className="bg-white text-white container max-w-8xl mx-auto px-4 sm:px-20 lg:px-8 mt-12">
-      <div className="flex justify-center" > <button className="bg-[#BFA77A] text-[#854D0E] text-xl font-semibold rounded-3xl p-4 justify-center">About the Department</button></div>
+    // <div className="bg-white text-white container max-w-8xl mx-auto px-4 sm:px-20 lg:px-8 ">
+      <div className="w-full bg-white text-white mt-6">
+
+      <div className="flex justify-center" > <button className="bg-[#1a1307] text-white text-xl font-bold rounded-3xl p-4 justify-center">About The Department of Electronics and Communication Engineering</button></div>
       <div className="grid grid-rows-1 md:grid-rows-1 gap-8">
-        <div className="bg-[#854D0E] border border-yellow-950 rounded-xl shadow-md hover:shadow-lg hover:shadow-yellow-900/30 transition-all duration-300 grid grid-cols-1 lg:grid-cols-5 gap-0 mx-12 mb-12 mt-8">
-          
+        <div className="bg-[#854D0E] border border-yellow-950  shadow-md hover:shadow-lg hover:shadow-yellow-900/30 transition-all duration-300 grid grid-cols-1 lg:grid-cols-5 gap-0 m-6">
+          <div className="lg:col-span-2 flex items-center justify-center">
+            <Slider />
+          </div>
           {isLoading ? (
             <div className="animate-pulse space-y-3 p-5">
               <div className="h-4 bg-yellow-900 rounded w-3/4"></div>
@@ -77,26 +82,22 @@ function AboutNITJ(props) {
             </div>
           ) : (
             <div className="text-base mb-4 text-justify text-white lg:col-span-3 p-5">
-              {/* <h2 className="text-2xl font-bold text-yellow-400 pl-5 mb-2">About the Department</h2>
-              <div className="w-20 h-1 ml-5 bg-yellow-400 mb-5"></div> */}
               {data ? (
                 <div
                   className="about-content"
                   dangerouslySetInnerHTML={{
-                    __html: data.about[3]?.description || "",
+                    __html: data.about[2]?.description || "",
                   }}
                 />
               ) : null}
             </div>
           )}
 
-          <div className="lg:col-span-2 flex items-center justify-center">
-            <Slider />
-          </div>
+          
         </div>
       </div>
     </div>
   );
 }
 
-export default AboutNITJ;
+export default AboutDept;
