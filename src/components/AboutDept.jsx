@@ -72,6 +72,7 @@ function AboutDept(props) {
       
       <div className="bg-[#854D0E] border border-yellow-950 rounded-xl shadow-md hover:shadow-lg hover:shadow-yellow-900/30 transition-all duration-300 flex flex-col lg:flex-row mx-4 sm:mx-6 md:mx-8 lg:mx-12 mb-8 md:mb-12">
         {/* Content Section - Comes first on mobile */}
+        {/* hello hi */}
         <div className="lg:w-3/5 p-4 md:p-6">
           {isLoading ? (
             <div className="animate-pulse space-y-3">

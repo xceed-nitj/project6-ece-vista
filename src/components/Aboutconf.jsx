@@ -40,7 +40,7 @@ function AboutNITJ() {
                     About CIPHER 2026
                 </button>
             </div>
-            
+            {/*  */}
             <div className="bg-[#854D0E] border border-yellow-950 rounded-xl shadow-md hover:shadow-lg hover:shadow-yellow-900/30 transition-all duration-300 flex flex-col lg:flex-row mx-auto mb-8 md:mb-12 mt-4 md:mt-8 max-w-7xl">
                 {/* Text Content - Takes full width on mobile, 60% on desktop */}
                 <div className="p-5 md:p-8 lg:w-3/5">
