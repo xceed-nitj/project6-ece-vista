@@ -67,7 +67,12 @@ function AboutDept(props) {
     // <div className="bg-white text-white container max-w-8xl mx-auto px-4 sm:px-20 lg:px-8 ">
       <div className="w-full bg-white text-white mt-6">
 
-      <div className="flex justify-center" > <button className="bg-[#1a1307] text-white text-xl font-bold rounded-3xl p-4 justify-center">About The Department of Electronics and Communication Engineering</button></div>
+<div className="flex justify-center">
+  <h2 className="bg-[#1a1307] text-white text-xl font-bold rounded-3xl p-4 text-center">
+    About The Department of Electronics and Communication Engineering
+  </h2>
+</div>      
+      
       <div className="grid grid-rows-1 md:grid-rows-1 gap-8">
         <div className="bg-[#854D0E] border border-yellow-950  shadow-md hover:shadow-lg hover:shadow-yellow-900/30 transition-all duration-300 grid grid-cols-1 lg:grid-cols-5 gap-0 m-6">
           <div className="lg:col-span-2 flex items-center justify-center">
