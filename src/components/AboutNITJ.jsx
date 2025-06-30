@@ -20,7 +20,7 @@ function Slider() {
   }, []);
 
   return (
-    <div className="relative h-full w-full overflow-hidden">
+    <div className="relative w-full h-64 md:h-80 lg:h-full overflow-hidden rounded-lg">
       {sliderData.map((slide, index) => (
         <div
           key={index}
@@ -63,34 +63,40 @@ function AboutNITJ(props) {
   }, [apiUrl, confid]);
 
   return (
-    <div className="bg-white text-white container max-w-8xl mx-auto px-4 sm:px-20 lg:px-8 ">
-      <div className="flex justify-center" > <button className="bg-[#BFA77A] text-[#854D0E] text-xl font-semibold rounded-3xl p-4 justify-center">About the NITJ</button></div>
-      <div className="grid grid-rows-1 md:grid-rows-1 gap-8">
-        <div className="bg-[#854D0E] border border-yellow-950 rounded-xl shadow-md hover:shadow-lg hover:shadow-yellow-900/30 transition-all duration-300 grid grid-cols-1 lg:grid-cols-5 gap-0 m-12">
-          <div className="lg:col-span-2 flex items-center justify-center">
-            <Slider />
-          </div>
+    <div className="bg-white text-white container max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="flex justify-center my-4 md:my-6">
+        <button className="bg-[#1A1307] text-white text-lg md:text-xl font-semibold rounded-3xl px-6 py-3 md:px-8 md:py-4">
+          About the NITJ
+        </button>
+      </div>
+      
+      <div className="bg-[#854D0E] border border-yellow-950 rounded-xl shadow-md hover:shadow-lg hover:shadow-yellow-900/30 transition-all duration-300 flex flex-col lg:flex-row mx-4 sm:mx-6 md:mx-8 lg:mx-12 mb-8 md:mb-12">
+        {/* Slider - Comes first on mobile, right on desktop */}
+        <div className="lg:w-2/5 order-first lg:order-last">
+          <Slider />
+        </div>
+        
+        {/* Content Section */}
+        <div className="lg:w-3/5 p-4 md:p-6">
           {isLoading ? (
-            <div className="animate-pulse space-y-3 p-5">
+            <div className="animate-pulse space-y-3">
               <div className="h-4 bg-yellow-900 rounded w-3/4"></div>
               <div className="h-4 bg-yellow-900 rounded"></div>
               <div className="h-4 bg-yellow-900 rounded w-5/6"></div>
               <div className="h-4 bg-yellow-900 rounded w-2/3"></div>
             </div>
           ) : (
-            <div className="text-base mb-4 text-justify text-white lg:col-span-3 p-5">
-              {data ? (
+            <div className="text-sm md:text-base leading-relaxed text-justify">
+              {data && (
                 <div
                   className="about-content"
                   dangerouslySetInnerHTML={{
                     __html: data.about[2]?.description || "",
                   }}
                 />
-              ) : null}
+              )}
             </div>
           )}
-
-          
         </div>
       </div>
     </div>
