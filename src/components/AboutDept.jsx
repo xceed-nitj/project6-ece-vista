@@ -66,7 +66,7 @@ function AboutDept(props) {
     <div className="bg-white text-white container max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 md:mt-12">
       <div className="flex justify-center mb-6 md:mb-8">
         <button className="bg-[#1A1307] text-white text-lg md:text-xl font-semibold rounded-3xl px-6 py-3 md:px-8 md:py-4">
-          About the Department
+          About The Department of Electronics and Communication Engineering
         </button>
       </div>
       

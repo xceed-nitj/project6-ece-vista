@@ -66,7 +66,7 @@ function AboutNITJ(props) {
     <div className="bg-white text-white container max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex justify-center my-4 md:my-6">
         <button className="bg-[#1A1307] text-white text-lg md:text-xl font-semibold rounded-3xl px-6 py-3 md:px-8 md:py-4">
-          About the NITJ
+          About Dr B R Ambedkar National Institute of Technology Jalandhar
         </button>
       </div>
       
