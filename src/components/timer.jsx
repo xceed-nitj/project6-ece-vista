@@ -61,7 +61,7 @@ const TripleCountdown = () => {
   }, []);
 
   return (
-    <div className="px-4 text-black bg-blue-900 py-8 w-full">
+    <div className="px-4 text-black bg-[#1A1307] py-5 w-full h-15">
       <div className="mx-auto grid max-w-7xl grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
         <CountdownBox
           title="Abstract Submission"

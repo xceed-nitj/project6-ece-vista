@@ -1,19 +1,19 @@
 // import React from "react";
 
 const ProfileCard = ({ person }) => (
-  <div className="bg-white border border-[#2563eb]/30 hover:border-[#2563eb]/70
-                  transition-all duration-300 rounded-xl p-6 shadow-lg hover:shadow-[#2563eb]/20
+  <div className="bg-white border border-[#1A1307]/30 hover:border-[#1A1307]/70
+                  transition-all duration-300 rounded-xl p-6 shadow-lg hover:shadow-[#1A1307]/20
                   backdrop-blur-sm w-72 flex flex-col items-center">
     <div className="relative mb-4">
-      <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-[#2563eb] p-0.5">
+      <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-[#1A1307] p-0.5">
         <img
           src={person.image}
           alt={person.name}
-          className="w-full h-full object-cover rounded-full"
+          className="w-full h-full object-cover object-top rounded-full"
         />
       </div>
     </div>
-    <h3 className="text-xl font-bold text-[#2563eb] mb-2 text-center">
+    <h3 className="text-xl font-bold text-[#1A1307] mb-2 text-center">
       {person.name}
     </h3>
     <p className="text-gray-700 text-center text-sm">{person.position}</p>
@@ -21,72 +21,93 @@ const ProfileCard = ({ person }) => (
 );
 
 const OrganizingHeads = () => {
-  const patrons = [
-    {
-      name: "Prof. Binod Kumar Kanaujia",
-      position: "Director, NIT Jalandhar",
-      image: "Director.jpg",
-    },
-    {
-      name: "Prof. Akash Deep",
-      position: "Director, Institute of Nano Science and Technology, Mohali",
-      image: "akashdeep.jpeg",
-    },
-  ];
+  // const patrons = [
+  //   {
+  //     name: "Prof. Binod Kumar Kanaujia",
+  //     position: "Director, NIT Jalandhar",
+  //     image: "Director.jpg",
+  //   },
+  //   {
+  //     name: "Prof. Akash Deep",
+  //     position: "Director, Institute of Nano Science and Technology, Mohali",
+  //     image: "akashdeep.jpeg",
+  //   },
+  // ];
 
-  const coPatrons = [
-    {
-      name: "Prof. Ajay Bansal",
-      position: "Registrar, NIT Jalandhar",
-      image: "ajaybansal.jpg",
-    },
-    {
-      name: "Prof. Rohit Mehra",
-      position: "Dean (R&C), NIT Jalandhar",
-      image: "rohitmehra.jpg",
-    },
-  ];
+  // const coPatrons = [
+  //   {
+  //     name: "Prof. Ajay Bansal",
+  //     position: "Registrar, NIT Jalandhar",
+  //     image: "ajaybansal.jpg",
+  //   },
+  //   {
+  //     name: "Prof. Rohit Mehra",
+  //     position: "Dean (R&C), NIT Jalandhar",
+  //     image: "rohitmehra.jpg",
+  //   },
+  // ];
 
-  const coPatrons2 = [
-    {
-      name: "Prof. H. M. Mittal",
-      position: "Head, Physics, NIT Jalandhar",
-      image: "mittal.jpg",
-    },
-  ];
+  // const coPatrons2 = [
+  //   {
+  //     name: "Prof. H. M. Mittal",
+  //     position: "Head, Physics, NIT Jalandhar",
+  //     image: "mittal.jpg",
+  //   },
+  // ];
 
   const chairman = [
     {
-      name: "Dr. Praveen Malik",
-      position: "Physics, NIT Jalandhar",
-      image: "malik.jpg",
+      name: "Dr. Ashish Raman",
+      position: "Electronics and Communication Engineering, NIT Jalandhar",
+      image: "ashish_raman.jpg",
+    },
+    {
+      name: "Dr. Sukwinder Singh",
+      position: "Electronics and Communication Engineering, NIT Jalandhar",
+      image: "sukhwinder.jpg",
+    },
+    {
+      name: "Dr. Aijaz Mehdi Zaidi",
+      position: "Electronics and Communication Engineering, NIT Jalandhar",
+      image: "zedimedi.jpg",
     },
   ];
 
   const secretary = [
     {
-      name: "Dr. A P Singh",
-      position: "Physics, NIT Jalandhar",
-      image: "abhinav.jpg",
+      name: "Dr. Pawan Kumar Verma",
+      position: "Electronics and Communication Engineering, NIT Jalandhar",
+      image: "pkverma.jpg",
     },
     {
-      name: "Dr. Shishram Rebari",
-      position: "Physics, NIT Jalandhar",
-      image: "Shishram.jpg",
+      name: "Dr. Ranjeet Kumar Rout",
+      position: "Information Technology, NIT Jalandhar",
+      image: "rkrout.jpeg",
     },
     {
-      name: "Dr. V Shanmugam",
-      position: "Scientist E, INST Mohali",
-      image: "vijay.png",
+      name: "Dr. Nitesh Kashyap",
+      position: "Electronics and Communication Engineering, NIT Jalandhar",
+      image: "nitesh.jpg",
+    },
+    {
+      name: "Dr. Rohit Singh",
+      position: "Electronics and Communication Engineering, NIT Jalandhar",
+      image: "rohit.jpg",
+    },
+    {
+      name: "Dr. Roshan Bodile",
+      position: "Electronics and Communication Engineering, NIT Jalandhar",
+      image: "bodile.jpg",
     },
   ];
 
   const renderSection = (title, members) => (
     <div className="text-center mb-12">
-      <h2 className="text-4xl font-black mb-2 text-[#2563eb] inline-flex items-center justify-center relative">
+      <h2 className="text-4xl font-black mb-2 text-[#1A1307] inline-flex items-center justify-center relative">
         {title}
-        <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-40 h-1 bg-[#2563eb]"></span>
+        {/* <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-40 h-1 bg-[#1A1307]"></span> */}
       </h2>
+      <div className="w-24 h-1 bg-gradient-to-r from-[#1a1307] to-transparent mx-auto"></div>
       <div className="flex flex-col items-center justify-center mt-8 mb-16">
         <div className="flex flex-col md:flex-row flex-wrap justify-center gap-8 md:gap-16">
           {members.map((person, idx) => (
@@ -101,26 +122,26 @@ const OrganizingHeads = () => {
     <div className="bg-white w-full py-16 relative overflow-hidden">
       {/* === Animated Background === */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-10">
-        <div className="absolute w-[600px] h-[600px] border border-[#2563eb]/10 rounded-full left-1/2 top-1/2 
+        <div className="absolute w-[600px] h-[600px] border border-[#1A1307]/10 rounded-full left-1/2 top-1/2 
                         transform -translate-x-1/2 -translate-y-1/2 animate-pulse" />
-        <div className="absolute w-[400px] h-[400px] border border-[#2563eb]/20 rounded-full left-1/2 top-1/2 
+        <div className="absolute w-[400px] h-[400px] border border-[#1A1307]/20 rounded-full left-1/2 top-1/2 
                         transform -translate-x-1/2 -translate-y-1/2 animate-pulse" />
-        <div className="absolute w-[200px] h-[200px] border border-[#2563eb]/30 rounded-full left-1/2 top-1/2 
+        <div className="absolute w-[200px] h-[200px] border border-[#1A1307]/30 rounded-full left-1/2 top-1/2 
                         transform -translate-x-1/2 -translate-y-1/2 animate-pulse" />
-        <div className="absolute w-3 h-3 bg-[#2563eb] rounded-full left-[calc(50%-300px)] top-1/2 
+        <div className="absolute w-3 h-3 bg-[#1A1307] rounded-full left-[calc(50%-300px)] top-1/2 
                         transform -translate-y-1/2 animate-ping opacity-75" />
-        <div className="absolute w-2 h-2 bg-[#2563eb] rounded-full left-[calc(50%-200px)] top-1/2 
+        <div className="absolute w-2 h-2 bg-[#1A1307] rounded-full left-[calc(50%-200px)] top-1/2 
                         transform -translate-y-1/2 animate-ping opacity-75" />
-        <div className="absolute w-1.5 h-1.5 bg-[#2563eb] rounded-full left-[calc(50%-100px)] top-1/2 
+        <div className="absolute w-1.5 h-1.5 bg-[#1A1307] rounded-full left-[calc(50%-100px)] top-1/2 
                         transform -translate-y-1/2 animate-ping opacity-75" />
       </div>
 
       {/* === Content === */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {renderSection("Chief Patrons", patrons)}
-        {renderSection("Patrons", coPatrons)}
-        {renderSection("Co-Patron", coPatrons2)}
-        {renderSection("Chairman/Convenor", chairman)}
+        {/* {renderSection("Chief Patrons", patrons)} */}
+        {/* {renderSection("Patrons", coPatrons)} */}
+        {/* {renderSection("Co-Patron", coPatrons2)} */}
+        {renderSection("Organising Chariman", chairman)}
         {renderSection("Organising Secretaries", secretary)}
       </div>
 
