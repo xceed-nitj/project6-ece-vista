@@ -227,7 +227,18 @@ const navigationRight = [
                     {/* Right nav */}
                     <div className="flex space-x-6">
               {navRight.map((item) => (
-                <div key={item.name} className="relative group">
+                <div
+                  key={item.name}
+                  className="relative group"
+                  onMouseEnter={e => {
+                    const submenu = e.currentTarget.querySelector('.submenu');
+                    if (submenu) submenu.style.display = 'block';
+                  }}
+                  onMouseLeave={e => {
+                    const submenu = e.currentTarget.querySelector('.submenu');
+                    if (submenu) submenu.style.display = 'none';
+                  }}
+                >
                   {item.subItems ? (
                     <>
                       <Link
@@ -245,7 +256,12 @@ const navigationRight = [
                           style={{ background: COLOR_NAV_BORDER }}
                         ></div>
                       </Link>
-                      <div className="absolute left-0 hidden mt-0.5 w-64 origin-top-left bg-white border border-gray-200 rounded-md shadow-lg group-hover:block z-50">
+                      <div
+                        className="submenu absolute left-0 mt-0.5 w-64 origin-top-left bg-white border border-gray-200 rounded-md shadow-lg z-50"
+                        style={{ display: "none" }}
+                        onMouseEnter={e => (e.currentTarget.style.display = 'block')}
+                        onMouseLeave={e => (e.currentTarget.style.display = 'none')}
+                      >
                         <div className="py-1">
                           {item.subItems.map((subItem) => (
                             <Link
