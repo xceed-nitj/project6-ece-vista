@@ -21,18 +21,18 @@ const ProfileCard = ({ person }) => (
 );
 
 const OrganizingHeads = () => {
-  // const patrons = [
-  //   {
-  //     name: "Prof. Binod Kumar Kanaujia",
-  //     position: "Director, NIT Jalandhar",
-  //     image: "Director.jpg",
-  //   },
-  //   {
-  //     name: "Prof. Akash Deep",
-  //     position: "Director, Institute of Nano Science and Technology, Mohali",
-  //     image: "akashdeep.jpeg",
-  //   },
-  // ];
+  const patrons = [
+    {
+      name: "Prof. Binod Kumar Kanaujia",
+      position: "Director, NIT Jalandhar",
+      image: "director.jpg",
+    },
+    // {
+    //   name: "Prof. Akash Deep",
+    //   position: "Director, Institute of Nano Science and Technology, Mohali",
+    //   image: "akashdeep.jpeg",
+    // },
+  ];
 
   // const coPatrons = [
   //   {
@@ -103,10 +103,10 @@ const OrganizingHeads = () => {
 //  Temp change to reopen PR
   const renderSection = (title, members) => (
     <div className="text-center mb-12">
-      <button className="bg-[#1A1307] text-white text-xl font-semibold rounded-3xl p-4 justify-center">
+      <h2 className="bg-[#1A1307] text-white text-xl font-semibold rounded-3xl p-4 justify-center inline-block">
         {title}
         {/* <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-40 h-1 bg-[#1A1307]"></span> */}
-      </button>
+      </h2>
       {/* <div className="w-24 h-1 bg-gradient-to-r from-[#1a1307] to-transparent mx-auto"></div> */}
       <div className="flex flex-col items-center justify-center mt-8 mb-16">
         <div className="flex flex-col md:flex-row flex-wrap justify-center gap-8 md:gap-16">
@@ -138,10 +138,10 @@ const OrganizingHeads = () => {
 
       {/* === Content === */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* {renderSection("Chief Patrons", patrons)} */}
+        {renderSection("Chief Patron", patrons)}
         {/* {renderSection("Patrons", coPatrons)} */}
         {/* {renderSection("Co-Patron", coPatrons2)} */}
-        {renderSection("Organising Chariman", chairman)}
+        {renderSection("Organising Chairmen", chairman)}
         {renderSection("Organising Secretaries", secretary)}
       </div>
 

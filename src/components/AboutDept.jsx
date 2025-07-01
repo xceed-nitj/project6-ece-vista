@@ -20,7 +20,7 @@ function Slider() {
   }, []);
 
   return (
-    <div className="relative w-full h-64 md:h-80 lg:h-full overflow-hidden rounded-lg lg:rounded-r-xl">
+    <div className="relative w-full h-64 md:h-80 lg:h-full overflow-hidden rounded-l-lg lg:rounded-l-xl">
       {sliderData.map((slide, index) => (
         <div
           key={index}
@@ -64,44 +64,41 @@ function AboutDept(props) {
   }, [apiUrl, confid]);
 
   return (
-    // <div className="bg-white text-white container max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 md:mt-12">
-      <div className="w-full bg-white text-white mt-6">
+    <div className="max-w-8xl px-0 sm:px-2 lg:px-12 bg-white text-white mt-6 py-12">
+      <div className="flex justify-center mb-6 md:mb-8">
+        <h2 className="bg-[#1A1307] text-white text-xl sm:text-l md:text-xl font-semibold rounded-3xl text-center px-6 py-3 sm:px-0 md:px-8 md:py-4">
+          About The Department of Electronics and Communication Engineering
+        </h2>
+      </div>
 
-        <div className="flex justify-center mb-6 md:mb-8">
-          <h2 className="bg-[#1A1307] text-white text-lg md:text-xl font-semibold rounded-3xl px-6 py-3 md:px-8 md:py-4">
-            About The Department of Electronics and Communication Engineering
-          </h2>
-        </div>      
-      
-      <div className="grid grid-rows-1 md:grid-rows-1 gap-8">
-        <div className="bg-[#854D0E] border border-yellow-950 rounded-xl shadow-md hover:shadow-lg hover:shadow-yellow-900/30 transition-all duration-300 flex flex-col lg:flex-row mx-4 sm:mx-6 md:mx-8 lg:mx-12 mb-8 md:mb-12">
-          <div className="lg:col-span-2 flex items-center justify-center">
+      <div className="mx-4 sm:mx-6 md:mx-8 lg:mx-12 mb-8 md:mb-12">
+        <div className="bg-[#854D0E] border border-yellow-950 rounded-xl shadow-md hover:shadow-lg hover:shadow-yellow-900/30 transition-all duration-300 flex flex-col lg:flex-row">
+          {/* Slider Section - Set fixed width on large screens */}
+          <div className="lg:w-2/5 h-64 md:h-96 lg:h-auto">
             <Slider />
           </div>
-          {isLoading ? (
-            <div className="animate-pulse space-y-3">
-              <div className="h-4 bg-yellow-900 rounded w-3/4"></div>
-              <div className="h-4 bg-yellow-900 rounded"></div>
-              <div className="h-4 bg-yellow-900 rounded w-5/6"></div>
-              <div className="h-4 bg-yellow-900 rounded w-2/3"></div>
-            </div>
-          ) : (
-            <div className="text-sm md:text-base leading-relaxed mb-4 text-justify text-white lg:col-span-3 p-5">
-              {data && (
-                <div
-                  className="about-content"
-                  dangerouslySetInnerHTML={{
-                    __html: data.about[2]?.description || "",
-                  }}
-                />
-              )}
-            </div>
-          )}
-        </div>
-
           
+          {/* Content Section */}
+          <div className="lg:w-3/5 p-5">
+            {isLoading ? (
+              <div className="animate-pulse space-y-3">
+                <div className="h-4 bg-yellow-900 rounded w-3/4"></div>
+                <div className="h-4 bg-yellow-900 rounded"></div>
+                <div className="h-4 bg-yellow-900 rounded w-5/6"></div>
+                <div className="h-4 bg-yellow-900 rounded w-2/3"></div>
+              </div>
+            ) : (
+              <div 
+                className="text-sm md:text-base leading-relaxed text-justify text-white"
+                dangerouslySetInnerHTML={{
+                  __html: data?.about[2]?.description || ""
+                }}
+              />
+            )}
+          </div>
         </div>
       </div>
+    </div>
   );
 }
 

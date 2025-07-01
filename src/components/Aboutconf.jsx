@@ -20,12 +20,12 @@ function Slider() {
   }, []);
 
   return (
-    <div className="relative h-full w-full overflow-hidden">
+    <div className="relative w-full h-64 md:h-96 lg:h-full overflow-hidden rounded-l-lg">
       {sliderData.map((slide, index) => (
         <div
           key={index}
-          className={`absolute inset-0 w-full h-full bg-center bg-cover transition-opacity duration-1000 ${
-            index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
+          className={`absolute inset-0 w-full h-full transition-opacity duration-1000 bg-center bg-cover ${
+            index === currentSlide ? "opacity-100" : "opacity-0"
           }`}
           style={{ backgroundImage: `url(${slide.image})` }}
         />
@@ -52,9 +52,6 @@ function AboutConf(props) {
           withCredentials: true,
         })
         .then((res) => {
-          console.log(res.data);
-          console.log("API response:", JSON.stringify(res.data, null, 2));
-
           setData(res.data);
           setIsLoading(false);
         })
@@ -66,40 +63,42 @@ function AboutConf(props) {
   }, [apiUrl, confid]);
 
   return (
-    // <div className="bg-white text-white container max-w-8xl mx-auto px-4 sm:px-20 lg:px-8 ">
-      <div className="bg-white text-white container max-w-8xl mx-auto px-4 sm:px-6 lg:px-20">
+    <div className="bg-white text-white container max-w-8xl px-4 sm:px-6 lg:px-8 py-14 md:py-12 lg:py-12">
+      <div className="flex justify-center my-4 md:my-6 lg:my-8">
+        <h2 className="bg-[#1A1307] text-white text-lg md:text-xl lg:text-2xl font-semibold rounded-3xl px-4 py-2 md:px-6 md:py-3 lg:px-8 lg:py-4">
+          About CIPHER 2026
+        </h2>
+      </div>
 
-     <div className="flex justify-center my-4 md:my-8">
-  <h2 className="bg-[#1A1307] text-white text-lg md:text-xl font-semibold rounded-3xl px-6 py-3 md:px-8 md:py-4">
-    About CIPHER 2026
-  </h2>
-</div>
-      <div className="grid grid-rows-1 md:grid-rows-1 gap-8">
-        <div className="bg-[#854D0E] border border-yellow-950 rounded-xl shadow-md hover:shadow-lg hover:shadow-yellow-900/30 transition-all duration-300 flex flex-col lg:flex-row mx-auto mb-8 md:mb-12 mt-4 md:mt-8 max-w-7xl">
-          <div className="lg:col-span-2 flex items-center justify-center">
+      <div className="mx-2 sm:mx-4 md:mx-6 lg:mx-8 mb-6 md:mb-8 lg:mb-10 mt-2 md:mt-4 lg:mt-6">
+        <div className="bg-[#854D0E] border border-yellow-950 rounded-xl shadow-md hover:shadow-lg hover:shadow-yellow-900/30 transition-all duration-300 flex flex-col lg:flex-row">
+          {/* Slider Section */}
+          <div className="lg:w-2/5 min-h-[250px] md:min-h-[300px] lg:min-h-[350px]">
             <Slider />
           </div>
-          {isLoading ? (
-            <div className="animate-pulse space-y-3 p-5">
-              <div className="h-4 bg-yellow-900 rounded w-3/4"></div>
-              <div className="h-4 bg-yellow-900 rounded"></div>
-              <div className="h-4 bg-yellow-900 rounded w-5/6"></div>
-              <div className="h-4 bg-yellow-900 rounded w-2/3"></div>
-            </div>
-          ) : (
-            <div className="text-base mb-4 text-justify text-white lg:col-span-3 p-5">
-              {data ? (
-                <div
-                  className="about-content"
-                  dangerouslySetInnerHTML={{
-                    __html: data.about[0]?.description || "",
-                  }}
-                />
-              ) : null}
-            </div>
-          )}
-
           
+          {/* Content Section */}
+          <div className="lg:w-3/5 p-4 sm:p-5 md:p-6">
+            {isLoading ? (
+              <div className="animate-pulse space-y-3">
+                <div className="h-4 bg-yellow-900 rounded w-3/4"></div>
+                <div className="h-4 bg-yellow-900 rounded"></div>
+                <div className="h-4 bg-yellow-900 rounded w-5/6"></div>
+                <div className="h-4 bg-yellow-900 rounded w-2/3"></div>
+              </div>
+            ) : (
+              <div className="text-sm md:text-base lg:text-lg leading-relaxed text-justify text-white">
+                {data && (
+                  <div
+                    className="about-content"
+                    dangerouslySetInnerHTML={{
+                      __html: data.about[0]?.description || "",
+                    }}
+                  />
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

@@ -128,7 +128,7 @@ const Footer = () => {
         <div className="flex flex-col lg:flex-row items-start justify-between gap-12">
           {/* Contact Information */}
           <div className="lg:w-1/2">
-          <div  > <button className="bg-white text-[#3a2920] text-xl font-semibold rounded-3xl p-3 justify-center mb-5">Contact us</button></div>
+          <div  > <h2 className="bg-white text-[#3a2920] text-xl font-semibold rounded-3xl p-3 justify-center mb-5 inline-block">Contact us</h2></div>
             {/* <h3 className="text-3xl font-bold text-black mb-4">
               Contact Us
             </h3>

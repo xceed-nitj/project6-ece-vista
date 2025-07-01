@@ -20,7 +20,7 @@ function Slider() {
   }, []);
 
   return (
-    <div className="relative w-full h-64 md:h-80 lg:h-full overflow-hidden rounded-lg">
+    <div className="relative w-full h-64 md:h-80 lg:h-full overflow-hidden lg:rounded-r-lg">
       {sliderData.map((slide, index) => (
         <div
           key={index}
@@ -62,9 +62,9 @@ function AboutNITJ(props) {
         });
     }
   }, [apiUrl, confid]);
-//  Temp change to reopen PR
+
   return (
-    <div className="bg-white text-white container max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="bg-white text-white container max-w-8xl mx-auto px-4 sm:px-6 lg:px-12 py-10">
       <div className="flex justify-center my-4 md:my-6">
         <h2 className="bg-[#1A1307] text-white text-xl md:text-xl font-semibold rounded-3xl text-center px-6 py-3 md:px-8 md:py-4">
           About Dr B R Ambedkar National Institute of Technology Jalandhar
@@ -72,7 +72,7 @@ function AboutNITJ(props) {
       </div>
       
       <div className="bg-[#854D0E] border border-yellow-950 rounded-xl shadow-md hover:shadow-lg hover:shadow-yellow-900/30 transition-all duration-300 flex flex-col lg:flex-row mx-4 sm:mx-6 md:mx-8 lg:mx-12 mb-8 md:mb-12">
-        {/* Content Section */}
+        {/* Content Section - now a sibling of Slider */}
         <div className="lg:w-3/5 p-4 md:p-6">
           {isLoading ? (
             <div className="animate-pulse space-y-3">
@@ -93,10 +93,11 @@ function AboutNITJ(props) {
               )}
             </div>
           )}
+        </div>
 
-           <div className="lg:col-span-2 flex items-center justify-center">
-            <Slider />
-          </div>
+        {/* Slider Section - now a sibling of Content */}
+        <div className="lg:w-2/5 h-64 md:h-96 lg:h-auto">
+          <Slider />
         </div>
       </div>
     </div>
