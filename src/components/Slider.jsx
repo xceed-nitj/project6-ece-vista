@@ -166,7 +166,7 @@ function Slider(props) {
                 February 13-15, 2026 &nbsp;|&nbsp; NIT Jalandhar
               </span>
             </div>
-            <div className="mt-6 flex items-center pl-4">
+            {/* <div className="mt-6 flex items-center pl-4">
               <a
                 href="/registrationlink"
                 className="inline-block bg-white hover:bg-amber-100 text-amber-900 text-base font-semibold px-8 py-2 rounded-sm shadow-md transition duration-200 border border-black-700"
@@ -179,7 +179,7 @@ function Slider(props) {
               >
                 Register
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
