@@ -65,8 +65,8 @@ function Slider(props) {
         withCredentials: true,
       })
       .then((res) => {
-        const sortedData = res.data.about.sort((a, b) => a.sequence - b.sequence);
-        setNewsData(res.data.about);
+        const sortedData = res.data.sort((a, b) => a.sequence - b.sequence);
+        setNewsData(sortedData);
         console.log("Fetched news data:");
         console.log("Fetched news data:", sortedData);
       })
@@ -216,16 +216,17 @@ function Slider(props) {
                     >
                       <button
                         type="button"
-                        className="relative px-4 py-2 rounded-full font-semibold text-sm transition-all duration-300 shadow-md bg-[#401b02] whitespace-nowrap hover:shadow-xl hover:-translate-y-1"
+                        className="relative px-4 py-2 rounded-full font-semibold text-sm transition-all duration-300 shadow-md bg-[#3d2b1f] whitespace-nowrap hover:shadow-xl hover:-translate-y-1"
                         style={{
                           color: "#fff",
                           fontFamily: "inherit",
                           cursor: "pointer",
-                          minWidth: window.innerWidth < 640 ? "90px" : "120px",
-                          minHeight: window.innerWidth < 640 ? "32px" : "36px",
-                          maxWidth: window.innerWidth < 640 ? "140px" : "220px",
+                           minWidth: window.innerWidth < 640 ? "90px" : "240px",
+                          minHeight: window.innerWidth < 640 ? "32px" : "56px",
+                          maxWidth: window.innerWidth < 640 ? "140px" : "270px",
                           border: "2px solid #bfa77a",
-                          background: "#401b02"
+                          opacity: 0.7,
+                          // background: "#401b02"
                         }}
                       >
                         <span className="text-left leading-relaxed block overflow-hidden text-ellipsis">
@@ -250,10 +251,10 @@ function Slider(props) {
                           alt="External link"  /// This is the external link icon here the link of the file comes from
                           style={{
                             position: "absolute",
-                           top: window.innerWidth < 640 ? 4 : 6,
-                            right: window.innerWidth < 640 ? 6 : 8,
-                            width: window.innerWidth < 640 ? "10px" : "12px",
-                            height: window.innerWidth < 640 ? "10px" : "12px",
+                           top: window.innerWidth < 640 ? 8 : 17,
+                            right: window.innerWidth < 640 ? 8 : 20,
+                            width: window.innerWidth < 640 ? "10px" : "17px",
+                            height: window.innerWidth < 640 ? "10px" : "17px",
                             opacity: 0.85,
                             filter: "brightness(0) invert(1)" // Makes the icon white
                           }}
