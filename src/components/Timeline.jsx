@@ -32,10 +32,7 @@ const Timeline = forwardRef((props, ref) => {
     >
       <div className="w-full max-w-6xl">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-black mb-4 text-[#1a1307] uppercase tracking-wider">
-            Timeline
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-[#1a1307] to-transparent mx-auto" />
+          <button className="bg-[#1A1307] text-white text-2xl font-semibold rounded-3xl px-6 py-4 justify-center">Timeline</button>
         </div>
 
         {/* Horizontal Timeline */}
@@ -57,7 +54,7 @@ const Timeline = forwardRef((props, ref) => {
                       {item.title}
                     </h4>
                   </div>
-
+{/*  Temp change to reopen PR */}
                   {/* Date Card */}
                   <div className="px-4 py-2 rounded-lg shadow-lg text-center bg-[#5C4033] text-[#BFA77A] ">
                     {!item.extended ? (

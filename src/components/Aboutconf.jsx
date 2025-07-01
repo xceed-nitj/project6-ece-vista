@@ -67,15 +67,15 @@ function AboutConf(props) {
 
   return (
     // <div className="bg-white text-white container max-w-8xl mx-auto px-4 sm:px-20 lg:px-8 ">
-      <div className="w-full bg-white text-white mt-6">
+      <div className="bg-white text-white container max-w-8xl mx-auto px-4 sm:px-6 lg:px-20">
 
-     <div className="flex justify-center">
-  <h2 className="bg-[#1a1307] text-white text-xl font-bold rounded-3xl p-4 text-center">
+     <div className="flex justify-center my-4 md:my-8">
+  <h2 className="bg-[#1A1307] text-white text-lg md:text-xl font-semibold rounded-3xl px-6 py-3 md:px-8 md:py-4">
     About CIPHER 2026
   </h2>
 </div>
       <div className="grid grid-rows-1 md:grid-rows-1 gap-8">
-        <div className="bg-[#854D0E] border border-yellow-950  shadow-md hover:shadow-lg hover:shadow-yellow-900/30 transition-all duration-300 grid grid-cols-1 lg:grid-cols-5 gap-0 m-6">
+        <div className="bg-[#854D0E] border border-yellow-950 rounded-xl shadow-md hover:shadow-lg hover:shadow-yellow-900/30 transition-all duration-300 flex flex-col lg:flex-row mx-auto mb-8 md:mb-12 mt-4 md:mt-8 max-w-7xl">
           <div className="lg:col-span-2 flex items-center justify-center">
             <Slider />
           </div>

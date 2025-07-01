@@ -100,14 +100,14 @@ const OrganizingHeads = () => {
       image: "bodile.jpg",
     },
   ];
-
+//  Temp change to reopen PR
   const renderSection = (title, members) => (
     <div className="text-center mb-12">
-      <h2 className="text-4xl font-black mb-2 text-[#1A1307] inline-flex items-center justify-center relative">
+      <button className="bg-[#1A1307] text-white text-xl font-semibold rounded-3xl p-4 justify-center">
         {title}
         {/* <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-40 h-1 bg-[#1A1307]"></span> */}
-      </h2>
-      <div className="w-24 h-1 bg-gradient-to-r from-[#1a1307] to-transparent mx-auto"></div>
+      </button>
+      {/* <div className="w-24 h-1 bg-gradient-to-r from-[#1a1307] to-transparent mx-auto"></div> */}
       <div className="flex flex-col items-center justify-center mt-8 mb-16">
         <div className="flex flex-col md:flex-row flex-wrap justify-center gap-8 md:gap-16">
           {members.map((person, idx) => (

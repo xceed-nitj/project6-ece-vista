@@ -92,6 +92,7 @@
 //   SiChina, 
 //   SiRussia 
 // } from 'react-icons/si';
+// import { Phone } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -122,31 +123,32 @@ const Footer = () => {
           />
         </svg>
       </div>
-
-      <div className="bg-[#AD958A]  container mx-auto relative z-10 px-4 py-16">
+{/*  Temp change to reopen PR */}
+      <div className="bg-[#1A1307]  container mx-auto relative z-10 px-4 py-16">
         <div className="flex flex-col lg:flex-row items-start justify-between gap-12">
           {/* Contact Information */}
           <div className="lg:w-1/2">
-          <div  > <button className="bg-white text-[#AD958A] text-xl font-semibold rounded-3xl p-3 justify-center mb-5">Contact us</button></div>
+          <div  > <button className="bg-white text-[#3a2920] text-xl font-semibold rounded-3xl p-3 justify-center mb-5">Contact us</button></div>
             {/* <h3 className="text-3xl font-bold text-black mb-4">
               Contact Us
             </h3>
             <div className="w-20 h-1 bg-[#1A1307] mb-4"></div> */}
             <ul className="space-y-3 text-white">
               <li className="flex items-center">
-                <span className="inline-block w-1.5 h-1.5 bg-[#1A1307] rounded-full mr-3"></span>
+                {/* <Phone /> */}
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ba6e1a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-mail-icon lucide-mail"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
                 <span className="text-base">E-mail: amsdt2025@nitj.ac.in</span>
               </li>
               <li className="flex items-start">
-                <span className="inline-block w-1.5 h-1.5 bg-[#1A1307] rounded-full mr-3 mt-1.5"></span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#ba6e1a" stroke="#ba6e1a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-user-icon lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 <span className="text-base">Dr Nitesh Kashyap (Organizing Secretary): +91 9753301930</span>
               </li>
               <li className="flex items-start">
-                <span className="inline-block w-1.5 h-1.5 bg-[#1A1307] rounded-full mr-3 mt-1.5"></span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#ba6e1a" stroke="#ba6e1a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-user-icon lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 <span className="text-base">Dr Rohit Singh (Organizing Secretary): +91 7087513174</span>
               </li>
               <li className="flex items-center">
-                <span className="inline-block w-1.5 h-1.5 bg-[#1A1307] rounded-full mr-3"></span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#ba6e1a" stroke="#ba6e1a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-user-icon lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 <span className="text-base">Dr. Aijaz Mehdi Zaidi (Organising Chairman): +91 01815032621</span>
               </li>
             </ul>
@@ -156,7 +158,7 @@ const Footer = () => {
           </a>
         </div>
 
-        <div className=" mt-12 pt-8 border-t border-[#1A1307]/20">
+        <div className=" mt-12 pt-8 border-t border-[#ba6e1a]/20">
           <div className="flex flex-col md:flex-row justify-center items-center">
             <p className="text-xs text-white mb-0 pb-0">
               Developed and Maintained by <a href="https://xceed.nitj.ac.in" target="_blank" rel="noopener noreferrer" className="hover:underline "><span className="text-xs text-white">XCEED NITJ</span></a>
