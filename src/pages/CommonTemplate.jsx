@@ -113,7 +113,7 @@ const CommonTemplate = ({ confid }) => {
 
       <Navbar />
 
-      <div className="pt-24 container mx-auto px-6 lg:px-8 pb-16 relative z-10">
+      <div className="pt-10 container mx-auto px-6 lg:px-8 pb-10 relative z-10">
         {/* 🌟 Gradient Rounded Border Wrapper */}
         <div className="relative p-[3px] rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-600 shadow-2xl shadow-yellow-900/40">
           {/* Card Content */}
