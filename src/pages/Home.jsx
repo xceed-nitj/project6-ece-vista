@@ -60,7 +60,7 @@ function Home(props) {
       
       {/* <Speaker confid={props.confId}  ref={ourspeakersRef}   />
       <InvitedSpeaker confid={props.confId}  ref={invitedspeakersRef}   /> */}
-      <Slider />
+      <Slider confid={props.confId}/>
       <AboutConf confid={props.confId}/>
       
       {/* <Speakers /> */}
