@@ -19,8 +19,8 @@ const COLOR_NAV_BORDER = "#bfa77a";
 
  const navigationLeft = [
   { name: "Home", href: "/", current: true },
-  { name: "Tracks", href: "/682c31514f0ddcc436b90ebd", current: false },
-  { name: "Abstract Submission", href: "/6835ec0c7709458abce41a5e", current: false },
+  { name: "Tracks", href: "/6863a71585f2e21ce21c8d42", current: false },
+  { name: "Committees", href: "/6863b4857b0acf10390f6b39", current: false },
 ];
 const navigationRight = [
   {
@@ -28,13 +28,13 @@ const navigationRight = [
     href: "",
     current: false,
     subItems: [
-      { name: "Registration Fee", href: "/registrationfee" },
-      { name: "Registration Link", href: "/682c30d94f0ddcc436b90eb7" },
+      { name: "Registration Fee", href: "/6863b4cd7b0acf10390f6b3e" },
+      { name: "Registration Link", href: "/6863b4da7b0acf10390f6b41" },
     ],
   },
-  { name: "Awards", href: "/awards", current: false },
+  { name: "Location", href: "/6863bcdd9f5bf58c267f065c", current: false },
   
-  { name: "Accommodation", href: "/685039afd6d0062014ddf965", current: false },
+  { name: "Accommodation", href: "/6863b4e57b0acf10390f6b44", current: false },
 ];
 
   function classNames(...classes) {

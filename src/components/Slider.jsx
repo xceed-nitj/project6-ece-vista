@@ -185,7 +185,7 @@ function Slider(props) {
       </div>
 
       {/* News & Logo Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-5 w-full h-[20vh]">
+      <div className="grid grid-cols-1 lg:grid-cols-5 w-full h-[10vh]">
         {/* News */}
         <div
           className="lg:col-span-3 p-6 border-r"
@@ -196,122 +196,67 @@ function Slider(props) {
           }}
         >
           {/* News card buttons, small and in a single row */}
-          <div
-            className="flex flex-row gap-3 flex-wrap items-center"
-            style={{
-              height: "calc(20vh - 48px)",
-              alignItems: "center",
-              maxHeight: "20vh",
-            }}
+         {/* News card buttons – now an auto-fitting grid */}
+<div
+  className="grid gap-3 items-center"
+  style={{
+    /* creates as many columns as fit:
+       - can shrink to 90 px on tiny phones
+       - prefers 200 px
+       - never grows past 260 px                         */
+    gridTemplateColumns:
+      "repeat(auto-fit, minmax(clamp(90px, 200px, 260px), 1fr))",
+    height: "calc(20vh - 48px)",
+    maxHeight: "20vh",
+  }}
+>
+  {(newsData.length ? newsData : [1, 2, 3, 4, 5]).map((item, idx) =>
+    newsData.length ? (
+      !item.hidden && (
+        <a
+          key={item._id}
+          href={item.link || `/news/${item._id}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ textDecoration: "none" }}
+        >
+          <button
+            type="button"
+            className="relative w-full px-4 py-1 rounded-full font-semibold text-sm transition-all duration-300 bg-[#854D0E] hover:shadow-xl hover:-translate-y-1 whitespace-nowrap border-2"
+            style={{ borderColor: "COLOR_BORDER_R", color: "#fff" }}
           >
-            {(newsData.length ? newsData : [1, 2, 3]).map((item, idx) =>
-              newsData.length
-                ? (!item.hidden && (
-                    <a
-                      key={item._id}
-                      href={item.link !== "" ? item.link : `/news/${item._id}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ textDecoration: "none", position: "relative" }}
-                    >
-                      <button
-                        type="button"
-                        className="relative px-4 py-2 rounded-full font-semibold text-sm transition-all duration-300 shadow-md bg-[#3d2b1f] whitespace-nowrap hover:shadow-xl hover:-translate-y-1"
-                        style={{
-                          color: "#fff",
-                          fontFamily: "inherit",
-                          cursor: "pointer",
-                           minWidth: window.innerWidth < 640 ? "90px" : "240px",
-                          minHeight: window.innerWidth < 640 ? "32px" : "56px",
-                          maxWidth: window.innerWidth < 640 ? "140px" : "270px",
-                          border: "2px solid #bfa77a",
-                          opacity: 0.7,
-                          // background: "#401b02"
-                        }}
-                      >
-                        <span className="text-left leading-relaxed block overflow-hidden text-ellipsis">
-                          {window.innerWidth < 640 && item.title.length > 12 ? `${item.title.substring(0, 12)}...` : item.title}
-                        </span>
-                        {/* Top-right external link icon */}
-                        {/* <span
-                          style={{
-                            position: "absolute",
-                            top: 6,
-                            right: 8,
-                            fontSize: 16,
-                            opacity: 0.85,
-                            color: "#fff"
-                          }}
-                        >
-                          <FontAwesomeIcon icon={faUpRightFromSquare} />
-                        </span> */}
+            <span className="block overflow-hidden text-ellipsis leading-relaxed">
+              {item.title.length > 35 ? `${item.title.slice(0, 32)}…` : item.title}
+            </span>
 
-                            <img
-                          src="\external-link.png"
-                          alt="External link"  /// This is the external link icon here the link of the file comes from
-                          style={{
-                            position: "absolute",
-                           top: window.innerWidth < 640 ? 8 : 17,
-                            right: window.innerWidth < 640 ? 8 : 20,
-                            width: window.innerWidth < 640 ? "10px" : "17px",
-                            height: window.innerWidth < 640 ? "10px" : "17px",
-                            opacity: 0.85,
-                            filter: "brightness(0) invert(1)" // Makes the icon white
-                          }}
-                        />
+            {/* external-link icon */}
+            <img
+              src="/external-link.png"
+              alt=""
+              style={{
+                position: "absolute",
+                top: 12,
+                right: 14,
+                width: 14,
+                height: 14,
+                opacity: 0.85,
+                filter: "brightness(0) invert(1)",
+              }}
+            />
+          </button>
+        </a>
+      )
+    ) : (
+      /* grey ghost while loading / empty */
+      <div
+        key={`ph-${idx}`}
+        className="w-full px-4 py-1 rounded-full animate-pulse bg-[#3d2b1f] border-2"
+        style={{ borderColor: "rgb(231,166,45)", opacity: 0.15, minHeight: 32 }}
+      />
+    )
+  )}
+</div>
 
-                        {/* {item.new && (
-                          <span
-                            className="ml-2 px-2 py-1 rounded-full text-xs font-bold"
-                            style={{
-                              background: "#ff6b35",
-                              color: "#fff",
-                              boxShadow: "0 2px 8px rgba(255, 107, 53, 0.3)"
-                            }}
-                          >
-                            NEW
-                          </span>
-                        )} */}
-                      </button>
-                    </a>
-                  ))
-                : (
-                  <button
-                    key={idx}
-                    type="button"
-                    className="relative px-4 py-2 rounded-full font-semibold text-sm transition-all duration-300 shadow-md bg-[#3d2b1f] whitespace-nowrap hover:shadow-xl hover:-translate-y-1"
-                    style={{
-                      color: "#fff",
-                      fontFamily: "inherit",
-                      opacity: 0.7,
-                      cursor: "default",
-                      minWidth: window.innerWidth < 640 ? "90px" : "240px",
-                      minHeight: window.innerWidth < 640 ? "32px" : "56px",
-                      maxWidth: window.innerWidth < 640 ? "140px" : "270px",
-                      border: "2px solid #bfa77a"
-                    }}
-                    disabled
-                  >
-                    <img
-                          src="\external-link.png"
-                          alt="External link"
-                          style={{
-                            position: "absolute",
-                            top: window.innerWidth < 640 ? 8 : 17,
-                            right: window.innerWidth < 640 ? 8 : 20,
-                            width: window.innerWidth < 640 ? "10px" : "17px",
-                            height: window.innerWidth < 640 ? "10px" : "17px",
-                            opacity: 0.85,
-                            filter: "brightness(0) invert(1)" // Makes the icon white
-                          }}
-                        />
-                   <span className="text-xs sm:text-sm">
-                      {window.innerWidth < 640 ? "News here" : "News will appear here"}
-                    </span>
-                  </button>
-                )
-            )}
-          </div>
         </div>
 
         {/* Logo */}
