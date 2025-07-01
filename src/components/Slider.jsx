@@ -163,7 +163,7 @@ function Slider(props) {
                   letterSpacing: "0.01em",
                 }}
               >
-                April 11–13, 2026 &nbsp;|&nbsp; NIT Jalandhar
+                February 13-15, 2026 &nbsp;|&nbsp; NIT Jalandhar
               </span>
             </div>
             <div className="mt-6 flex items-center pl-4">
