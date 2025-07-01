@@ -221,15 +221,15 @@ function Slider(props) {
                           color: "#fff",
                           fontFamily: "inherit",
                           cursor: "pointer",
-                          minWidth: "120px",
-                          minHeight: "36px",
-                          maxWidth: "220px",
+                          minWidth: window.innerWidth < 640 ? "90px" : "120px",
+                          minHeight: window.innerWidth < 640 ? "32px" : "36px",
+                          maxWidth: window.innerWidth < 640 ? "140px" : "220px",
                           border: "2px solid #bfa77a",
                           background: "#401b02"
                         }}
                       >
-                        <span className="text-left leading-relaxed">
-                          {item.title}
+                        <span className="text-left leading-relaxed block overflow-hidden text-ellipsis">
+                          {window.innerWidth < 640 && item.title.length > 12 ? `${item.title.substring(0, 12)}...` : item.title}
                         </span>
                         {/* Top-right external link icon */}
                         {/* <span
@@ -250,16 +250,16 @@ function Slider(props) {
                           alt="External link"  /// This is the external link icon here the link of the file comes from
                           style={{
                             position: "absolute",
-                            top: 6,
-                            right: 8,
-                            width: "12px",
-                            height: "12px",
+                           top: window.innerWidth < 640 ? 4 : 6,
+                            right: window.innerWidth < 640 ? 6 : 8,
+                            width: window.innerWidth < 640 ? "10px" : "12px",
+                            height: window.innerWidth < 640 ? "10px" : "12px",
                             opacity: 0.85,
                             filter: "brightness(0) invert(1)" // Makes the icon white
                           }}
                         />
 
-                        {item.new && (
+                        {/* {item.new && (
                           <span
                             className="ml-2 px-2 py-1 rounded-full text-xs font-bold"
                             style={{
@@ -270,7 +270,7 @@ function Slider(props) {
                           >
                             NEW
                           </span>
-                        )}
+                        )} */}
                       </button>
                     </a>
                   ))
@@ -278,12 +278,15 @@ function Slider(props) {
                   <button
                     key={idx}
                     type="button"
-                    className="relative px-4 py-2 rounded-full font-semibold text-sm transition-all duration-300 shadow-md bg-[#3d2b1f] min-w-[240px] min-h-[56px] max-w-[270px] whitespace-nowrap hover:shadow-xl hover:-translate-y-1"
+                    className="relative px-4 py-2 rounded-full font-semibold text-sm transition-all duration-300 shadow-md bg-[#3d2b1f] whitespace-nowrap hover:shadow-xl hover:-translate-y-1"
                     style={{
                       color: "#fff",
                       fontFamily: "inherit",
                       opacity: 0.7,
                       cursor: "default",
+                      minWidth: window.innerWidth < 640 ? "90px" : "240px",
+                      minHeight: window.innerWidth < 640 ? "32px" : "56px",
+                      maxWidth: window.innerWidth < 640 ? "140px" : "270px",
                       border: "2px solid #bfa77a"
                     }}
                     disabled
@@ -293,15 +296,17 @@ function Slider(props) {
                           alt="External link"
                           style={{
                             position: "absolute",
-                            top: 17,
-                            right: 20,
-                            width: "17px",
-                            height: "17px",
+                            top: window.innerWidth < 640 ? 8 : 17,
+                            right: window.innerWidth < 640 ? 8 : 20,
+                            width: window.innerWidth < 640 ? "10px" : "17px",
+                            height: window.innerWidth < 640 ? "10px" : "17px",
                             opacity: 0.85,
                             filter: "brightness(0) invert(1)" // Makes the icon white
                           }}
                         />
-                    News will appear here
+                   <span className="text-xs sm:text-sm">
+                      {window.innerWidth < 640 ? "News here" : "News will appear here"}
+                    </span>
                   </button>
                 )
             )}
