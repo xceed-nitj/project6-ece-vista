@@ -1,65 +1,86 @@
+/**
+ * Slider Component
+ * 
+ * This component renders a full-screen hero section with an auto-rotating image slider,
+ * a news section that fetches announcements from an API, and an organizational logo section.
+ */
+
 import { useEffect, useState, useRef } from "react";
 // import { Link } from "react-router-dom";
 import axios from "axios";
 import getEnvironment from "../getenvironment";
+import { motion, AnimatePresence } from 'framer-motion';
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 
-const sliderData = [
-  {
-    image: "/new_slider7.jpg",
-    label:
-      "NITJ has been ranked in the 2025 THE (Times Higher Education) Asia University Rankings in the ranking band of 351-400",
-  },
-  {
-    image: "/new_slider2.jpg",
-    label:
-      "NITJ Ranked 58th in Engineering Category and Rank-Band: 101-150 in Overall Ranking of NIRF Ranking, 2024",
-  },
-  {
-    image: "/new_slider1.jpg",
-    label:
-      "NITJ Placed in ranking band of 661-680 amongst Asian Universities",
-  },
+// -----------------------------------------------------------------------------
+// CONFIGURATION DATA
+// -----------------------------------------------------------------------------
+
+/**
+ * Static slider data for the hero section
+ */
+const heroImages = [
+  '/heroImages/hero1.jpg',
+  '/heroImages/hero2.jpg',
+  '/heroImages/hero3.jpg',
+  '/heroImages/hero4.jpg',
+  '/heroImages/hero5.jpg'
 ];
 
-const COLOR_BG_NEWS = "#f9f6f2";
-const COLOR_BORDER_R = "#713F12";
-// const COLOR_CARD_BG = "#f5eee6";
-// const COLOR_CARD_BORDER = "#bfa77a";
-// const COLOR_CARD_TITLE = "#6b4f2c";
-// const COLOR_CARD_ACCENT = "#bfa77a";
-// const COLOR_CARD_NEW_BG = "#f6e7c1";
-// const COLOR_CARD_NEW_TEXT = "#bfa77a";
-// const COLOR_CARD_DESC = "#6b4f2c";
-// const COLOR_CARD_LINK = "#bfa77a";
-// const COLOR_CARD_LINK_HOVER = "#6b4f2c";
-const COLOR_LOGO_BG = "#1a1307";
+/**
+ * Color constants for styling
+ */
+// const COLOR_BG_NEWS = "#f0f7f4";  // Light green background
+// const COLOR_BORDER_R = "#0f5132";  // Dark green border
+// const COLOR_LOGO_BG = "#0c3823";  // Darker green background
+
+// -----------------------------------------------------------------------------
+// MAIN COMPONENT
+// -----------------------------------------------------------------------------
 
 function Slider(props) {
+  // Props and state
   const confid = props.confid;
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [apiUrl, setApiUrl] = useState(null);
   const [newsData, setNewsData] = useState([]);
   const scrollRef = useRef(null);
 
+  // -----------------------------------------------------------------------------
+  // EFFECTS
+  // -----------------------------------------------------------------------------
+
+  /**
+   * Auto-rotate slider images every 4 seconds
+   */
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % sliderData.length);
-    }, 3000);
+      setCurrentImageIndex((prevIndex) => 
+        prevIndex === heroImages.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 4000);
+    
     return () => clearInterval(interval);
   }, []);
 
+  /**
+   * Initialize API URL from environment
+   */
   useEffect(() => {
     getEnvironment().then((url) => setApiUrl(url));
   }, []);
 
+  /**
+   * Fetch news announcements from API when apiUrl is available
+   */
   useEffect(() => {
     if (!confid || !apiUrl) {
       console.warn("Missing confid or apiUrl", { confid, apiUrl });
       return;
     }
     console.log("Sending GET request to:", `${apiUrl}/conferencemodule/announcements/conf/${confid}`);
+    
     axios
       .get(`${apiUrl}/conferencemodule/announcements/conf/${confid}`, {
         withCredentials: true,
@@ -67,19 +88,20 @@ function Slider(props) {
       .then((res) => {
         const sortedData = res.data.sort((a, b) => a.sequence - b.sequence);
         setNewsData(sortedData);
-        console.log("Fetched news data:");
         console.log("Fetched news data:", sortedData);
       })
       .catch((err) => {
         console.error("API error:", err);
-        setNewsData([]); // Optionally clear on error
+        setNewsData([]); // Clear on error
       });
   }, [apiUrl, confid]);
-  console.log("apiUrl:", apiUrl);
-  
 
+  /**
+   * Auto-scroll news items when news data is loaded
+   */
   useEffect(() => {
     if (!newsData.length) return;
+    
     const container = scrollRef.current;
     let reqId;
     const scrollAmount = 0.5;
@@ -101,200 +123,192 @@ function Slider(props) {
     return () => cancelAnimationFrame(reqId);
   }, [newsData]);
 
+  // Navigation functions for slider
+  const nextSlide = () => {
+    setCurrentImageIndex((prevIndex) => 
+      prevIndex === heroImages.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+  
+  const prevSlide = () => {
+    setCurrentImageIndex((prevIndex) => 
+      prevIndex === 0 ? heroImages.length - 1 : prevIndex - 1
+    );
+  };
+
+  // -----------------------------------------------------------------------------
+  // RENDER
+  // -----------------------------------------------------------------------------
+  
   return (
-    <div className="w-full min-h-screen flex flex-col">
-      {/* Top Slider */}
-      <div
-        className="relative w-full h-[70vh]"
-        style={{ position: "relative" }}
-      >
-        <div className="absolute inset-0 z-0">
-  {sliderData.map((slide, index) => (
-    <div
-      key={index}
-      className={`absolute inset-0 transition-opacity duration-2000 ease-in-out ${
-        index === currentSlide ? "opacity-100 z-10" : "opacity-0"
-      }`}
-      style={{
-        backgroundImage: `url('${slide.image}')`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        transition: "opacity 1s ease-in-out",
-      }}
-    />
-  ))}
-</div>
-        <div className="absolute inset-0 pointer-events-none z-10">
-          <div className="absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-black/60 to-transparent"></div>
-          <div className="absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-black/60 to-transparent"></div>
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent z-10"></div>
-        <div
-          className="absolute top-1/2 left-0 transform -translate-y-1/2"
-          style={{
-            width: "100%",
-            display: "flex",
-            alignItems: "flex-start",
-            pointerEvents: "none",
-            zIndex: 20,
-          }}
-        >
-          <div className="pl-8 sm:pl-16 md:pl-24 lg:pl-32 max-w-4xl pointer-events-auto text-left">
-            <div className="mb-2">
-              <span
-                className="text-white text-3xl sm:text-4xl md:text-4xl lg:text-5xl px-4 py-2 rounded shadow-lg block"
-                style={{
-                  fontFamily: "Playfair",
-                  fontWeight: 300,
-                  lineHeight: 1.2,
-                }}
-              >
-                International Conference on Intelligent Processing, Hardware,
-                Electronics, and Radio Systems
-              </span>
+    <div className="w-full min-h-screen flex flex-col relative">
+      {/* Hero Section with Image Slider - Using Project1 Design */}
+      <section className="relative bg-white overflow-hidden h-[90vh] px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col lg:flex-row h-full w-full max-w-7xl mx-auto">
+          {/* Left Content - 40% (hidden on mobile) */}
+          <div className="hidden lg:flex w-1/5 pt-28 pb-16 px-8 lg:px-16 flex-col justify-center">
+            {/* Decorative dots */}
+            <div className="absolute top-[5%] left-[8%] mb-16 w-36">
+              <div className="grid grid-cols-6 gap-2">
+                {[...Array(36)].map((_, i) => (
+                  <div key={i} className="w-1.5 h-1.5 rounded-full bg-teal-800/60"></div>
+                ))}
+              </div>
             </div>
-            <div>
-              <span
-                className="text-white text-lg sm:text-xl md:text-2xl lg:text-2xl px-4 py-1 rounded block"
-                style={{
-                  fontFamily: "sans-serif",
-                  fontWeight: 300,
-                  letterSpacing: "0.01em",
-                }}
-              >
-                February 13-15, 2026 &nbsp;|&nbsp; NIT Jalandhar
+          </div>
+
+          {/* Desktop Hero Text Box (hidden on mobile) */}
+          <div className="hidden lg:block absolute top-[50%] left-[20%] transform -translate-x-1/2 -translate-y-1/2 w-[450px] max-w-xl h-[330px] bg-white/20 backdrop-blur-md rounded-lg z-10 border border-white/10">
+            <div className="absolute inset-0 flex flex-col justify-center items-center px-12 text-center">
+              <span className="text-4xl font-serif text-teal-900 font-medium mb-6 text-left w-full block">
+                International Conference on Intelligent Processing
               </span>
+              <p className="text-gray-900 font-sans text-lg max-w-md text-left w-full">
+                Hardware, Electronics, and Radio Systems | February 13-15, 2026 | NIT Jalandhar
+              </p>
+              <div className="mt-6 flex items-center justify-start w-full">
+                <a
+                  href="/6863b4da7b0acf10390f6b41"
+                  className="inline-block bg-white hover:bg-teal-50 text-teal-900 text-base font-semibold px-8 py-2 rounded-sm shadow-md transition duration-200 border border-teal-900/20"
+                  style={{
+                    fontWeight: 500,
+                    borderRadius: "10px",
+                    letterSpacing: "0.02em",
+                    textDecoration: "none",
+                  }}
+                >
+                  Register
+                </a>
+              </div>
             </div>
-            <div className="mt-6 flex items-center pl-4">
-              <a
-                href=  "/6863b4da7b0acf10390f6b41"
-                className="inline-block bg-white hover:bg-amber-100 text-amber-900 text-base font-semibold px-8 py-2 rounded-sm shadow-md transition duration-200 border border-black-700"
-                style={{
-                  fontFamily: "'Montserrat', sans-serif",
-                  fontWeight: 500,
-                  letterSpacing: "0.02em",
-                  textDecoration: "none",
+          </div>
+
+          {/* Mobile Hero Text Box (hidden on desktop) */}
+          <div className="block lg:hidden absolute top-[30%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-md h-auto bg-white/30 backdrop-blur-sm rounded-lg z-10 border border-white/10 px-6 py-8">
+            <div className="flex flex-col justify-center items-center text-center">
+              <span className="text-3xl font-serif text-teal-900 font-medium mb-4 text-center w-full block">
+                International Conference on Intelligent Processing
+              </span>
+              <p className="text-gray-900 font-sans text-base max-w-xs text-center w-full">
+                Hardware, Electronics, and Radio Systems | February 13-15, 2026 | NIT Jalandhar
+              </p>
+              <div className="mt-4 flex items-center justify-center w-full">
+                <a
+                  href="/6863b4da7b0acf10390f6b41"
+                  className="inline-block bg-white hover:bg-teal-50 text-teal-900 text-base font-semibold px-6 py-2 rounded-sm shadow-md transition duration-200 border border-teal-900/20"
+                  style={{
+                    fontWeight: 500,
+                    borderRadius: "10px",
+                    letterSpacing: "0.02em",
+                    textDecoration: "none",
+                  }}
+                >
+                  Register
+                </a>
+              </div>
+            </div>
+          </div>
+        
+          {/* Right Image Section - 60% */}
+          <div className="relative w-full h-[500px] m-0 p-0 rounded-none overflow-hidden lg:ml-auto lg:w-4/5 lg:h-[90%] lg:mt-[2vh] lg:rounded-lg">
+            {/* Pre-load all images to prevent white flash */}
+            <div className="hidden"> 
+              {heroImages.map((src, idx) => (
+                <img key={idx} src={src} alt="preload" />
+              ))}
+            </div>
+            
+            {/* Current image with framer-motion animation */}
+            <AnimatePresence mode="sync" initial={false}>
+              <motion.div
+                key={currentImageIndex}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ 
+                  duration: 0.4,
+                  ease: "easeInOut"
                 }}
+                className="absolute inset-0"
               >
-                Register
-              </a>
+                <img 
+                  src={heroImages[currentImageIndex]}
+                  alt={`Conference image ${currentImageIndex + 1}`}
+                  className="h-full w-full object-cover"
+                />
+              </motion.div>
+            </AnimatePresence>
+            
+            {/* Vertical Navigation Arrows */}
+            <div className="absolute bottom-4 right-4 z-10 flex flex-row gap-4 lg:bottom-10 lg:right-10">
+              <button 
+                onClick={prevSlide}
+                className="p-2 focus:outline-none rotate-[270deg]" 
+                aria-label="Previous slide"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-teal-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 15l7-7 7 7" />
+                </svg>
+              </button>
+              <button 
+                onClick={nextSlide}
+                className="p-2 focus:outline-none rotate-[270deg]" 
+                aria-label="Next slide"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Progress dots */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 lg:bottom-10">
+              {heroImages.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentImageIndex(index)}
+                  className={`w-2 h-2 rounded-full ${
+                    index === currentImageIndex ? 'bg-teal-300' : 'bg-teal-100/40'
+                  } transition-all duration-300`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* News & Logo Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-5 w-full h-[10vh]">
-        {/* News */}
-        <div
-          className="lg:col-span-3 p-6 border-r"
-          style={{
-            background: COLOR_BG_NEWS,
-            borderRightColor: COLOR_BORDER_R,
-            borderRightWidth: "1px",
-          }}
-        >
-          {/* News card buttons, small and in a single row */}
-         {/* News card buttons – now an auto-fitting grid */}
-<div
-  className="grid gap-3 items-center"
-  style={{
-    /* creates as many columns as fit:
-       - can shrink to 90 px on tiny phones
-       - prefers 200 px
-       - never grows past 260 px                         */
-    gridTemplateColumns:
-      "repeat(auto-fit, minmax(clamp(90px, 200px, 260px), 1fr))",
-    height: "calc(20vh - 48px)",
-    maxHeight: "20vh",
-  }}
->
-  {(newsData.length ? newsData : [1, 2, 3, 4, 5]).map((item, idx) =>
-    newsData.length ? (
-      !item.hidden && (
-        <a
-          key={item._id}
-          href={item.link || `/news/${item._id}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ textDecoration: "none" }}
-        >
-          <button
-            type="button"
-            className="relative w-full px-4 py-1 rounded-full font-semibold text-sm transition-all duration-300 bg-[#854D0E] hover:shadow-xl hover:-translate-y-1 whitespace-nowrap border-2"
-            style={{ borderColor: "COLOR_BORDER_R", color: "#fff" }}
-          >
-            <span className="block overflow-hidden text-ellipsis leading-relaxed">
-              {item.title.length > 35 ? `${item.title.slice(0, 32)}…` : item.title}
-            </span>
+      {/* Trusted By / Organized By Section - New Design */}
+      <div className="w-full shadow-lg bg-gray-50 py-6" style={{ zIndex: 30 }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-6">
+            <p className="text-gray-600 text-md font-medium">ORGANIZED BY DEPARTMENT OF ELECTRONICS AND COMMUNICATION ENGINEERING, NIT JALANDHAR</p>
+          </div>
+          
+          <div className="flex flex-wrap justify-center items-center gap-8 sm:gap-12">
+            {/* Three featured buttons/logos */}
+            <a 
+              href="/submit-paper" 
+              className="flex items-center justify-center bg-white py-3 px-8 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition-all duration-200"
+            >
+              <span className="text-teal-800 font-semibold">Submit Paper</span>
+            </a>
 
-            {/* external-link icon */}
-            <img
-              src="/external-link.png"
-              alt=""
-              style={{
-                position: "absolute",
-                top: 12,
-                right: 14,
-                width: 14,
-                height: 14,
-                opacity: 0.85,
-                filter: "brightness(0) invert(1)",
-              }}
-            />
-          </button>
-        </a>
-      )
-    ) : (
-      /* grey ghost while loading / empty */
-      <div
-        key={`ph-${idx}`}
-        className="w-full px-4 py-1 rounded-full animate-pulse bg-[#3d2b1f] border-2"
-        style={{ borderColor: "rgb(231,166,45)", opacity: 0.15, minHeight: 32 }}
-      />
-    )
-  )}
-</div>
+            <a 
+              href="/registration" 
+              className="flex items-center justify-center bg-white py-3 px-8 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition-all duration-200"
+            >
+              <span className="text-teal-800 font-semibold">Register Now</span>
+            </a>
 
+            <a 
+              href="/contact" 
+              className="flex items-center justify-center bg-white py-3 px-8 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition-all duration-200"
+            >
+              <span className="text-teal-800 font-semibold">Contact Us</span>
+            </a>
+          </div>
         </div>
-
-        {/* Logo */}
-        <div
-  className="lg:col-span-2 p-4 flex items-center justify-center"
-  style={{ background: COLOR_LOGO_BG }}
->
-<div
-  className="lg:col-span-2  flex items-center justify-center"
-  style={{ background: COLOR_LOGO_BG }}
->
-  <div className="grid grid-cols-5 gap-4 items-center w-full max-w-5xl">
-    {/* Logo Column */}
-    <div className="flex justify-center col-span-1">
-      <img
-        src="/nitjlogo.png"
-        alt="NITJ Logo"
-        className="max-w-20 max-h-16 object-contain"
-      />
-    </div>
-
-    {/* Text Column spanning columns 2 to 5 */}
-    <div className="col-span-4 flex items-center">
-      <p
-        className="text-white text-sm sm:text-base font-light leading-snug text-left"
-        style={{
-          fontFamily: "'Montserrat', sans-serif",
-          letterSpacing: "0.01em",
-        }}
-      >
-        Organised by the Department of Electronics and Communication Engineering, NIT Jalandhar
-      </p>
-    </div>
-  </div>
-</div>
-
-</div>
-
       </div>
     </div>
   );

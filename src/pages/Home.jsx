@@ -11,7 +11,7 @@ import AboutDept  from "../components/AboutDept.jsx"
 import { useEffect} from "react";
 // import Hero2 from "../components/Hero2";
 import Slider from "../components/Slider";
-
+// import Hero2 from "../components/Hero2";
 // import SecNavbar from "../components/SecNavbar";
 import Navbar from "../components/Navbar";
 // import Speaker from "../components/Speaker";
@@ -60,6 +60,7 @@ function Home(props) {
       
       {/* <Speaker confid={props.confId}  ref={ourspeakersRef}   />
       <InvitedSpeaker confid={props.confId}  ref={invitedspeakersRef}   /> */}
+      {/* <Hero2/> */}
       <Slider confid={props.confId}/>
       <AboutConf confid={props.confId}/>
       
