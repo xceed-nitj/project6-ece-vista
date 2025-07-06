@@ -189,7 +189,7 @@ export default function Example() {
                           ) : (
                             <Link
                               to={item.href}
-                              className="inline-flex items-center py-2 px-1 text-sm uppercase font-bold transition-colors duration-200"
+                              className="inline-flex items-center py-2 px-1 text-sm uppercase  transition-colors duration-200"
                               style={{ color: COLOR_NAV_TEXT }}
                               aria-current={item.current ? "page" : undefined}
                               onMouseOver={e => (e.currentTarget.style.color = COLOR_NAV_TEXT_HOVER)}
@@ -209,7 +209,7 @@ export default function Example() {
                   {/* Center CIPHER */}
                   <div className="px-10 justify-center items-center">
                     <span
-                      className="text-2xl font-bold whitespace-nowrap"
+                      className="text-2xl whitespace-nowrap"
                       style={{ color: COLOR_NAV_CENTER }}
                     >
                       C I P H E R 2 0 2 6
@@ -235,7 +235,7 @@ export default function Example() {
                           <>
                             <Link
                               to={item.href}
-                              className="inline-flex items-center py-2 px-3 text-sm uppercase font-bold transition-colors duration-200"
+                              className="inline-flex items-center py-2 px-3 text-sm uppercase  transition-colors duration-200"
                               style={{ color: COLOR_NAV_TEXT }}
                               aria-current={item.current ? "page" : undefined}
                               onMouseOver={e => (e.currentTarget.style.color = COLOR_NAV_TEXT_HOVER)}
@@ -268,7 +268,7 @@ export default function Example() {
                         ) : (
                           <Link
                             to={item.href}
-                            className="inline-flex items-center py-2 px-1 text-sm uppercase font-bold transition-colors duration-200"
+                            className="inline-flex items-center py-2 px-1 text-sm uppercase transition-colors duration-200"
                             style={{ color: COLOR_NAV_TEXT }}
                             aria-current={item.current ? "page" : undefined}
                             onMouseOver={e => (e.currentTarget.style.color = COLOR_NAV_TEXT_HOVER)}

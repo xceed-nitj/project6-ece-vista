@@ -11,10 +11,10 @@
   color: #1f2937;
 }
 
-::selection {
+/* ::selection {
   color: white;
   background: #196a84;
-}
+} */
 
 
 #news::-webkit-scrollbar {
@@ -129,10 +129,10 @@ a, a:visited {
   text-decoration: none !important;
 }
 
-.about-content * {
+/* .about-content * {
   color: #056960 !important;
   padding-left: 15px;
   padding-right: 15px;
   line-height: 1.5 !important;
-  /* background-color: #854D0E !important; */
-}
+  background-color: #854D0E !important;
+} */
