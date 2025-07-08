@@ -46,6 +46,7 @@ function Slider(props) {
   const [apiUrl, setApiUrl] = useState(null);
   const [newsData, setNewsData] = useState([]);
   const scrollRef = useRef(null);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
 
   // -----------------------------------------------------------------------------
   // EFFECTS
@@ -123,6 +124,22 @@ function Slider(props) {
     return () => cancelAnimationFrame(reqId);
   }, [newsData]);
 
+  // Preload images
+  useEffect(() => {
+    const loadImage = (src) => {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.src = src;
+        img.onload = resolve;
+        img.onerror = reject;
+      });
+    };
+
+    Promise.all(heroImages.map(loadImage))
+      .then(() => setImagesLoaded(true))
+      .catch(console.error);
+  }, []);
+
   // Navigation functions for slider
   const nextSlide = () => {
     setCurrentImageIndex((prevIndex) => 
@@ -141,9 +158,9 @@ function Slider(props) {
   // -----------------------------------------------------------------------------
   
   return (
-    <div className="w-full min-h-[80vh] sm:min-h-screen flex flex-col relative">
-      {/* Hero Section with Image Slider - Using Project1 Design */}
-      <section className="relative bg-white overflow-hidden h-[70vh] sm:h-[80vh] md:h-[90vh] px-4 sm:px-6 lg:px-8">
+    <div className="w-full  sm:min-h-screen flex flex-col relative">
+      {/* Hero Section with Image Slider */}
+      <section className="relative  overflow-hidden h-[50vh] sm:h-[80vh] md:h-[90vh] px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row h-full w-full max-w-7xl mx-auto">
           {/* Left Content - 40% (hidden on mobile) */}
           <div className="hidden lg:flex w-1/5 pt-28 pb-16 px-8 lg:px-16 flex-col justify-center">
@@ -184,7 +201,7 @@ function Slider(props) {
           </div>
 
           {/* Mobile Hero Text Box (hidden on desktop) */}
-          <div className="block lg:hidden absolute top-[35%] xs:top-[30%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] xs:w-[85%] sm:w-[80%] md:w-[70%] max-w-md h-auto bg-white/30 backdrop-blur-sm rounded-lg z-10 border border-white/10 px-4 xs:px-5 sm:px-6 py-5 xs:py-6 sm:py-8">
+          <div className="block lg:hidden absolute top-[45%] xs:top-[30%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] xs:w-[85%] sm:w-[80%] md:w-[70%] max-w-md h-auto bg-white/30 backdrop-blur-sm rounded-lg z-10 border border-white/10 px-4 xs:px-5 sm:px-6 py-5 xs:py-6 sm:py-8">
             <div className="flex flex-col justify-center items-center text-center">
               <span className="text-xl xs:text-2xl sm:text-3xl font-serif text-teal-900 font-medium mb-2 xs:mb-3 sm:mb-4 text-center w-full block">
                 International Conference on Intelligent Processing
@@ -210,53 +227,48 @@ function Slider(props) {
           </div>
         
           {/* Right Image Section - 60% */}
-          <div className="relative w-full h-[350px] xs:h-[400px] sm:h-[450px] md:h-[500px] m-0 p-0 rounded-none overflow-hidden lg:ml-auto lg:w-4/5 lg:h-[90%] lg:mt-[2vh] lg:rounded-lg">
-            {/* Pre-load all images to prevent white flash */}
-            <div className="hidden"> 
-              {heroImages.map((src, idx) => (
-                <img key={idx} src={src} alt="preload" />
-              ))}
-            </div>
+          <div className="w-full md:relative h-[350px] xs:h-[400px] sm:h-[450px] md:h-[500px] m-0 p-0 rounded-none overflow-hidden lg:ml-auto lg:w-4/5 lg:h-[90%] lg:mt-[2vh] lg:rounded-lg">
+            {imagesLoaded && (
+              <AnimatePresence >
+                <motion.div
+                  key={currentImageIndex}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ 
+                    duration: 0.3,
+                    ease: "easeInOut"
+                  }}
+                  className="absolute inset-0"
+                >
+                  <img 
+                    src={heroImages[currentImageIndex]}
+                    alt={`Conference image ${currentImageIndex + 1}`}
+                    className="h-full w-full object-cover"
+                    style={{ opacity: imagesLoaded ? 1 : 0 }}
+                  />
+                </motion.div>
+              </AnimatePresence>
+            )}
             
-            {/* Current image with framer-motion animation */}
-            <AnimatePresence mode="sync" initial={false}>
-              <motion.div
-                key={currentImageIndex}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ 
-                  duration: 0.4,
-                  ease: "easeInOut"
-                }}
-                className="absolute inset-0"
-              >
-                <img 
-                  src={heroImages[currentImageIndex]}
-                  alt={`Conference image ${currentImageIndex + 1}`}
-                  className="h-full w-full object-cover"
-                />
-              </motion.div>
-            </AnimatePresence>
-            
-            {/* Vertical Navigation Arrows */}
+            {/* Navigation Arrows */}
             <div className="absolute bottom-2 xs:bottom-3 sm:bottom-4 right-2 xs:right-3 sm:right-4 z-10 flex flex-row gap-2 xs:gap-3 sm:gap-4 lg:bottom-10 lg:right-10">
               <button 
                 onClick={prevSlide}
-                className="p-1 sm:p-2 focus:outline-none rotate-[270deg]" 
+                className="p-1 sm:p-2 focus:outline-none rotate-[270deg] bg-black/20 hover:bg-black/30 rounded-full transition-colors" 
                 aria-label="Previous slide"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5 text-teal-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 15l7-7 7 7" />
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
                 </svg>
               </button>
               <button 
                 onClick={nextSlide}
-                className="p-1 sm:p-2 focus:outline-none rotate-[270deg]" 
+                className="p-1 sm:p-2 focus:outline-none rotate-90 bg-black/20 hover:bg-black/30 rounded-full transition-colors" 
                 aria-label="Next slide"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
                 </svg>
               </button>
             </div>
