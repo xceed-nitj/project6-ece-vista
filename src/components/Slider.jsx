@@ -175,7 +175,12 @@ function Slider(props) {
           </div>
 
           {/* Desktop Hero Text Box (hidden on mobile) */}
-          <div className="hidden lg:block absolute top-[50%] left-[20%] transform -translate-x-1/2 -translate-y-1/2 w-[450px] max-w-xl h-[330px] bg-white/20 backdrop-blur-md rounded-lg z-10 border border-white/10">
+          <div
+            className="hidden lg:block absolute top-[50%] left-[20%] transform -translate-x-1/2 -translate-y-1/2 w-[450px] max-w-xl h-[330px] backdrop-blur-md rounded-lg z-10 border border-white/10"
+            style={{
+              background: "rgba(20, 184, 165, 0.17)", // teal-500 with 18% opacity
+            }}
+          >
             <div className="absolute inset-0 flex flex-col justify-center items-center px-12 text-center">
               <span className="text-4xl font-serif text-teal-900 font-medium mb-6 text-left w-full block">
                 International Conference on Intelligent Processing

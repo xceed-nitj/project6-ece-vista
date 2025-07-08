@@ -142,14 +142,14 @@ export default function Example() {
                       <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
                     )}
                   </Disclosure.Button>
-                  <span className="text-xl font-semibold text-teal-700">
+                  <span className="text-xl font-bold text-teal-700">
                     CIPHER 2026
                   </span>
                   <div className="w-6" /> {/* Spacer for centering */}
                 </div>
                 
                 <nav
-                  className="hidden lg:flex items-center justify-center w-full px-4"
+                  className="hidden lg:flex items-center justify-between w-full px-4"
                   aria-label="Global"
                   style={{
                     fontFamily: "'Montserrat', sans-serif",
@@ -157,44 +157,25 @@ export default function Example() {
                     background: COLOR_NAV_OPTION_BG
                   }}
                 >
-                  {/* Left nav */}
-                  <div className="flex items-center justify-center gap-10 max-w-5xl ">
-                    <div className="flex space-x-6">
-                      {navLeft.map((item) => (
-                        <div key={item.name} className="relative group">
-                          {item.subItems ? (
-                            <>
-                              <Link
-                                to={item.href}
-                                className="inline-flex items-center py-2 px-3 text-sm uppercase font-medium transition-colors duration-200"
-                                style={{ color: COLOR_NAV_TEXT }}
-                                aria-current={item.current ? "page" : undefined}
-                                onMouseOver={e => (e.currentTarget.style.color = COLOR_NAV_TEXT_HOVER)}
-                                onMouseOut={e => (e.currentTarget.style.color = COLOR_NAV_TEXT)}
-                              >
-                                {item.name}
-                                <div className="absolute bottom-[3px] left-0 w-0 h-0.5 group-hover:w-full transition-all duration-500"
-                                  style={{ background: COLOR_NAV_TEXT }}
-                                ></div>
-                              </Link>
-                              <div className="absolute left-0 hidden mt-0.5 w-64 origin-top-left bg-gray-50 border border-teal-100 rounded-md shadow-lg group-hover:block z-50">
-                                <div className="py-1">
-                                  {item.subItems.map((subItem) => (
-                                    <Link
-                                      key={subItem.name}
-                                      to={subItem.href}
-                                      className="block px-4 py-2 text-sm text-teal-800 hover:bg-teal-50 hover:text-teal-900"
-                                    >
-                                      {subItem.name}
-                                    </Link>
-                                  ))}
-                                </div>
-                              </div>
-                            </>
-                          ) : (
+                  {/* Left side with CIPHER text */}
+                  <div className="flex items-center space-x-10">
+                    <span
+                      className="text-2xl whitespace-nowrap "
+                      style={{ color: COLOR_NAV_CENTER }}
+                    >
+                      CIPHER 2026
+                    </span>
+                  </div>
+
+                  {/* Center navigation */}
+                  <div className="flex items-center justify-center space-x-6">
+                    {navLeft.map((item) => (
+                      <div key={item.name} className="relative group">
+                        {item.subItems ? (
+                          <>
                             <Link
                               to={item.href}
-                              className="inline-flex items-center py-2 px-1 text-sm uppercase  transition-colors duration-200"
+                              className="inline-flex items-center py-2 px-3 text-sm uppercase font-medium transition-colors duration-200"
                               style={{ color: COLOR_NAV_TEXT }}
                               aria-current={item.current ? "page" : undefined}
                               onMouseOver={e => (e.currentTarget.style.color = COLOR_NAV_TEXT_HOVER)}
@@ -205,58 +186,7 @@ export default function Example() {
                                 style={{ background: COLOR_NAV_TEXT }}
                               ></div>
                             </Link>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Center CIPHER */}
-                  <div className="px-10 justify-center items-center">
-                    <span
-                      className="text-2xl whitespace-nowrap"
-                      style={{ color: COLOR_NAV_CENTER }}
-                    >
-                      C I P H E R 2 0 2 6
-                    </span>
-                  </div>
-
-                  {/* Right nav */}
-                  <div className="flex space-x-6">
-                    {navRight.map((item) => (
-                      <div
-                        key={item.name}
-                        className="relative group"
-                        onMouseEnter={e => {
-                          const submenu = e.currentTarget.querySelector('.submenu');
-                          if (submenu) submenu.style.display = 'block';
-                        }}
-                        onMouseLeave={e => {
-                          const submenu = e.currentTarget.querySelector('.submenu');
-                          if (submenu) submenu.style.display = 'none';
-                        }}
-                      >
-                        {item.subItems ? (
-                          <>
-                            <Link
-                              to={item.href}
-                              className="inline-flex items-center py-2 px-3 text-sm uppercase  transition-colors duration-200"
-                              style={{ color: COLOR_NAV_TEXT }}
-                              aria-current={item.current ? "page" : undefined}
-                              onMouseOver={e => (e.currentTarget.style.color = COLOR_NAV_TEXT_HOVER)}
-                              onMouseOut={e => (e.currentTarget.style.color = COLOR_NAV_TEXT)}
-                            >
-                              {item.name}
-                              <div className="absolute bottom-[3px] left-0 w-0 h-0.5 group-hover:w-full transition-all duration-500"
-                                style={{ background: COLOR_NAV_BORDER }}
-                              ></div>
-                            </Link>
-                            <div
-                              className="submenu absolute left-0 mt-0.5 w-64 origin-top-left bg-white border border-teal-100 rounded-md shadow-lg z-50"
-                              style={{ display: "none" }}
-                              onMouseEnter={e => (e.currentTarget.style.display = 'block')}
-                              onMouseLeave={e => (e.currentTarget.style.display = 'none')}
-                            >
+                            <div className="absolute left-0 hidden mt-0.5 w-64 origin-top-left bg-gray-50 border border-teal-100 rounded-md shadow-lg group-hover:block z-50">
                               <div className="py-1">
                                 {item.subItems.map((subItem) => (
                                   <Link
@@ -281,7 +211,68 @@ export default function Example() {
                           >
                             {item.name}
                             <div className="absolute bottom-[3px] left-0 w-0 h-0.5 group-hover:w-full transition-all duration-500"
-                              style={{ background: COLOR_NAV_BORDER }}
+                              style={{ background: COLOR_NAV_TEXT }}
+                            ></div>
+                          </Link>
+                        )}
+                      </div>
+                    ))}
+
+                    {/* Right nav items */}
+                    {navRight.map((item) => (
+                      <div
+                        key={item.name}
+                        className="relative group"
+                        onMouseEnter={e => {
+                          const submenu = e.currentTarget.querySelector('.submenu');
+                          if (submenu) submenu.style.display = 'block';
+                        }}
+                        onMouseLeave={e => {
+                          const submenu = e.currentTarget.querySelector('.submenu');
+                          if (submenu) submenu.style.display = 'none';
+                        }}
+                      >
+                        {item.subItems ? (
+                          <>
+                            <Link
+                              to={item.href}
+                              className="inline-flex items-center py-2 px-3 text-sm uppercase transition-colors duration-200"
+                              style={{ color: COLOR_NAV_TEXT }}
+                              aria-current={item.current ? "page" : undefined}
+                              onMouseOver={e => (e.currentTarget.style.color = COLOR_NAV_TEXT_HOVER)}
+                              onMouseOut={e => (e.currentTarget.style.color = COLOR_NAV_TEXT)}
+                            >
+                              {item.name}
+                              <div className="absolute bottom-[3px] left-0 w-0 h-0.5 group-hover:w-full transition-all duration-500"
+                                style={{ background: COLOR_NAV_TEXT }}
+                              ></div>
+                            </Link>
+                            <div className="submenu absolute right-0 hidden mt-0.5 w-64 origin-top-right bg-gray-50 border border-teal-100 rounded-md shadow-lg z-50">
+                              <div className="py-1">
+                                {item.subItems.map((subItem) => (
+                                  <Link
+                                    key={subItem.name}
+                                    to={subItem.href}
+                                    className="block px-4 py-2 text-sm text-teal-800 hover:bg-teal-50 hover:text-teal-900"
+                                  >
+                                    {subItem.name}
+                                  </Link>
+                                ))}
+                              </div>
+                            </div>
+                          </>
+                        ) : (
+                          <Link
+                            to={item.href}
+                            className="inline-flex items-center py-2 px-1 text-sm uppercase transition-colors duration-200"
+                            style={{ color: COLOR_NAV_TEXT }}
+                            aria-current={item.current ? "page" : undefined}
+                            onMouseOver={e => (e.currentTarget.style.color = COLOR_NAV_TEXT_HOVER)}
+                            onMouseOut={e => (e.currentTarget.style.color = COLOR_NAV_TEXT)}
+                          >
+                            {item.name}
+                            <div className="absolute bottom-[3px] left-0 w-0 h-0.5 group-hover:w-full transition-all duration-500"
+                              style={{ background: COLOR_NAV_TEXT }}
                             ></div>
                           </Link>
                         )}

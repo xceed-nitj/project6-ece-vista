@@ -36,7 +36,7 @@ const CountdownDigit = ({ value, label, color, animate }) => {
   return (
     <div className="flex flex-col items-center">
       <motion.div 
-        className="h-10 w-10 xs:h-12 xs:w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 lg:h-20 lg:w-20 rounded-lg sm:rounded-xl perspective-[1000px] relative shadow-lg"
+        className="h-8 w-8 xs:h-10 xs:w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 lg:h-16 lg:w-16 rounded-lg sm:rounded-xl perspective-[1000px] relative shadow-lg"
         style={{ transformStyle: "preserve-3d" }}
       >
         <motion.div 
@@ -45,7 +45,7 @@ const CountdownDigit = ({ value, label, color, animate }) => {
           style={{ backfaceVisibility: "hidden" }}
         >
           <span 
-            className="text-base xs:text-lg sm:text-xl md:text-2xl lg:text-3xl font-mono font-bold"
+            className="text-base xs:text-lg sm:text-xl md:text-2xl lg:text-xl font-mono font-bold"
             style={{ color: color }}
           >
             {String(value).padStart(2, '0')}
