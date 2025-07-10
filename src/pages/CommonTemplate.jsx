@@ -1,85 +1,3 @@
-
-
-
-
-
-// import { useState, useEffect } from "react";
-// import getEnvironment from "../getenvironment";
-// import { useParams } from "react-router-dom";
-// import Footer from '../components/Footer';
-// import Navbar from '../components/Navbar';
-
-// const CommonTemplate = ({ confid }) => {
-//   const [data, setData] = useState(null);
-//   const { templateid } = useParams();
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       const apiUrl = await getEnvironment();
-//       try {
-//         const response = await fetch(
-//           `${apiUrl}/conferencemodule/commontemplate/${confid}/${templateid}`,
-//           {
-//             method: "GET",
-//             credentials: "include",
-//             headers: { "Content-Type": "application/json" },
-//           }
-//         );
-//         if (!response.ok) throw new Error("Network response was not ok");
-//         setData(await response.json());
-//       } catch (error) {
-//         console.error("Error fetching data:", error);
-//       }
-//     };
-//     fetchData();
-//   }, [confid, templateid]);
-
-//   return (
-//     <div className="bg-[#3b2f2f] min-h-screen relative overflow-hidden">
-//       {/* decorative dots */}
-//       <div className="absolute inset-0 pointer-events-none opacity-10">
-//         <div className="absolute w-[600px] h-[600px] border border-[#8b5e3c]/20 rounded-full -right-1/4 top-1/3" />
-//         <div className="absolute w-2 h-2 bg-[#d97706] rounded-full left-[15%] top-[25%] animate-pulse" />
-//       </div>
-
-//       <Navbar />
-
-//       <div className="pt-24 container mx-auto px-6 lg:px-8 pb-16 relative z-10">
-//         <div className="bg-white border border-[#8b5e3c]/30 rounded-xl p-8 shadow-lg">
-//           <h1 className="text-3xl font-bold text-[#5c3a21] mb-4">
-//             {data ? (
-//               <span dangerouslySetInnerHTML={{ __html: data.pageTitle }} />
-//             ) : (
-//               <div className="animate-pulse space-y-2">
-//                 <div className="h-6 bg-gray-300 rounded w-3/4" />
-//                 <div className="h-6 bg-gray-300 rounded w-1/2" />
-//               </div>
-//             )}
-//           </h1>
-//           <div className="w-24 h-1 bg-[#d97706] mb-6" />
-
-//           {data ? (
-//             <div className="prose prose-[#5c3a21] max-w-none">
-//               <div dangerouslySetInnerHTML={{ __html: data.description }} />
-//             </div>
-//           ) : (
-//             <div className="animate-pulse space-y-2">
-//               <div className="h-4 bg-gray-300 rounded w-5/6" />
-//               <div className="h-4 bg-gray-300 rounded w-2/3" />
-//               <div className="h-4 bg-gray-300 rounded w-3/4" />
-//             </div>
-//           )}
-//         </div>
-//       </div>
-
-//       <Footer />
-//     </div>
-//   );
-// };
-
-// export default CommonTemplate;
-
-
 import { useState, useEffect } from "react";
 import getEnvironment from "../getenvironment";
 import { useParams } from "react-router-dom";
@@ -107,47 +25,49 @@ const CommonTemplate = ({ confid }) => {
   }, [confid, templateid]);
 
   return (
-    <div className="bg-[#3b2f2f] min-h-screen relative overflow-hidden">
-      {/* GLOBAL BACKDROP GLOW */}
-      {/* <div className="absolute inset-0 bg-gradient-to-br from-yellow-800 via-transparent to-yellow-900 opacity-20 pointer-events-none" /> */}
+    <div className="min-h-screen bg-white relative">
+      {/* Minimal dotted background pattern with increased intensity */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.15]" 
+           style={{
+             backgroundImage: `radial-gradient(circle, #0d9488 1.5px, transparent 1.5px)`,
+             backgroundSize: '20px 20px'
+           }} 
+      />
 
       <Navbar />
 
-      <div className="pt-10 container mx-auto px-6 lg:px-8 pb-10 relative z-10">
-        {/* 🌟 Gradient Rounded Border Wrapper */}
-        <div className="relative p-[3px] rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-600 shadow-2xl shadow-yellow-900/40">
-          {/* Card Content */}
-          <div className="bg-white rounded-xl p-8">
-            
-            {/* Decorative Ornaments */}
-            <div className="absolute -top-8 -left-8 w-24 h-24 bg-yellow-200/20 rounded-full filter blur-xl" />
-            <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-yellow-200/10 rounded-full filter blur-2xl" />
-
+      <div className="pt-20 container mx-auto px-4 sm:px-6 lg:px-8 pb-16 relative z-10">
+        {/* Card with gradient border */}
+        <div className="relative p-[2px] rounded-xl bg-gradient-to-br from-teal-400 to-teal-600 shadow-lg">
+          <div className="bg-white rounded-xl p-6 sm:p-8">
             {/* Title */}
-            <h1 className="relative text-3xl font-extrabold text-[#5c3a21] mb-4">
+            <h1 className="text-2xl sm:text-3xl font-medium text-teal-800 mb-6">
               {data ? (
                 <span dangerouslySetInnerHTML={{ __html: data.pageTitle }} />
               ) : (
                 <div className="animate-pulse space-y-2">
-                  <div className="h-6 bg-gray-300 rounded w-3/4" />
-                  <div className="h-6 bg-gray-300 rounded w-1/2" />
+                  <div className="h-6 bg-teal-50 rounded w-3/4" />
+                  <div className="h-6 bg-teal-50 rounded w-1/2" />
                 </div>
               )}
             </h1>
 
-            {/* Divider */}
-            <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 mb-6 rounded" />
+            {/* Simple teal divider */}
+            <div className="w-16 h-0.5 bg-teal-500 mb-6" />
 
-            {/* Description */}
+            {/* Content */}
             {data ? (
-              <div className="prose prose-[#5c3a21] max-w-none overflow-x-auto">
-                <div dangerouslySetInnerHTML={{ __html: data.description }} />
+              <div className="prose max-w-none">
+                <div 
+                  dangerouslySetInnerHTML={{ __html: data.description }}
+                  className="text-gray-600 leading-relaxed text-base"
+                />
               </div>
             ) : (
-              <div className="animate-pulse space-y-2">
-                <div className="h-4 bg-gray-300 rounded w-5/6" />
-                <div className="h-4 bg-gray-300 rounded w-2/3" />
-                <div className="h-4 bg-gray-300 rounded w-3/4" />
+              <div className="animate-pulse space-y-3">
+                <div className="h-4 bg-teal-50 rounded w-full" />
+                <div className="h-4 bg-teal-50 rounded w-5/6" />
+                <div className="h-4 bg-teal-50 rounded w-4/5" />
               </div>
             )}
           </div>
