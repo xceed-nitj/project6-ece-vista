@@ -5,15 +5,15 @@ import Timeline from "../components/Timeline";
 import Footer from "../components/Footer";
 import AboutNITJ from "../components/AboutNITJ";
 // import AboutNews from "../components/AboutNews";
-import CountdownBox from "../components/timer.jsx";
+// import CountdownBox from "../components/timer.jsx";
 import AboutDept from "../components/AboutDept.jsx";
 // import SponsorShip from "../components/Sponsorship";
 import { useEffect } from "react";
-// import Hero2 from "../components/Hero2";
-import Slider from "../components/Slider";
+import Hero2 from "../components/Hero2";
+// import Slider from "../components/Slider";
 // import Hero2 from "../components/Hero2";
 // import SecNavbar from "../components/SecNavbar";
-import Navbar from "../components/Navbar";
+// import Navbar from "../components/Navbar";
 // import Speaker from "../components/Speaker";
 // import InvitedSpeaker from "../components/InvitedSpeaker";
 // import VideoGallery from "../components/VideoGallery";
@@ -47,14 +47,12 @@ function Home(props) {
   // };
   return (
     <div className="bg-white overflow-x-hidden">
-      {/* Fixed Navigation */}
-      <div className="sticky top-0 w-full z-50">
-        <Navbar />
-      </div>
       
-      {/* Main Hero Slider - Keeping as is per user request */}
+      
+      
+      {/* Main Hero Section */}
       <section className="relative">
-        <Slider confid={props.confId} />
+        <Hero2 />
       </section>
       
       {/* About Conference */}
@@ -78,12 +76,7 @@ function Home(props) {
         </div>
       </section>
       
-      {/* Countdown Timers */}
-      <section className="px-3 md:px-6 lg:px-8 py-6 md:py-10 lg:py-14">
-        <div className="max-w-7xl mx-auto">
-          <CountdownBox />
-        </div>
-      </section>
+      {/* Countdown Timers - Removed as Hero2 now includes countdown */}
       
       {/* About Department */}
       <section className="px-4 md:px-6 lg:px-8 py-8 md:py-12 lg:py-16 bg-gray-50">

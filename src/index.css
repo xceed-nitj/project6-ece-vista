@@ -116,12 +116,23 @@
   }
 
 a, a:visited {
-  color: rgb(0, 0, 0) !important;
+  color: rgb(0, 0, 0) ;
   text-decoration: none !important;
 }
   a:active {
     color: #2563eb;
   }
+}
+
+/* Custom animations for Hero2 component */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); opacity: 0.4; }
+  50% { transform: translateY(-10px); opacity: 0.8; }
 }
 
 .navbar a{
