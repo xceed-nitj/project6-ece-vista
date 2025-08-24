@@ -20,7 +20,7 @@ function Slider() {
   }, []);
 
   return (
-    <div className="relative h-full w-full overflow-hidden">
+    <div className="relative section-spacing h-full w-full overflow-hidden">
       {sliderData.map((slide, index) => (
         <div
           key={index}

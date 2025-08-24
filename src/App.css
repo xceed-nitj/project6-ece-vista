@@ -8,3 +8,7 @@
     z-index: 10;
     background: #fff;
    }
+.section-spacing {
+  margin-top: 6rem;   /* gap above the section */
+  margin-bottom: 6rem; /* gap below the section */
+}
