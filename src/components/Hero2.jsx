@@ -87,7 +87,7 @@ export default function Hero2() {
                 <img
                   src="/nitjlogo.png"
                   alt="NIT Jalandhar"
-                  className="h-15 sm:h-18 lg:h-20 w-auto object-contain drop-shadow"
+                  className="h-15 sm:h-9 lg:h-20 w-auto object-contain drop-shadow"
                   loading="lazy"
                 />
                 {/* <img
