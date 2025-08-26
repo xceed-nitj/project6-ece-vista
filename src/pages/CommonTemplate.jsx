@@ -107,24 +107,24 @@ const CommonTemplate = ({ confid }) => {
   }, [confid, templateid]);
 
   return (
-    <div className="bg-[#3b2f2f] min-h-screen relative overflow-hidden">
+    <div className="bg-blue-950 min-h-screen relative overflow-hidden">
       {/* GLOBAL BACKDROP GLOW */}
       {/* <div className="absolute inset-0 bg-gradient-to-br from-yellow-800 via-transparent to-yellow-900 opacity-20 pointer-events-none" /> */}
 
       <Navbar />
 
-      <div className="pt-10 container mx-auto px-6 lg:px-8 pb-10 relative z-10">
+      <div className="pt-5 container mx-auto px-2 lg:px-8 pb-10 relative z-10">
         {/* 🌟 Gradient Rounded Border Wrapper */}
-        <div className="relative p-[3px] rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-600 shadow-2xl shadow-yellow-900/40">
+        <div className="relative p-[1px] rounded-xl bg-gradient-to-br from-blue-800 to-white-600 ">
           {/* Card Content */}
-          <div className="bg-white rounded-xl p-8">
+          <div className="bg-white rounded-xl p-4">
             
             {/* Decorative Ornaments */}
             <div className="absolute -top-8 -left-8 w-24 h-24 bg-yellow-200/20 rounded-full filter blur-xl" />
             <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-yellow-200/10 rounded-full filter blur-2xl" />
 
             {/* Title */}
-            <h1 className="relative text-3xl font-extrabold text-[#5c3a21] mb-4">
+            <h1 className="relative text-3xl font-extrabold text-blue-900 mb-4">
               {data ? (
                 <span dangerouslySetInnerHTML={{ __html: data.pageTitle }} />
               ) : (
@@ -136,7 +136,7 @@ const CommonTemplate = ({ confid }) => {
             </h1>
 
             {/* Divider */}
-            <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 mb-6 rounded" />
+            <div className="w-24 h-1 bg-gradient-to-r from-pink-900 to-pink-800 mb-6 rounded" />
 
             {/* Description */}
             {data ? (

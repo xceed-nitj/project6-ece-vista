@@ -109,20 +109,20 @@
   animation: wave-move 60s linear infinite;
 }
 
-@layer base {
+/* @layer base {
 
   a:hover {
     color: #2563eb;
-  }
+  } */
 
-a, a:visited {
+/* a, a:visited {
   color: rgb(0, 0, 0) ;
   text-decoration: none !important;
 }
   a:active {
     color: #2563eb;
   }
-}
+} */
 
 /* Custom animations for Hero2 component */
 @keyframes spin {
@@ -135,10 +135,10 @@ a, a:visited {
   50% { transform: translateY(-10px); opacity: 0.8; }
 }
 
-.navbar a{
+/* .navbar a{
   color: rgb(255, 255, 255) !important;
   text-decoration: none !important;
-}
+} */
 
 /* .about-content * {
   color: #056960 !important;

@@ -104,6 +104,7 @@ import Hero2 from "../components/Hero2";
 // import DriveLinks from "../components/Drivelink";
 import OrganizingHeads from "../components/OrganizingHeads";
 import AboutConf from "../components/Aboutconf.jsx";
+// import NavbarBluePink from "../components/Navbar/index.jsx";
 // import AboutNews from "./components/Dummy";
 
 function Home(props) {
@@ -131,9 +132,9 @@ function Home(props) {
   // };
   return (
     <div className="bg-white overflow-x-hidden">
-      
-      
-      
+
+      {/* <Navbar /> */}
+
       {/* Main Hero Section */}
       <section className="relative">
         <Hero2 />

@@ -28,7 +28,9 @@
     "react-icons": "^4.12.0",
     "react-router-dom": "^6.21.0",
     "react-social-icons": "^6.7.0",
-    "swiper": "^11.0.4"
+    "react-tsparticles": "^2.12.2",
+    "swiper": "^11.0.4",
+    "tsparticles": "^3.9.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
