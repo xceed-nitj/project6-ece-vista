@@ -129,15 +129,15 @@ const Timeline = forwardRef((props, ref) => {
 
         {/* Timeline Container */}
         <div className="relative max-w-4xl mx-auto">
-                     {/* Central Timeline Tube */}
-           <motion.div 
-             className="absolute left-1/2 top-0 bottom-0 w-12 sm:w-16 bg-gradient-to-b from-gray-200 via-gray-100 to-gray-200 rounded-full transform -translate-x-1/2 z-10 shadow-inner"
-             initial={{ height: 0 }}
-             whileInView={{ height: "100%" }}
-             viewport={{ once: true }}
-             transition={{ duration: 1.2 }}
-           >
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/20 to-transparent rounded-full"></div>
+          {/* Central Timeline Line - Desktop: Tube, Mobile: Left line */}
+          <motion.div 
+            className="absolute md:left-1/2 left-6 top-0 bottom-0 md:w-12 md:sm:w-16 w-1 md:bg-gradient-to-b md:from-gray-200 md:via-gray-100 md:to-gray-200 bg-gray-300 md:rounded-full md:transform md:-translate-x-1/2 z-10 md:shadow-inner"
+            initial={{ height: 0 }}
+            whileInView={{ height: "100%" }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2 }}
+          >
+            <div className="absolute inset-0 md:bg-gradient-to-b md:from-transparent md:via-white/20 md:to-transparent md:rounded-full"></div>
           </motion.div>
 
           {/* Timeline Items */}
@@ -157,32 +157,31 @@ const Timeline = forwardRef((props, ref) => {
               <motion.div
                 key={idx}
                 className="relative flex items-center mb-12 sm:mb-20 group min-h-[140px]"
-                initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
+                initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.6, delay: idx * 0.15 }}
                 onMouseEnter={() => setHoveredIndex(idx)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
-                                 {/* Timeline Circle Icon */}
-                 <motion.div
-                   className="absolute top-1/2 transform -translate-y-1/2 z-20"
-                   style={{ left: 'calc(47.6% - 1px)' }}
-                   initial={{ scale: 0 }}
-                   whileInView={{ scale: 1 }}
-                   viewport={{ once: true, margin: "-100px" }}
-                   transition={{ 
-                     type: "spring", 
-                     stiffness: 400, 
-                     damping: 15,
-                     delay: 0.3 + idx * 0.15 
-                   }}
-                 >
-                                     <div 
-                     className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full ${colorScheme.bg} shadow-2xl flex items-center justify-center transition-all duration-300 ${
-                       hoveredIndex === idx ? "scale-110" : "scale-100"
-                     } border-2 border-white`}
-                   >
+                {/* Timeline Circle Icon */}
+                <motion.div
+                  className="absolute top-1/2 transform -translate-y-1/2 z-20 md:left-[calc(47.6%-1px)] left-3"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ 
+                    type: "spring", 
+                    stiffness: 400, 
+                    damping: 15,
+                    delay: 0.3 + idx * 0.15 
+                  }}
+                >
+                  <div 
+                    className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full ${colorScheme.bg} shadow-2xl flex items-center justify-center transition-all duration-300 ${
+                      hoveredIndex === idx ? "scale-110" : "scale-100"
+                    } border-2 border-white`}
+                  >
                     <div className={`${colorScheme.icon} transform transition-transform duration-300 ${
                       hoveredIndex === idx ? "scale-110" : "scale-100"
                     }`}>
@@ -191,88 +190,126 @@ const Timeline = forwardRef((props, ref) => {
                   </div>
                 </motion.div>
 
-                {/* Content Block - Left Side */}
-                {isLeft && (
-                  <motion.div
-                    className="w-[calc(50%-60px)] pr-8 text-right"
-                    whileHover={{ x: -10 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <h3 className={`font-extrabold text-lg sm:text-xl tracking-wide ${titleColor}`}>
-                      {(item.title || '').toUpperCase()}
-                    </h3>
-                    {item.description && (
-                      <p className="text-gray-300 text-sm sm:text-base mt-2">
-                        {item.description}
-                      </p>
-                    )}
-                    {!item.extended ? (
-                      <div className="mt-3 flex justify-end">
-                        <span className="inline-block bg-pink-500 text-white px-4 py-1.5 rounded-full text-xs sm:text-sm shadow">
-                          {formatDate(item.date)}
-                        </span>
-                      </div>
-                    ) : (
-                      <div className="mt-3 space-y-2">
-                        <div className="flex justify-end items-center">
-                          <span className="inline-block bg-pink-500 text-white px-4 py-1.5 rounded-full text-xs sm:text-sm shadow mr-2">
-                            {formatDate(item.newDate)}
+                {/* Desktop Layout - Alternating sides */}
+                <div className="hidden md:flex w-full">
+                  {/* Content Block - Left Side */}
+                  {isLeft && (
+                    <motion.div
+                      className="w-[calc(50%-60px)] pr-8 text-right"
+                      whileHover={{ x: -10 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <h3 className={`font-extrabold text-lg sm:text-xl tracking-wide ${titleColor}`}>
+                        {(item.title || '').toUpperCase()}
+                      </h3>
+                      {item.description && (
+                        <p className="text-gray-300 text-sm sm:text-base mt-2">
+                          {item.description}
+                        </p>
+                      )}
+                      {!item.extended ? (
+                        <div className="mt-3 flex justify-end">
+                          <span className="inline-block bg-pink-500 text-white px-4 py-1.5 rounded-full text-xs sm:text-sm shadow">
+                            {formatDate(item.date)}
                           </span>
-                          <span className="text-pink-300 text-xs">Extended</span>
                         </div>
-                        <div className="flex justify-end">
+                      ) : (
+                        <div className="mt-3 space-y-2">
+                          <div className="flex justify-end items-center">
+                            <span className="inline-block bg-pink-500 text-white px-4 py-1.5 rounded-full text-xs sm:text-sm shadow mr-2">
+                              {formatDate(item.newDate)}
+                            </span>
+                            <span className="text-pink-300 text-xs">Extended</span>
+                          </div>
+                          <div className="flex justify-end">
+                            <span className="inline-block text-gray-400 line-through text-xs sm:text-sm">
+                              {formatDate(item.date)}
+                            </span>
+                          </div>
+                        </div>
+                      )}
+                    </motion.div>
+                  )}
+
+                  {/* Content Block - Right Side */}
+                  {!isLeft && (
+                    <motion.div
+                      className="w-[calc(50%-60px)] pl-8 ml-auto text-left"
+                      whileHover={{ x: 10 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <h3 className={`font-extrabold text-lg sm:text-xl tracking-wide ${titleColor}`}>
+                        {(item.title || '').toUpperCase()}
+                      </h3>
+                      {item.description && (
+                        <p className="text-gray-300 text-sm sm:text-base mt-2">
+                          {item.description}
+                        </p>
+                      )}
+                      {!item.extended ? (
+                        <div className="mt-3">
+                          <span className="inline-block bg-pink-500 text-white px-4 py-1.5 rounded-full text-xs sm:text-sm shadow">
+                            {formatDate(item.date)}
+                          </span>
+                        </div>
+                      ) : (
+                        <div className="mt-3 space-y-2">
+                          <div className="flex items-center">
+                            <span className="inline-block bg-pink-500 text-white px-4 py-1.5 rounded-full text-xs sm:text-sm shadow mr-2">
+                              {formatDate(item.newDate)}
+                            </span>
+                            <span className="text-pink-300 text-xs">Extended</span>
+                          </div>
                           <span className="inline-block text-gray-400 line-through text-xs sm:text-sm">
                             {formatDate(item.date)}
                           </span>
                         </div>
-                      </div>
-                    )}
-                  </motion.div>
-                )}
+                      )}
+                    </motion.div>
+                  )}
+                </div>
 
-                {/* Content Block - Right Side */}
-                {!isLeft && (
+                {/* Mobile Layout - All content on right side */}
+                <div className="md:hidden w-full pl-16">
                   <motion.div
-                    className="w-[calc(50%-60px)] pl-8 ml-auto text-left"
-                    whileHover={{ x: 10 }}
+                    className="text-left"
+                    whileHover={{ x: 5 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <h3 className={`font-extrabold text-lg sm:text-xl tracking-wide ${titleColor}`}>
+                    <h3 className={`font-extrabold text-lg tracking-wide ${titleColor}`}>
                       {(item.title || '').toUpperCase()}
                     </h3>
                     {item.description && (
-                      <p className="text-gray-300 text-sm sm:text-base mt-2">
+                      <p className="text-gray-300 text-sm mt-2">
                         {item.description}
                       </p>
                     )}
                     {!item.extended ? (
                       <div className="mt-3">
-                        <span className="inline-block bg-pink-500 text-white px-4 py-1.5 rounded-full text-xs sm:text-sm shadow">
+                        <span className="inline-block bg-pink-500 text-white px-4 py-1.5 rounded-full text-xs shadow">
                           {formatDate(item.date)}
                         </span>
                       </div>
                     ) : (
                       <div className="mt-3 space-y-2">
                         <div className="flex items-center">
-                          <span className="inline-block bg-pink-500 text-white px-4 py-1.5 rounded-full text-xs sm:text-sm shadow mr-2">
+                          <span className="inline-block bg-pink-500 text-white px-4 py-1.5 rounded-full text-xs shadow mr-2">
                             {formatDate(item.newDate)}
                           </span>
                           <span className="text-pink-300 text-xs">Extended</span>
                         </div>
-                        <span className="inline-block text-gray-400 line-through text-xs sm:text-sm">
+                        <span className="inline-block text-gray-400 line-through text-xs">
                           {formatDate(item.date)}
                         </span>
                       </div>
                     )}
                   </motion.div>
-                )}
+                </div>
               </motion.div>
             );
           })}
         </div>
       </div>
-
-
     </motion.div>
   );
 });
