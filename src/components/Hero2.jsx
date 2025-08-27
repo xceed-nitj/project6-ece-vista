@@ -79,7 +79,7 @@ export default function Hero2() {
 
         {/* Centered content */}
         <main className="relative z-10 h-full grid place-items-center px-4 py-6 sm:px-6">
-          <div className="flex flex-col items-center text-center gap-2 max-w-5xl">
+          <div className="flex flex-col items-center text-center gap-4 max-w-5xl">
             {/* Date pill */}
             
    <div className="w-full flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5">
@@ -99,8 +99,8 @@ export default function Hero2() {
               </div>
             </div>
             {/* Headline (BLUE) */}
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-snug">
-            International Conference on International Conference on VLSI, Intelligent System, Signal Processing, Telecommunication and AI   </h1>
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-snug gap-2">
+            International Conference on VLSI, Intelligent System, Signal Processing, Telecommunication and AI   </h1>
 
             {/* Tagline (BLUE) */}
             {/* <p className="text-sm sm:text-base lg:text-lg text-blue-200/90 leading-relaxed max-w-2xl drop-shadow-[0_1px_6px_rgba(0,0,0,0.35)]">
@@ -109,7 +109,7 @@ export default function Hero2() {
 
             {/* Logos */}
          
-<span className="inline-block bg-pink-800/90 text-white px-3 py-1 rounded-full text-xs sm:text-sm font-medium">
+<span className="inline-block bg-pink-600 text-white px-3 py-3 rounded-full text-xs sm:text-sm font-medium">
               27th – 29th November 2026
             </span>
             {/* Location (BLUE) */}
@@ -134,7 +134,7 @@ export default function Hero2() {
                   {digits.map(({ label, value }) => (
                     <div
                       key={label}
-                      className="min-w-[64px] sm:min-w-[74px] text-center rounded-xl bg-pink-600/90 text-white px-3 py-1 sm:px-4 sm:py-3 shadow-lg ring-1 ring-white/30 backdrop-blur-[1px]"
+                      className="min-w-[64px] sm:min-w-[74px] text-center rounded-xl bg-pink-600 text-white px-3 py-1 sm:px-4 sm:py-3 shadow-lg ring-1 ring-white/30 backdrop-blur-[1px]"
                     >
                       <div className="text-xl sm:text-xl lg:text-xl tabular-nums leading-none">
                         {String(value).padStart(2, "0")}
@@ -149,7 +149,7 @@ export default function Hero2() {
             </div>
 
             {/* CTA */}
-            <button className="mt-2 bg-white text-blue-900 px-5 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold text-sm sm:text-base border-2 border-white hover:bg-transparent hover:text-blue-100 transition-all duration-300 flex items-center gap-2 group">
+            <button className="mt-1 bg-white text-blue-900 px-5 sm:px-6 py-1 sm:py-3 rounded-lg font-semibold text-sm sm:text-base border-2 border-white hover:bg-transparent hover:text-blue-100 transition-all duration-300 flex items-center gap-2 group">
               Submit Papers
               <svg className="w-4 h-4 sm:w-5 sm:h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />

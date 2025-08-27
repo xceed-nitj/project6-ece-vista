@@ -75,7 +75,7 @@ const Timeline = forwardRef((props, ref) => {
       transition={{ duration: 0.7 }}
     >
       {/* Background decorative elements */}
-      <div className="absolute max-w-full inset-0 z-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/4 w-48 sm:w-64 md:w-96 h-48 sm:h-64 md:h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-1/4 right-1/4 w-40 sm:w-60 md:w-80 h-40 sm:h-60 md:h-80 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
         
@@ -88,7 +88,7 @@ const Timeline = forwardRef((props, ref) => {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+      <div className="w-full mx-auto px-4 sm:px-6 relative z-10">
         {/* Title Section */}
         <motion.div 
           className="text-center mb-8 sm:mb-12 md:mb-20"

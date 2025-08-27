@@ -1,84 +1,116 @@
-// PinkWaveBanner.jsx
-// Smooth pink waves using stroked SVG backgrounds (no filled shapes),
-// parallax drift, and transparent backdrop. Pure React + CSS, no TypeScript.
-// ------------------------------------------------------------------
-// Usage:
-// import PinkWaveBanner from "./PinkWaveBanner";
-// <PinkWaveBanner height="h-[220px]" />
-
-import React from "react";
+// import React from "react";
 
 function PinkWaveBanner({
-  height = "h-72",
+  height = "h-[160px]",
   className = "",
-  top = false,
-  // visual tuning
-  speed1 = 14,
-  speed2 = 22,
-  color1 = "#ff4d9d",
-  color2 = "#ff7abf",
-  strokeWidth = 2.5,
-  children,
+  flip = false,        // flip vertically to alternate between sections
+  opacityBack = 0.35,  // back layer opacity
+  opacityFront = 0.65, // front layer opacity
+  animated = true,     // set false to freeze
+  speed = 2,           // >1 = faster, <1 = slower (2 = 2x faster)
 }) {
-  const containerClasses = `relative w-full ${height} overflow-hidden ${className}`;
-  const pos1 = top ? "top: 0;" : "bottom: 0;";
-  const pos2 = top ? "top: -6px;" : "bottom: -6px;";
-
-  // Smooth, sinusoidal-ish line paths placed near the bottom of the viewBox
-  const LINE_PATH_1 =
-    "M0,94 C120,102 240,110 360,110 C480,110 600,102 720,96 C840,90 960,88 1080,94 C1200,100 1320,110 1440,114";
-  const LINE_PATH_2 =
-    "M0,98 C140,106 280,108 420,104 C560,100 700,92 840,92 C980,92 1120,100 1260,108 C1350,112 1395,114 1440,116";
-
-  const svgLine = (d, color) =>
-    `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'>` +
-    `<path d='${d}' fill='none' stroke='${color}' stroke-width='${strokeWidth}' stroke-linecap='round' stroke-linejoin='round'/>` +
-    `</svg>`;
-
-  const bg1 = `url("data:image/svg+xml;utf8,${encodeURIComponent(svgLine(LINE_PATH_1, color1))}")`;
-  const bg2 = `url("data:image/svg+xml;utf8,${encodeURIComponent(svgLine(LINE_PATH_2, color2))}")`;
+  const container = `relative w-full ${height} overflow-hidden ${className}`;
+  const repeat = animated ? "indefinite" : 0;
+  const dur = (base) => `${(base / Math.max(0.1, speed)).toFixed(2)}s`;
 
   return (
-    <div className={containerClasses}>
-      {children && <div className="relative z-10 text-center px-4">{children}</div>}
-
-      <div
-        className="wave wave-1"
+    <div className={container}>
+      <svg
+        className={`absolute inset-0 w-full h-full ${flip ? "rotate-180" : ""}`}
+        viewBox="0 0 1440 320"
+        preserveAspectRatio="none"
         aria-hidden="true"
-        style={{ animationDuration: `${speed1}s` }}
-      />
-      <div
-        className="wave wave-2"
-        aria-hidden="true"
-        style={{ animationDuration: `${speed2}s` }}
-      />
+      >
+        <defs>
+          {/* Enhanced gradients with hue shift and smoother shimmer */}
+          <linearGradient id="gradBack" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#ff4d9d" stopOpacity="0.9">
+              <animate attributeName="stopColor" values="#ff4d9d;#ff66a8;#ff4d9d" dur={dur(20)} repeatCount={repeat} />
+              <animate attributeName="offset" values="0%;12%;0%" dur={dur(18)} repeatCount={repeat} />
+            </stop>
+            <stop offset="100%" stopColor="#ffb3d6" stopOpacity="0.9">
+              <animate attributeName="stopColor" values="#ffb3d6;#ffc2e0;#ffb3d6" dur={dur(20)} repeatCount={repeat} />
+              <animate attributeName="offset" values="100%;88%;100%" dur={dur(18)} repeatCount={repeat} />
+            </stop>
+          </linearGradient>
+          <linearGradient id="gradFront" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#ff2d86" stopOpacity="1">
+              <animate attributeName="stopColor" values="#ff2d86;#ff4f9e;#ff2d86" dur={dur(16)} repeatCount={repeat} />
+              <animate attributeName="offset" values="0%;18%;0%" dur={dur(14)} repeatCount={repeat} />
+            </stop>
+            <stop offset="100%" stopColor="#ff8fc7" stopOpacity="1">
+              <animate attributeName="stopColor" values="#ff8fc7;#ffa8d0;#ff8fc7" dur={dur(16)} repeatCount={repeat} />
+              <animate attributeName="offset" values="100%;82%;100%" dur={dur(14)} repeatCount={repeat} />
+            </stop>
+          </linearGradient>
 
-      <style>{`
-        @media (prefers-reduced-motion: reduce) { .wave { animation: none !important; } }
-        @keyframes drift { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+          {/* Enhanced glow with slight pulse */}
+          <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="4" result="blur">
+              <animate attributeName="stdDeviation" values="4;6;4" dur={dur(10)} repeatCount={repeat} />
+            </feGaussianBlur>
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
 
-        .wave {
-          position: absolute;
-          left: 0;
-          width: 200%;
-          height: 140px;
-          background-repeat: repeat-x;
-          background-size: 50% 100%;
-          pointer-events: none;
-          animation: drift linear infinite;
-        }
-        .wave-1 {
-          ${pos1}
-          background-image: ${bg1};
-          opacity: 0.95;
-          filter: drop-shadow(0 -1px 4px rgba(255, 105, 180, 0.25));
-        }
-        .wave-2 {
-          ${pos2}
-          background-image: ${bg2};
-          opacity: 0.6;
-        }
-      `}</style>
+        {/* BACK WAVE with smoother, more organic motion and slight scale pulse */}
+        <path
+          fill="url(#gradBack)"
+          fillOpacity={opacityBack}
+          filter="url(#glow)"
+          d="M0,224 C 180,210 360,200 540,212 C 720,224 900,260 1080,248 C 1260,236 1350,220 1440,216 L1440,320 L0,320 Z"
+        >
+          <animate
+            attributeName="d"
+            dur={dur(16)}
+            repeatCount={repeat}
+            values="
+              M0,224 C 180,210 360,200 540,212 C 720,224 900,260 1080,248 C 1260,236 1350,220 1440,216 L1440,320 L0,320 Z;
+              M0,228 C 200,216 380,208 560,218 C 740,230 920,266 1100,254 C 1280,242 1360,226 1440,220 L1440,320 L0,320 Z;
+              M0,226 C 160,214 340,204 520,216 C 700,226 880,262 1060,250 C 1240,238 1340,222 1440,218 L1440,320 L0,320 Z;
+              M0,224 C 180,210 360,200 540,212 C 720,224 900,260 1080,248 C 1260,236 1350,220 1440,216 L1440,320 L0,320 Z
+            "
+          />
+          <animateTransform
+            attributeName="transform"
+            type="scale"
+            values="1,1;1.02,1.02;1,1"
+            dur={dur(12)}
+            repeatCount={repeat}
+            additive="sum"
+          />
+        </path>
+
+        {/* FRONT WAVE with smoother motion and subtle scale pulse */}
+        <path
+          fill="url(#gradFront)"
+          fillOpacity={opacityFront}
+          d="M0,240 C 200,230 400,260 600,250 C 800,240 1000,210 1200,220 C 1320,226 1380,236 1440,240 L1440,320 L0,320 Z"
+        >
+          <animate
+            attributeName="d"
+            dur={dur(12)}
+            repeatCount={repeat}
+            values="
+              M0,240 C 200,230 400,260 600,250 C 800,240 1000,210 1200,220 C 1320,226 1380,236 1440,240 L1440,320 L0,320 Z;
+              M0,244 C 220,234 420,264 620,256 C 820,244 1020,214 1220,226 C 1340,232 1390,240 1440,244 L1440,320 L0,320 Z;
+              M0,242 C 180,232 380,262 580,252 C 780,242 980,212 1180,222 C 1300,228 1370,238 1440,242 L1440,320 L0,320 Z;
+              M0,240 C 200,230 400,260 600,250 C 800,240 1000,210 1200,220 C 1320,226 1380,236 1440,240 L1440,320 L0,320 Z
+            "
+          />
+          <animateTransform
+            attributeName="transform"
+            type="scale"
+            values="1,1;1.015,1.015;1,1"
+            dur={dur(8)}
+            repeatCount={repeat}
+            additive="sum"
+          />
+        </path>
+      </svg>
     </div>
   );
 }

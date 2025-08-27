@@ -96,7 +96,7 @@
 
 const Footer = () => {
   return (
-    <footer className="bg-white relative overflow-hidden border-t border-blue-950">
+    <footer className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 relative overflow-hidden border-t border-blue-950">
       {/* Enhanced Wave background pattern */}
       
       <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 absolute inset-0 opacity-20 pointer-events-none ">

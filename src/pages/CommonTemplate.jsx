@@ -113,7 +113,7 @@ const CommonTemplate = ({ confid }) => {
 
       <Navbar />
 
-      <div className="pt-5 container mx-auto px-2 lg:px-8 pb-10 relative z-10">
+      <div className="pt-5 mx-auto px-2 lg:px-8 pb-10 relative z-10">
         {/* 🌟 Gradient Rounded Border Wrapper */}
         <div className="relative p-[1px] rounded-xl bg-gradient-to-br from-blue-800 to-white-600 ">
           {/* Card Content */}
@@ -124,7 +124,7 @@ const CommonTemplate = ({ confid }) => {
             <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-yellow-200/10 rounded-full filter blur-2xl" />
 
             {/* Title */}
-            <h1 className="relative text-3xl font-extrabold text-blue-900 mb-4">
+            <h1 className=" flex bg-gradient-to-r from-pink-500 to-pink-400 text-white text-xl font-semibold rounded-3xl p-3 justify-center mb-5 inline-block">
               {data ? (
                 <span dangerouslySetInnerHTML={{ __html: data.pageTitle }} />
               ) : (
@@ -136,7 +136,7 @@ const CommonTemplate = ({ confid }) => {
             </h1>
 
             {/* Divider */}
-            <div className="w-24 h-1 bg-gradient-to-r from-pink-900 to-pink-800 mb-6 rounded" />
+            {/*     <div className="w-24 h-1 bg-gradient-to-r from-pink-900 to-pink-800 mb-6 rounded" /> */}
 
             {/* Description */}
             {data ? (

@@ -51,7 +51,7 @@ export default function NavbarBluePink() {
               to="/"
               className="text-xl sm:text-2xl font-extrabold tracking-wide whitespace-nowrap"
             >
-              VISTA&nbsp;2026
+              VISTA&nbsp; <span className="text-pink-500">2026</span>
             </Link>
 
             {/* RIGHT-ALIGNED DESKTOP NAV */}
