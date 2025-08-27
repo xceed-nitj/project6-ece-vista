@@ -88,7 +88,7 @@ function AboutNITJ(props) {
                 <div
                   className="about-content"
                   dangerouslySetInnerHTML={{
-                    __html: data.about[1]?.description || "",
+                    __html: data.about[3]?.description || "",
                   }}
                 />
               ) : null}

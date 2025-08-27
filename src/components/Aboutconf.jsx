@@ -90,7 +90,7 @@ function AboutConf(props) {
                 <div
                   className="about-content"
                   dangerouslySetInnerHTML={{
-                    __html: data.about[0]?.description || "",
+                    __html: data.about[1]?.description || "",
                   }}
                 />
               ) : null}

@@ -137,7 +137,7 @@ const Footer = () => {
               <li className="flex items-center">
                 {/* <Phone /> */}
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ba6e1a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-mail-icon lucide-mail"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
-                <span className="text-base"> E-mail: cipher@nitj.ac.in</span>
+                <span className="text-base"> E-mail: vista@nitj.ac.in</span>
               </li>
               <li className="flex items-start">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#ba6e1a" stroke="#ba6e1a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-user-icon lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -145,7 +145,7 @@ const Footer = () => {
               </li>
               <li className="flex items-start">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#ba6e1a" stroke="#ba6e1a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-user-icon lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                <span className="text-base">Dr Rohit Singh (Organizing Secretary): +91 7087513174</span>
+                <span className="text-base">Dr Rohit Singh (Organizing Chairman): +91 7087513174</span>
               </li>
               <li className="flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#ba6e1a" stroke="#ba6e1a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-user-icon lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -153,11 +153,11 @@ const Footer = () => {
               </li>
             </ul>
         </div>
-          <a href="https://info.flagcounter.com/0oJR">
-            <img src="https://s01.flagcounter.com/count2/0oJR/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"/>
+          <a href="https://info.flagcounter.com/8LP0">
+            <img src="https://s01.flagcounter.com/count2/8LP0/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"/>
           </a>
         </div>
-
+{/* <a href="https://info.flagcounter.com/8LP0"><img src="https://s01.flagcounter.com/count2/8LP0/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a> */}
         <div className=" mt-12 pt-8 border-t border-white">
           <div className="flex flex-col md:flex-row justify-center items-center">
             <p className="text-xs text-white mb-0 pb-0">

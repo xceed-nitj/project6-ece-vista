@@ -22,30 +22,21 @@ const ProfileCard = ({ person }) => (
 
 const OrganizingHeads = () => {
   const patrons = [
+    
     {
+      name: "Prof. Bhim Singh",
+      position: "Chairman, NIT Jalandhar",
+      image: "bs.jpg",
+    },
+  ];
+
+  const coPatrons = [
+   {
       name: "Prof. Binod Kumar Kanaujia",
       position: "Director, NIT Jalandhar",
       image: "director.jpg",
     },
-    // {
-    //   name: "Prof. Akash Deep",
-    //   position: "Director, Institute of Nano Science and Technology, Mohali",
-    //   image: "akashdeep.jpeg",
-    // },
   ];
-
-  // const coPatrons = [
-  //   {
-  //     name: "Prof. Ajay Bansal",
-  //     position: "Registrar, NIT Jalandhar",
-  //     image: "ajaybansal.jpg",
-  //   },
-  //   {
-  //     name: "Prof. Rohit Mehra",
-  //     position: "Dean (R&C), NIT Jalandhar",
-  //     image: "rohitmehra.jpg",
-  //   },
-  // ];
 
   // const coPatrons2 = [
   //   {
@@ -71,6 +62,11 @@ const OrganizingHeads = () => {
       position: "Electronics and Communication Engineering, NIT Jalandhar",
       image: "zedimedi.jpg",
     },
+     {
+      name: "Dr. Rohit Singh",
+      position: "Electronics and Communication Engineering, NIT Jalandhar",
+      image: "rohit.jpg",
+    },
   ];
 
   const secretary = [
@@ -80,24 +76,24 @@ const OrganizingHeads = () => {
       image: "pkverma.jpg",
     },
     {
-      name: "Dr. Ranjeet Kumar Rout",
-      position: "Information Technology, NIT Jalandhar",
-      image: "rkrout.jpeg",
-    },
-    {
       name: "Dr. Nitesh Kashyap",
       position: "Electronics and Communication Engineering, NIT Jalandhar",
       image: "nitesh.jpg",
     },
     {
-      name: "Dr. Rohit Singh",
-      position: "Electronics and Communication Engineering, NIT Jalandhar",
-      image: "rohit.jpg",
-    },
-    {
       name: "Dr. Roshan Bodile",
       position: "Electronics and Communication Engineering, NIT Jalandhar",
       image: "bodile.jpg",
+    },
+    {
+      name: "Dr. Harimurugan Devarajan",
+      position: "Electrical Engineering, NIT Jalandhar",
+      image: "hari.jpg",
+    },
+    {
+      name: "Dr. Kundan Kumar",
+      position: "Electronics and Communication Engineering, NIT Jalandhar",
+      image: "kundan.jpeg",
     },
   ];
 //  Temp change to reopen PR
@@ -138,8 +134,8 @@ const OrganizingHeads = () => {
 
       {/* === Content === */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {renderSection("Chief Patron", patrons)}
-        {/* {renderSection("Patrons", coPatrons)} */}
+        {renderSection("Patron", patrons)}
+        {renderSection("Executive Chair", coPatrons)}
         {/* {renderSection("Co-Patron", coPatrons2)} */}
         {renderSection("Organising Chairmen", chairman)}
         {renderSection("Organising Secretaries", secretary)}
