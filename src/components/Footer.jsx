@@ -96,10 +96,10 @@
 
 const Footer = () => {
   return (
-    <footer className="bg-white relative overflow-hidden border-t border-[#1A1307]/30">
+    <footer className="bg-white relative overflow-hidden border-t border-blue-950">
       {/* Enhanced Wave background pattern */}
       
-      <div className="bg-[#AD958A] absolute inset-0 opacity-20 pointer-events-none">
+      <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 absolute inset-0 opacity-20 pointer-events-none ">
         <svg width="100%" height="100%" viewBox="0 0 1440 400" xmlns="http://www.w3.org/2000/svg">
           <path 
             d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z" 
@@ -124,11 +124,11 @@ const Footer = () => {
         </svg>
       </div>
 {/*  Temp change to reopen PR */}
-      <div className="bg-[#1A1307]  container mx-auto relative z-10 px-4 py-16">
+      <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 container mx-auto relative z-10 px-4 py-16 w-full">
         <div className="flex flex-col lg:flex-row items-start justify-between gap-12">
           {/* Contact Information */}
           <div className="lg:w-1/2">
-          <div  > <h2 className="bg-white text-[#3a2920] text-xl font-semibold rounded-3xl p-3 justify-center mb-5 inline-block">Contact us</h2></div>
+          <div  > <h2 className="bg-gradient-to-r from-pink-500 to-pink-400 text-white text-xl font-semibold rounded-3xl p-3 justify-center mb-5 inline-block">Contact us</h2></div>
             {/* <h3 className="text-3xl font-bold text-black mb-4">
               Contact Us
             </h3>
@@ -158,7 +158,7 @@ const Footer = () => {
           </a>
         </div>
 
-        <div className=" mt-12 pt-8 border-t border-[#ba6e1a]/20">
+        <div className=" mt-12 pt-8 border-t border-white">
           <div className="flex flex-col md:flex-row justify-center items-center">
             <p className="text-xs text-white mb-0 pb-0">
               Developed and Maintained by <a href="https://xceed.nitj.ac.in" target="_blank" rel="noopener noreferrer" className="hover:underline "><span className="text-xs text-white">XCEED NITJ</span></a>

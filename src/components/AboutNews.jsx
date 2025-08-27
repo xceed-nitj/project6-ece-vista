@@ -120,7 +120,7 @@ function AboutNews(props) {
                   !item.hidden && (
                     <div
                       key={item._id + "_" + idx}
-                      className="inline-block align-top rounded-xl shadow-md hover:shadow-lg transition-all duration-200 w-48 h-56 flex flex-col justify-between mr-2"
+                      className="align-top rounded-xl shadow-md hover:shadow-lg transition-all duration-200 w-48 h-56 flex flex-col justify-between mr-2"
                       style={{
                         background: COLOR_CARD_BG,
                         border: `2px solid ${COLOR_CARD_BORDER}`,
