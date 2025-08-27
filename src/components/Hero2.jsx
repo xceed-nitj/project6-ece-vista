@@ -110,7 +110,7 @@ export default function Hero2() {
             {/* Logos */}
          
 <span className="inline-block bg-pink-800/90 text-white px-3 py-1 rounded-full text-xs sm:text-sm font-medium">
-              5th – 7th June
+              27th – 29th November 2026
             </span>
             {/* Location (BLUE) */}
             <div className="flex items-center justify-center gap-2 text-white drop-shadow">
