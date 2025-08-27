@@ -11,14 +11,15 @@ export default function NavbarBluePink() {
     { label: "Home", href: "/" },
     { label: "Tracks", href: "/68adcce8e8f579b7ff663394" },
     { label: "Organising Heads", href: "/68adcccfe8f579b7ff66329a" },
-    { label: "Committees",
+    {
+      label: "Committees",
       subItems: [
         { label: "International Advisory Committee", href: "/68adccd5e8f579b7ff6632b6" },
         { label: "National Advisory Committee", href: "/68adccd9e8f579b7ff6632d8" },
-        {label:"Technical Committee", href:"/68adccdee8f579b7ff6632fe"},
-        {label:"Other Committees", href:"/68adcce3e8f579b7ff66332a"},
-      
-      ],},
+        { label: "Technical Committee", href: "/68adccdee8f579b7ff6632fe" },
+        { label: "Other Committees", href: "/68adcce3e8f579b7ff66332a" },
+      ],
+    },
   ];
 
   const navRight = [
@@ -35,37 +36,65 @@ export default function NavbarBluePink() {
 
   const isActive = (to) => to && (pathname === to || pathname.endsWith(to));
 
-  const linkBase =
-    "group relative inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold text-white transition-colors";
-  const linkActive = "ring-1 ring-white/20 bg-white/10";
+  // Top-level desktop items: underline only, single line, no ring/pill.
+  const linkBaseDesktop =
+    "group relative inline-flex items-center px-3 py-1 text-sm font-semibold text-white transition-colors whitespace-nowrap shrink-0 focus:outline-none focus:ring-0";
 
   return (
     <header className="sticky top-0 z-50">
-      {/* Blue bar */}
       <div className="bg-blue-950 border-b border-blue-500/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          {/* Row: brand left, centered nav (absolute), toggle right */}
+          {/* Brand left, nav (desktop) right, mobile toggle right on small screens */}
           <div className="h-14 relative flex items-center justify-between text-white">
             {/* Brand (left) */}
             <Link
               to="/"
-              className="text-xl sm:text-2xl font-extrabold tracking-wide"
+              className="text-xl sm:text-2xl font-extrabold tracking-wide whitespace-nowrap"
             >
               VISTA&nbsp;2026
             </Link>
 
-            {/* Desktop nav centered */}
-            <nav className="hidden md:flex items-center gap-2 absolute translate-x-1/2">
+            {/* RIGHT-ALIGNED DESKTOP NAV */}
+            <nav className="hidden md:flex items-center gap-2 ml-auto whitespace-nowrap">
               {[...navLeft, ...navRight].map((it) =>
                 it.subItems ? (
-                  <div key={it.label} className="relative group">
-                    <button className={`${linkBase}`} aria-haspopup="true">
+                  <div
+                    key={it.label}
+                    className="
+                      relative group shrink-0
+                      before:content-[''] before:absolute before:left-0 before:right-0 before:top-full
+                      before:h-2 before:bg-transparent
+                    "
+                  >
+                    <button
+                      className={linkBaseDesktop}
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      type="button"
+                    >
                       {it.label}
-                      {/* underline on hover */}
-                      <span className="pointer-events-none absolute left-3 right-3 -bottom-1 h-0.5 bg-pink-400 scale-x-0 origin-left transition-transform duration-200 group-hover:scale-x-100" />
+                      {/* underline on hover/focus/active */}
+                      <span
+                        className="
+                          pointer-events-none absolute left-3 right-3 -bottom-1 h-0.5 bg-pink-400
+                          origin-left scale-x-0 transition-transform duration-200
+                          group-hover:scale-x-100 group-focus:scale-x-100
+                        "
+                      />
                     </button>
+
                     {/* Dropdown */}
-                    <div className="pointer-events-none opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-150 absolute left-0 mt-2 w-64 rounded-xl bg-blue-900 ring-1 ring-white/15 shadow-xl p-1">
+                    <div
+                      className="
+                        absolute left-0 top-full mt-2 z-50
+                        opacity-0 translate-y-1 pointer-events-none
+                        group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto
+                        group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:pointer-events-auto
+                        transition-all duration-150
+                        w-64 rounded-xl bg-blue-900 ring-1 ring-white/15 shadow-xl p-1
+                      "
+                      role="menu"
+                    >
                       {it.subItems.map((s) => (
                         <Link
                           key={s.label}
@@ -80,17 +109,14 @@ export default function NavbarBluePink() {
                     </div>
                   </div>
                 ) : (
-                  <Link
-                    key={it.label}
-                    to={it.href || "/"}
-                    className={`${linkBase} ${isActive(it.href) ? linkActive : ""}`}
-                  >
+                  <Link key={it.label} to={it.href || "/"} className={linkBaseDesktop}>
                     {it.label}
-                    {/* Pink underline (active + hover) */}
                     <span
                       className={[
-                        "pointer-events-none absolute left-3 right-3 -bottom-1 h-0.5 bg-pink-400 rounded-full",
-                        isActive(it.href) ? "opacity-100" : "opacity-0 group-hover:opacity-100",
+                        "pointer-events-none absolute left-3 right-3 -bottom-1 h-0.5 bg-pink-400 rounded-full origin-left transition-transform duration-200",
+                        isActive(it.href)
+                          ? "scale-x-100"
+                          : "scale-x-0 group-hover:scale-x-100 group-focus:scale-x-100",
                       ].join(" ")}
                     />
                   </Link>
@@ -98,7 +124,7 @@ export default function NavbarBluePink() {
               )}
             </nav>
 
-            {/* Mobile toggle (right) */}
+            {/* Mobile toggle (desktop hidden) */}
             <button
               aria-label="Toggle navigation"
               onClick={() => setMobileOpen((v) => !v)}
@@ -117,7 +143,7 @@ export default function NavbarBluePink() {
           </div>
         </div>
 
-        {/* Mobile panel */}
+        {/* Mobile panel (unchanged) */}
         {mobileOpen && (
           <div className="md:hidden border-t border-blue-500/40">
             <nav className="mx-4 my-3 rounded-2xl bg-blue-800 ring-1 ring-white/10 p-2 space-y-1">
@@ -128,7 +154,7 @@ export default function NavbarBluePink() {
                       onClick={() => setOpenGroup(openGroup === i ? null : i)}
                       className="w-full flex items-center justify-between px-3 py-2 text-left rounded-xl text-white/90 hover:bg-white/10"
                     >
-                      <span className="text-sm font-semibold">{it.label}</span>
+                      <span className="text-sm font-semibold truncate">{it.label}</span>
                       <svg
                         className={`h-5 w-5 transition-transform ${openGroup === i ? "rotate-180" : ""}`}
                         viewBox="0 0 20 20"
@@ -163,7 +189,6 @@ export default function NavbarBluePink() {
                       isActive(it.href) ? "bg-white/10 text-white" : ""
                     }`}
                   >
-                    {/* Simple pink indicator on mobile when active */}
                     <span className="inline-block mr-2 w-1.5 h-1.5 rounded-full bg-pink-400 align-middle" />
                     {it.label}
                   </Link>
