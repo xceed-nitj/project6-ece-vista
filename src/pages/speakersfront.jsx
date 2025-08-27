@@ -41,7 +41,7 @@ function Speakers(props) {
                 <Navbar />
             </div>
 
-            <div className="pt-[166px] container max-w-7xl mx-auto px-5 sm:px-10 lg:px-8 pt-[80px] lg:pt-[100px] pb-16 relative z-10">
+            <div className="pt-[166px] container max-w-7xl mx-auto px-5 sm:px-10 lg:px-8  lg:pt-[100px] pb-16 relative z-10">
                 <div className="bg-white border border-[#2563eb]/30 rounded-xl p-6 md:p-8 shadow-lg shadow-[#2563eb]/10 backdrop-blur-sm">
                     <h1 className="text-4xl font-bold text-[#2563eb] mb-4">
                         {data ? (

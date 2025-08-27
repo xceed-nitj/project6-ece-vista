@@ -1,11 +1,11 @@
 // import React from "react";
 
 const ProfileCard = ({ person }) => (
-  <div className="bg-white border border-[#1A1307]/30 hover:border-[#1A1307]/70
-                  transition-all duration-300 rounded-xl p-6 shadow-lg hover:shadow-[#1A1307]/20
+  <div className="bg-white border border-slate-900/30 hover:border-slate-900/70
+                  transition-all duration-300 rounded-xl p-6 shadow-lg hover:shadow-slate-900/20
                   backdrop-blur-sm w-72 flex flex-col items-center">
     <div className="relative mb-4">
-      <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-[#1A1307] p-0.5">
+      <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-slate-900 p-0.5">
         <img
           src={person.image}
           alt={person.name}
@@ -13,7 +13,7 @@ const ProfileCard = ({ person }) => (
         />
       </div>
     </div>
-    <h3 className="text-xl font-bold text-[#1A1307] mb-2 text-center">
+    <h3 className="text-xl font-bold text-blue-950 mb-2 text-center">
       {person.name}
     </h3>
     <p className="text-gray-700 text-center text-sm">{person.position}</p>
@@ -103,7 +103,7 @@ const OrganizingHeads = () => {
 //  Temp change to reopen PR
   const renderSection = (title, members) => (
     <div className="text-center mb-12">
-      <h2 className="bg-[#1A1307] text-white text-xl font-semibold rounded-3xl p-4 justify-center inline-block">
+      <h2 className="bg-gradient-to-r from-pink-500 to-pink-400 text-white text-xl font-semibold rounded-3xl p-4 justify-center inline-block">
         {title}
         {/* <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-40 h-1 bg-[#1A1307]"></span> */}
       </h2>
@@ -122,17 +122,17 @@ const OrganizingHeads = () => {
     <div className="bg-white w-full py-16 relative overflow-hidden">
       {/* === Animated Background === */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-10">
-        <div className="absolute w-[600px] h-[600px] border border-[#1A1307]/10 rounded-full left-1/2 top-1/2 
+        <div className="absolute w-[600px] h-[600px] border border-slate-900 rounded-full left-1/2 top-1/2 
                         transform -translate-x-1/2 -translate-y-1/2 animate-pulse" />
-        <div className="absolute w-[400px] h-[400px] border border-[#1A1307]/20 rounded-full left-1/2 top-1/2 
+        <div className="absolute w-[400px] h-[400px] border border-slate-900/20 rounded-full left-1/2 top-1/2 
                         transform -translate-x-1/2 -translate-y-1/2 animate-pulse" />
-        <div className="absolute w-[200px] h-[200px] border border-[#1A1307]/30 rounded-full left-1/2 top-1/2 
+        <div className="absolute w-[200px] h-[200px] border border-slate-900/30 rounded-full left-1/2 top-1/2 
                         transform -translate-x-1/2 -translate-y-1/2 animate-pulse" />
-        <div className="absolute w-3 h-3 bg-[#1A1307] rounded-full left-[calc(50%-300px)] top-1/2 
+        <div className="absolute w-3 h-3 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 rounded-full left-[calc(50%-300px)] top-1/2 
                         transform -translate-y-1/2 animate-ping opacity-75" />
-        <div className="absolute w-2 h-2 bg-[#1A1307] rounded-full left-[calc(50%-200px)] top-1/2 
+        <div className="absolute w-2 h-2 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 rounded-full left-[calc(50%-200px)] top-1/2 
                         transform -translate-y-1/2 animate-ping opacity-75" />
-        <div className="absolute w-1.5 h-1.5 bg-[#1A1307] rounded-full left-[calc(50%-100px)] top-1/2 
+        <div className="absolute w-1.5 h-1.5 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 rounded-full left-[calc(50%-100px)] top-1/2 
                         transform -translate-y-1/2 animate-ping opacity-75" />
       </div>
 
