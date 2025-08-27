@@ -9,9 +9,16 @@ export default function NavbarBluePink() {
 
   const navLeft = [
     { label: "Home", href: "/" },
-    { label: "Tracks", href: "/68adccc0e8f579b7ff66327d" },
+    { label: "Tracks", href: "/68adcce8e8f579b7ff663394" },
     { label: "Organising Heads", href: "/68adcccfe8f579b7ff66329a" },
-    { label: "Committees", href: "/6863b4857b0acf10390f6b39" },
+    { label: "Committees",
+      subItems: [
+        { label: "International Advisory Committee", href: "/68adccd5e8f579b7ff6632b6" },
+        { label: "National Advisory Committee", href: "/68adccd9e8f579b7ff6632d8" },
+        {label:"Technical Committee", href:"/68adccdee8f579b7ff6632fe"},
+        {label:"Other Committees", href:"/68adcce3e8f579b7ff66332a"},
+      
+      ],},
   ];
 
   const navRight = [
