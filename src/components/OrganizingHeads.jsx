@@ -57,16 +57,7 @@ const OrganizingHeads = () => {
       position: "Electronics and Communication Engineering, NIT Jalandhar",
       image: "sukhwinder.jpg",
     },
-    {
-      name: "Dr. Aijaz Mehdi Zaidi",
-      position: "Electronics and Communication Engineering, NIT Jalandhar",
-      image: "zedimedi.jpg",
-    },
-     {
-      name: "Dr. Rohit Singh",
-      position: "Electronics and Communication Engineering, NIT Jalandhar",
-      image: "rohit.jpg",
-    },
+    
   ];
 
   const secretary = [
