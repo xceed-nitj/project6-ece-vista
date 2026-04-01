@@ -4,7 +4,7 @@ import Navbar from "./Navbar/index";
 // ---------- CONFIG ----------
 const sliderImages = ["/blue1.jpg", "/blue2.jpg",  "/blue3.jpg"]; // public/
 const SLIDE_MS = 5000; // 5s autoplay
-const EVENT_START = new Date("2026-06-05T09:00:00+05:30");
+const EVENT_START = new Date("2026-11-27T09:00:00+05:30");
 
 // ---------- HELPERS ----------
 function getTimeRemaining(target) {
