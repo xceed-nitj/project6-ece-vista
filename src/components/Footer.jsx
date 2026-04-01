@@ -141,15 +141,15 @@ const Footer = () => {
               </li>
               <li className="flex items-start">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#ba6e1a" stroke="#ba6e1a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-user-icon lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                <span className="text-base">Dr Nitesh Kashyap (Organizing Secretary): +91 9753301930</span>
+                <span className="text-base">Dr Nitesh Kashyap : +91 9753301930</span>
               </li>
               <li className="flex items-start">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#ba6e1a" stroke="#ba6e1a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-user-icon lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                <span className="text-base">Dr Rohit Singh (Organizing Chairman): +91 7087513174</span>
+                <span className="text-base">Dr Rohit Singh: +91 7087513174</span>
               </li>
               <li className="flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#ba6e1a" stroke="#ba6e1a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-user-icon lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                <span className="text-base">Dr. Aijaz Mehdi Zaidi (Organising Chairman): +91 01815032621</span>
+                <span className="text-base">Dr. Aijaz Mehdi Zaidi: +91 01815032621</span>
               </li>
             </ul>
         </div>
